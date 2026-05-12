@@ -11,8 +11,8 @@ BACKEND_URL = os.getenv("BACKEND_URL", "https://job-dashboard-production-3016.up
 BACKEND_DIR = Path(__file__).parent / "backend"
 sys.path.insert(0, str(BACKEND_DIR))
 
-SCRAPER_EMAIL = "deepanshuverma966@gmail.com"
-SCRAPER_PASS  = "Dv12062001@"
+SCRAPER_EMAIL = "scraper@jobflow.io"
+SCRAPER_PASS  = "ScraperBot2024!"
 
 KEYWORDS = [
     "AI Engineer",

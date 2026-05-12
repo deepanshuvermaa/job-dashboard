@@ -114,9 +114,9 @@ def wait_for_url(url, label, timeout):
 
 # ── Auth ──────────────────────────────────────────────────────────────────────
 
-_SCRAPER_EMAIL = "deepanshuverma966@gmail.com"
-_SCRAPER_PASS  = "Dv12062001@"
-_SCRAPER_NAME  = "Deepanshu Verma"
+_SCRAPER_EMAIL = "scraper@jobflow.io"
+_SCRAPER_PASS  = "ScraperBot2024!"
+_SCRAPER_NAME  = "Scraper Bot"
 
 def get_token(base):
     try:

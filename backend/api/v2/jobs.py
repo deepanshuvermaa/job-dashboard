@@ -13,6 +13,13 @@ from models.job import Job, JobEvaluation
 
 router = APIRouter(prefix="/api/jobs", tags=["jobs"])
 
+SCRAPER_EMAIL = "scraper@jobflow.io"
+
+def _shared_owner_id(db, fallback_user_id: str) -> str:
+    """Return the scraper account's user_id (shared job pool). Falls back to current user."""
+    scraper = db.query(User).filter(User.email == SCRAPER_EMAIL).first()
+    return scraper.id if scraper else fallback_user_id
+
 
 class JobResponse(BaseModel):
     id: str
@@ -135,8 +142,14 @@ def list_jobs(
 ):
     from datetime import timedelta
 
+    # Jobs are stored under the shared scraper account — visible to all logged-in users
+    SCRAPER_EMAIL = "scraper@jobflow.io"
+    scraper_user = db.query(User).filter(User.email == SCRAPER_EMAIL).first()
+    # Fall back to current user if scraper account doesn't exist
+    owner_id = scraper_user.id if scraper_user else user.id
+
     q = db.query(Job).options(joinedload(Job.evaluation)).filter(
-        Job.user_id == user.id,
+        Job.user_id == owner_id,
         Job.is_ignored == False,
     )
 
@@ -211,7 +224,8 @@ def list_jobs(
 
 @router.get("/stats")
 def job_stats(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    base = db.query(Job).filter(Job.user_id == user.id)
+    owner_id = _shared_owner_id(db, user.id)
+    base = db.query(Job).filter(Job.user_id == owner_id)
 
     total = base.count()
     active = base.filter(Job.status == "active").count()
@@ -219,37 +233,28 @@ def job_stats(user: User = Depends(get_current_user), db: Session = Depends(get_
     bookmarked = base.filter(Job.is_bookmarked == True).count()
     applied = base.join(Job.applications).distinct().count()
 
-    # Grade distribution
     grades = (
         db.query(JobEvaluation.grade, func.count(JobEvaluation.id))
         .join(Job, Job.id == JobEvaluation.job_id)
-        .filter(Job.user_id == user.id, Job.status.in_(["active", "stale"]))
+        .filter(Job.user_id == owner_id, Job.status.in_(["active", "stale"]))
         .group_by(JobEvaluation.grade)
         .all()
     )
-
-    # Source distribution
     sources = (
         base.filter(Job.status.in_(["active", "stale"]))
         .with_entities(Job.source, func.count(Job.id))
         .group_by(Job.source)
         .all()
     )
-
-    # Category distribution
     categories = (
         base.filter(Job.status.in_(["active", "stale"]))
         .with_entities(Job.category, func.count(Job.id))
         .group_by(Job.category)
         .all()
     )
-
     return {
-        "total": total,
-        "active": active,
-        "stale": stale,
-        "bookmarked": bookmarked,
-        "applied": applied,
+        "total": total, "active": active, "stale": stale,
+        "bookmarked": bookmarked, "applied": applied,
         "grades": {g: c for g, c in grades if g},
         "sources": {s: c for s, c in sources if s},
         "categories": {c: n for c, n in categories if c},
@@ -258,9 +263,10 @@ def job_stats(user: User = Depends(get_current_user), db: Session = Depends(get_
 
 @router.get("/categories/list")
 def list_categories(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    owner_id = _shared_owner_id(db, user.id)
     rows = (
         db.query(Job.category, func.count(Job.id))
-        .filter(Job.user_id == user.id, Job.status.in_(["active", "stale"]), Job.category.isnot(None))
+        .filter(Job.user_id == owner_id, Job.status.in_(["active", "stale"]), Job.category.isnot(None))
         .group_by(Job.category)
         .order_by(func.count(Job.id).desc())
         .all()
@@ -277,9 +283,10 @@ class IngestRequest(BaseModel):
 
 @router.get("/locations/list")
 def list_locations(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    owner_id = _shared_owner_id(db, user.id)
     rows = (
         db.query(Job.location, func.count(Job.id))
-        .filter(Job.user_id == user.id, Job.status.in_(["active", "stale"]), Job.location.isnot(None))
+        .filter(Job.user_id == owner_id, Job.status.in_(["active", "stale"]), Job.location.isnot(None))
         .group_by(Job.location)
         .order_by(func.count(Job.id).desc())
         .limit(50)
@@ -290,18 +297,18 @@ def list_locations(user: User = Depends(get_current_user), db: Session = Depends
 
 @router.post("/ingest")
 def ingest_scraped_jobs(body: IngestRequest, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """Ingest raw scraped jobs into the v2 jobs table."""
+    """Ingest raw scraped jobs into the shared job pool (scraper account)."""
     from modules.job_ingestor import ingest_jobs
-    stats = ingest_jobs(db, user.id, body.jobs, body.source)
+    owner_id = _shared_owner_id(db, user.id)
+    stats = ingest_jobs(db, owner_id, body.jobs, body.source)
     return stats
 
 
 @router.post("/cleanup")
 def run_cleanup(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """Run staleness cleanup on jobs."""
     from modules.staleness_engine import run_cleanup
-    stats = run_cleanup(db, user.id)
-    return stats
+    owner_id = _shared_owner_id(db, user.id)
+    return run_cleanup(db, owner_id)
 
 
 # ── Applications (from new table) ──
@@ -361,10 +368,11 @@ def application_stats(user: User = Depends(get_current_user), db: Session = Depe
 
 @router.get("/{job_id}")
 def get_job(job_id: str, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    owner_id = _shared_owner_id(db, user.id)
     job = (
         db.query(Job)
         .options(joinedload(Job.evaluation))
-        .filter(Job.id == job_id, Job.user_id == user.id)
+        .filter(Job.id == job_id, Job.user_id == owner_id)
         .first()
     )
     if not job:
@@ -376,7 +384,8 @@ def get_job(job_id: str, user: User = Depends(get_current_user), db: Session = D
 
 @router.patch("/{job_id}")
 def update_job(job_id: str, body: PatchJobRequest, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    job = db.query(Job).filter(Job.id == job_id, Job.user_id == user.id).first()
+    owner_id = _shared_owner_id(db, user.id)
+    job = db.query(Job).filter(Job.id == job_id, Job.user_id == owner_id).first()
     if not job:
         raise HTTPException(status_code=404, detail="Job not found")
     if body.is_bookmarked is not None:
