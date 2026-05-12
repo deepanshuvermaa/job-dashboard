@@ -68,7 +68,7 @@ class LinkedInJobScraper:
         os.makedirs(profile_dir, exist_ok=True)
         options.add_argument(f'--user-data-dir={profile_dir}')
 
-        self.driver = Chrome(options=options)
+        self.driver = Chrome(options=options, version_main=147)
         self.driver.maximize_window()
 
     def login(self) -> bool:
@@ -254,13 +254,16 @@ class LinkedInJobScraper:
         if job_type and job_type in job_type_map:
             search_url += f"&f_JT={job_type_map[job_type]}"
 
-        # Experience level filters
+        # Experience level filters — f_E accepts comma-separated values
         exp_map = {
+            'internship': '1',
             'entry': '2',
+            'associate': '3',
             'mid': '3',
             'senior': '4',
             'director': '5',
-            'executive': '6'
+            'executive': '6',
+            'entry_associate': '1,2,3',  # 0-3 years
         }
         if experience_level and experience_level in exp_map:
             search_url += f"&f_E={exp_map[experience_level]}"

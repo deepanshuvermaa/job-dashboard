@@ -76,6 +76,7 @@ def scrape_linkedin_direct(keyword, scraper_instance):
         jobs = scraper_instance.search_jobs(
             keywords=keyword, location=LOCATION,
             posted_within=DURATION, max_results=MAX_LI,
+            experience_level="entry_associate",
         )
         for j in jobs:
             j.setdefault("source", "linkedin")
