@@ -61,7 +61,7 @@ class LinkedInJobScraper:
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
         options.add_argument('--disable-blink-features=AutomationControlled')
-        self.driver = Chrome(options=options, version_main=147)
+        self.driver = Chrome(options=options, version_main=148)
         self.driver.maximize_window()
 
     def login(self) -> bool:
