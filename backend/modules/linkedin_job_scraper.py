@@ -84,44 +84,41 @@ class LinkedInJobScraper:
         self.driver.maximize_window()
 
     def login(self) -> bool:
-        """Login to LinkedIn with 2FA/checkpoint support"""
+        """Login to LinkedIn — tries cookie injection first, then form login."""
         try:
             if not self.driver:
                 self._init_driver()
 
-            # Check if already logged in from persistent profile
+            # Try cookie-based login first (most reliable)
+            li_at = os.getenv("LINKEDIN_COOKIE_LI_AT", "")
+            if li_at:
+                print("Trying cookie-based login...")
+                self.driver.get("https://www.linkedin.com")
+                time.sleep(2)
+                self.driver.add_cookie({"name": "li_at", "value": li_at, "domain": ".linkedin.com"})
+                self.driver.get("https://www.linkedin.com/feed/")
+                time.sleep(3)
+                if "/feed" in self.driver.current_url:
+                    print("Cookie login successful!")
+                    self.logged_in = True
+                    return True
+                print("Cookie login failed, trying form login...")
+
+            # Check if already logged in
             print("Checking if already logged in...")
             self.driver.get('https://www.linkedin.com/feed/')
-
-            # Wait up to 15 seconds for the page to fully load
-            for wait in range(15):
+            for _ in range(10):
                 time.sleep(1)
-                current_url = self.driver.current_url
-                if '/feed' in current_url or '/mynetwork' in current_url:
-                    try:
-                        self.driver.find_element(By.ID, 'global-nav')
-                        print("Already logged in from saved session!")
-                        self.logged_in = True
-                        return True
-                    except:
-                        pass
-                # If redirected to login page, break and do fresh login
-                if '/login' in current_url or '/uas/' in current_url:
-                    print("Not logged in, redirected to login page")
+                if '/feed' in self.driver.current_url:
+                    self.logged_in = True
+                    return True
+                if '/login' in self.driver.current_url:
                     break
 
-            # Double check — maybe the feed loaded but global-nav ID changed
-            current_url = self.driver.current_url
-            if '/feed' in current_url:
-                # We're on the feed — must be logged in even if we can't find global-nav
-                print("On feed page — treating as logged in!")
-                self.logged_in = True
-                return True
-
-            # Not logged in — do fresh login
+            # Form login
             print("Navigating to LinkedIn login...")
             self.driver.get('https://www.linkedin.com/login')
-            time.sleep(2)
+            time.sleep(3)
 
             # Enter email
             email_field = WebDriverWait(self.driver, 10).until(
