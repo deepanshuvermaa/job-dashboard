@@ -5,8 +5,8 @@ WORKDIR /frontend
 COPY frontend/package.json frontend/package-lock.json ./
 RUN npm ci --legacy-peer-deps
 
+# Copy source AFTER npm ci so source changes invalidate build cache
 COPY frontend/ ./
-ENV NEXT_PUBLIC_API_URL=RUNTIME_API_URL
 RUN npm run build
 
 # ── Stage 2: Python backend + Next.js standalone ──────────────────────────────
@@ -24,11 +24,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY backend/ ./backend/
 
-# standalone output becomes the Next.js server
 COPY --from=frontend-builder /frontend/.next/standalone ./frontend/
-# static files must live at frontend/.next/static (inside standalone dir)
 COPY --from=frontend-builder /frontend/.next/static ./frontend/.next/static
-# public assets
 COPY --from=frontend-builder /frontend/public ./frontend/public
 
 COPY start.sh ./start.sh
