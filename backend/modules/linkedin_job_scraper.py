@@ -54,14 +54,33 @@ class LinkedInJobScraper:
         self.logged_in = False
 
     def _init_driver(self):
-        """Initialize undetected Chrome driver."""
-        options = ChromeOptions()
+        """Initialize Chrome with stealth mode using webdriver-manager (auto-downloads correct chromedriver)."""
+        from selenium import webdriver
+        from selenium.webdriver.chrome.service import Service
+        from selenium.webdriver.chrome.options import Options
+        from webdriver_manager.chrome import ChromeDriverManager
+        from selenium_stealth import stealth
+
+        options = Options()
         if self.headless:
             options.add_argument('--headless')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
         options.add_argument('--disable-blink-features=AutomationControlled')
-        self.driver = Chrome(options=options, version_main=148)
+        options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        options.add_experimental_option("useAutomationExtension", False)
+
+        service = Service(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=service, options=options)
+
+        stealth(self.driver,
+                languages=["en-US", "en"],
+                vendor="Google Inc.",
+                platform="Win32",
+                webgl_vendor="Intel Inc.",
+                renderer="Intel Iris OpenGL Engine",
+                fix_hairline=True)
+
         self.driver.maximize_window()
 
     def login(self) -> bool:
