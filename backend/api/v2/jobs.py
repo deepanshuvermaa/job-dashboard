@@ -44,6 +44,8 @@ class JobResponse(BaseModel):
     is_easy_apply: bool
     is_bookmarked: bool
     is_ignored: bool
+    hr_name: Optional[str] = None
+    hr_email: Optional[str] = None
     first_seen_at: Optional[str] = None
     last_seen_at: Optional[str] = None
     times_seen: int
@@ -110,6 +112,8 @@ def _serialize_job(job: Job) -> dict:
         "is_easy_apply": job.is_easy_apply,
         "is_bookmarked": job.is_bookmarked,
         "is_ignored": job.is_ignored,
+        "hr_name": job.hr_name,
+        "hr_email": job.hr_email,
         "first_seen_at": job.first_seen_at.isoformat() if job.first_seen_at else None,
         "last_seen_at": job.last_seen_at.isoformat() if job.last_seen_at else None,
         "times_seen": job.times_seen or 1,

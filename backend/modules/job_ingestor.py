@@ -195,6 +195,8 @@ def ingest_jobs(db: Session, user_id: str, raw_jobs: List[Dict], source_name: st
                 category=classify_category(title, description),
                 status="active",
                 is_easy_apply=raw.get("easy_apply", False),
+                hr_name=raw.get("hr_name"),
+                hr_email=raw.get("hr_email"),
                 first_seen_at=now,
                 last_seen_at=now,
                 times_seen=1,

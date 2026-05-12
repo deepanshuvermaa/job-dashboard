@@ -55,6 +55,21 @@ export default function JobCard({ job, onClick, onBookmark }: JobCardProps) {
           <span className="text-[10px] font-medium text-gravel px-2 py-0.5 rounded-pill border border-chalk">{job.source}</span>
         </div>
       </div>
+
+      {/* HR Contact */}
+      {(job.hr_name || job.hr_email) && (
+        <div className="mt-2 pt-2 border-t border-chalk flex items-center gap-2" onClick={e => e.stopPropagation()}>
+          <svg className="w-3 h-3 text-gravel flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8 4 4 0 000-8z"/></svg>
+          <span className="text-[11px] text-gravel truncate">
+            {job.hr_name && <span className="font-medium text-obsidian">{job.hr_name}</span>}
+            {job.hr_email && (
+              <a href={`mailto:${job.hr_email}`} className="ml-1 text-blue-600 hover:underline" onClick={e => e.stopPropagation()}>
+                {job.hr_email}
+              </a>
+            )}
+          </span>
+        </div>
+      )}
     </div>
   );
 }

@@ -38,6 +38,8 @@ class Job(Base, TimestampMixin):
     is_easy_apply = Column(Boolean, default=False)
     is_bookmarked = Column(Boolean, default=False)
     is_ignored = Column(Boolean, default=False)
+    hr_name = Column(String(255))
+    hr_email = Column(String(255))
     first_seen_at = Column(DateTime, default=utcnow)
     last_seen_at = Column(DateTime, default=utcnow)
     times_seen = Column(Integer, default=1)

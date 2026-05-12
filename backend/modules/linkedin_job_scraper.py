@@ -686,6 +686,18 @@ class LinkedInJobScraper:
             # Calculate relevance score based on job match
             relevance_score = self._calculate_relevance(title, description, easy_apply)
 
+            # Extract HR name/email from recruiter_info and description
+            hr_name = None
+            hr_email = None
+            if recruiter_info and recruiter_info.get('name'):
+                hr_name = recruiter_info['name']
+                print(f"✓ Found recruiter from description: {hr_name}")
+            # Extract email from description text
+            import re as _re
+            email_match = _re.search(r'[\w.+-]+@[\w-]+\.[a-zA-Z]{2,}', description or '')
+            if email_match:
+                hr_email = email_match.group(0)
+
             return {
                 'id': job_id,
                 'title': title,
@@ -703,7 +715,9 @@ class LinkedInJobScraper:
                 'relevance_score': relevance_score,
                 'people_who_can_help': people_who_can_help,
                 'recruiter_info': recruiter_info,
-                'company_details': company_details
+                'company_details': company_details,
+                'hr_name': hr_name,
+                'hr_email': hr_email,
             }
 
         except Exception as e:

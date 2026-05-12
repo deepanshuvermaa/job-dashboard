@@ -15,10 +15,10 @@ SCRAPER_EMAIL = "scraper@jobflow.io"
 SCRAPER_PASS  = "ScraperBot2024!"
 
 KEYWORDS = [
-    "AI Engineer",
-    "Software Developer",
     "Software Engineer",
-    "Full Stack Engineer",
+    "Software Developer",
+    "Full Stack Developer",
+    "AI Engineer",
 ]
 LOCATION    = "India"
 DURATION    = "24h"
