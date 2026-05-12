@@ -30,7 +30,7 @@ COPY backend/ ./backend/
 # Frontend standalone build
 COPY --from=frontend-builder /frontend/.next/standalone ./frontend/
 COPY --from=frontend-builder /frontend/.next/static ./frontend/.next/static
-COPY --from=frontend-builder /frontend/public ./frontend/public 2>/dev/null || true
+COPY --from=frontend-builder /frontend/public ./frontend/public
 
 # Start script — runs backend on 8000, frontend on 3000, nginx-style proxy via caddy
 # Simpler: run backend on $PORT, frontend on 3000, use backend as the public entry
