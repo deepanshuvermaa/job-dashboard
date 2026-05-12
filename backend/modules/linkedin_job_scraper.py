@@ -68,7 +68,7 @@ class LinkedInJobScraper:
         os.makedirs(profile_dir, exist_ok=True)
         options.add_argument(f'--user-data-dir={profile_dir}')
 
-        self.driver = Chrome(options=options, version_main=146)
+        self.driver = Chrome(options=options)
         self.driver.maximize_window()
 
     def login(self) -> bool:

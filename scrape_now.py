@@ -70,15 +70,16 @@ def ingest(token, jobs, source):
         warn(f"Ingest failed [{source}]: {e}")
         return {"new": 0, "updated": 0, "skipped": 0}
 
-def scrape_linkedin(keyword):
+def scrape_linkedin_direct(keyword, scraper_instance):
+    """Call LinkedIn scraper directly — no HTTP, no timeout issues."""
     try:
-        r = requests.get(f"http://localhost:8000/api/jobs/search",
-                         params={"keywords": keyword, "location": LOCATION,
-                                 "posted_within": DURATION, "max_results": MAX_LI},
-                         timeout=BUDGET_SECS)
-        r.raise_for_status()
-        jobs = r.json().get("jobs", [])
-        ok(f"LinkedIn '{keyword}' → {len(jobs)} jobs")
+        jobs = scraper_instance.search_jobs(
+            keywords=keyword, location=LOCATION,
+            posted_within=DURATION, max_results=MAX_LI,
+        )
+        for j in jobs:
+            j.setdefault("source", "linkedin")
+        ok(f"LinkedIn '{keyword}' -> {len(jobs)} jobs")
         return jobs
     except Exception as e:
         warn(f"LinkedIn '{keyword}' failed: {e}")
@@ -170,44 +171,48 @@ def main():
     token = get_token()
     grand = {"new": 0, "updated": 0, "skipped": 0}
 
-    # Check if local backend is running for LinkedIn
-    local_backend_up = False
+    # Init LinkedIn scraper once (one Chrome session for all keywords)
+    li_scraper = None
     try:
-        requests.get("http://localhost:8000/health", timeout=3)
-        local_backend_up = True
-        ok("Local backend detected — LinkedIn scraping enabled")
-    except:
-        warn("No local backend — LinkedIn scraping skipped (start run_scraper.py first for LinkedIn)")
+        from modules.linkedin_job_scraper import LinkedInJobScraper
+        li_scraper = LinkedInJobScraper()
+        if li_scraper.login():
+            ok("LinkedIn logged in — Chrome session ready")
+        else:
+            warn("LinkedIn login failed — skipping LinkedIn")
+            li_scraper = None
+    except Exception as e:
+        warn(f"LinkedIn init failed: {e}")
 
     for keyword in KEYWORDS:
         print(f"\n--- {keyword} ---")
         all_jobs = []
 
-        # LinkedIn (needs local backend with Selenium)
-        if local_backend_up:
-            li_jobs = run_with_timeout(lambda kw=keyword: scrape_linkedin(kw), BUDGET_SECS)
-            all_jobs += li_jobs
+        # LinkedIn — direct call, ingest immediately
+        if li_scraper:
+            li_jobs = scrape_linkedin_direct(keyword, li_scraper)
+            if li_jobs:
+                li_jobs = [j for j in li_jobs if j.get("job_url")]
+                s = ingest(token, li_jobs, "linkedin")
+                for k in grand: grand[k] += s.get(k, 0)
 
-        # Naukri (HTTP, fast)
-        naukri_jobs = run_with_timeout(lambda kw=keyword: scrape_naukri(kw), 30)
-        all_jobs += naukri_jobs
-
-        # InstaHyre (HTTP, fast)
-        ih_jobs = run_with_timeout(lambda kw=keyword: scrape_instahyre(kw), 30)
-        all_jobs += ih_jobs
-
-        # Greenhouse (HTTP, fast)
-        gh_jobs = run_with_timeout(lambda kw=keyword: scrape_greenhouse(kw), 30)
+        # Greenhouse (open API, works)
+        gh_jobs = run_with_timeout(lambda kw=keyword: scrape_greenhouse(kw), 60)
         all_jobs += gh_jobs
 
-        # Lever (HTTP, fast)
-        lv_jobs = run_with_timeout(lambda kw=keyword: scrape_lever(kw), 30)
-        all_jobs += lv_jobs
+        # Naukri + InstaHyre (may return 0 due to protection, but try)
+        all_jobs += run_with_timeout(lambda kw=keyword: scrape_naukri(kw), 20)
+        all_jobs += run_with_timeout(lambda kw=keyword: scrape_instahyre(kw), 20)
 
-        # Ingest all for this keyword
-        s = ingest(token, all_jobs, f"batch_{keyword.lower().replace(' ','_')}")
-        for k in grand: grand[k] += s.get(k, 0)
-        info(f"  Total for '{keyword}': {len(all_jobs)} scraped")
+        if all_jobs:
+            s = ingest(token, all_jobs, f"batch_{keyword.lower().replace(' ','_')}")
+            for k in grand: grand[k] += s.get(k, 0)
+        info(f"  Total for '{keyword}': {len(all_jobs)} non-LinkedIn scraped")
+
+    # Close Chrome
+    if li_scraper:
+        try: li_scraper.driver.quit(); ok("Chrome closed")
+        except: pass
 
     print(f"\n{'-'*40}")
     print(f"  Total new in DB:  {grand['new']}")
