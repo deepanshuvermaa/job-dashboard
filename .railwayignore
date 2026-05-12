@@ -1,0 +1,32 @@
+# Scraping modules — run locally only, not needed on Railway
+backend/modules/board_scrapers/
+backend/modules/linkedin_job_scraper.py
+backend/modules/easy_apply_bot.py
+backend/modules/automation_workflow.py
+backend/modules/batch_conductor.py
+backend/modules/portal_scanner.py
+backend/modules/ats_detector.py
+backend/modules/clickers_and_finders.py
+backend/modules/question_answerer.py
+backend/modules/linkedin_auto_messenger.py
+backend/modules/linkedin_auto_poster.py
+backend/modules/linkedin_poster.py
+backend/modules/linkedin_post_generator.py
+backend/core/browser/
+
+# Scraper entry point
+run_scraper.py
+
+# Local dev / exports
+exports/
+backend/data/
+backend/screenshots/
+backend/uploads/
+
+# Old API
+backend/api/main.py
+backend/api/main_old.py
+backend/api/main_backup.py
+
+# Docs
+*.md
