@@ -489,11 +489,13 @@ class LinkedInJobScraper:
         return list(all_jobs.values())
 
     def _extract_job_info(self, card, index: int = 0) -> Optional[Dict]:
-        """Extract job information from a job card"""
+        """Extract job information from a job card using JS click to avoid nav interception."""
         try:
-            # Click on job card to load details
-            card.click()
-            time.sleep(3)  # Increased wait time for details to load
+            # Scroll card into view and click via JS to avoid nav bar interception
+            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", card)
+            time.sleep(0.3)
+            self.driver.execute_script("arguments[0].click();", card)
+            time.sleep(2)
 
             # Try multiple selectors for title (LinkedIn updates these frequently)
             title = None
