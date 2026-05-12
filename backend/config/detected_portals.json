@@ -1,0 +1,4890 @@
+[
+  {
+    "company": "3i Infotech",
+    "original_url": "3i-infotech.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "error: Invalid URL '3i-infotech.com/careers/': No scheme ",
+    "has_structured_data": false
+  },
+  {
+    "company": "Accenture",
+    "original_url": "https://www.accenture.com/in-en/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "314e Corporation",
+    "original_url": "https://www.314e.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Agnikul Cosmos",
+    "original_url": "https://agnikul.in/#/career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Acaira",
+    "original_url": "https://www.acaira.com/Career.aspx",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Airbnb",
+    "original_url": "https://careers.airbnb.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Airbase",
+    "original_url": "https://www.airbase.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Agile Solutions",
+    "original_url": "http://agilesolutions.com/careers-2/  ",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Ajio",
+    "original_url": "https://www.ajio.com/ajio-careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Airtel x labs",
+    "original_url": "https://careers.airtel.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Airbus",
+    "original_url": "https://www.airbus.com/careers.html",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Amazon",
+    "original_url": "https://www.amazon.jobs/en/",
+    "ats": "amazon_jobs",
+    "ats_url": "https://www.amazon.jobs/en/",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "Accord software",
+    "original_url": "https://accord-global.com/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Akamai",
+    "original_url": "https://www.akamai.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "1 mg",
+    "original_url": "https://www.1mg.com/jobs",
+    "ats": "darwinbox",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Amadeus labs",
+    "original_url": "https://jobs.amadeus.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "AirGarage",
+    "original_url": "https://airgara.ge/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "[24]7.ai",
+    "original_url": "https://www.247.ai/career-search",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Alphabet Inc",
+    "original_url": "https://abc.xyz",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Alstom",
+    "original_url": "https://www.alstom.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "American express",
+    "original_url": "https://www.americanexpress.com/en-us/careers/",
+    "ats": "eightfold",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Amdocs",
+    "original_url": "https://asset.amdocs.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Agile Infoway",
+    "original_url": "https://www.agileinfoways.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "AppInventiv",
+    "original_url": "https://appinventiv.com/career/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Apna",
+    "original_url": "https://www.instahyre.com/jobs-at-apna/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "App Dynamics",
+    "original_url": "https://www.appdynamics.com/company/careers/india",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Amway",
+    "original_url": "https://www.amway.in/about-amway/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Apex Technology",
+    "original_url": "https://www.apextechnologies.info/job-vacancies.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Aryaka networks",
+    "original_url": "https://www.linkedin.com/company/aryaka-networks/jobs?originalSubdomain=in",
+    "ats": "linkedin",
+    "ats_url": "https://www.linkedin.com/company/aryaka-networks/jobs?originalSubdomain=in",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "Arista Networks",
+    "original_url": "https://www.arista.com/en/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_406",
+    "has_structured_data": false
+  },
+  {
+    "company": "Accolite software",
+    "original_url": "https://www.accolite.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Anaxee",
+    "original_url": "https://www.anaxee.com/career/",
+    "ats": "freshteam",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Apple",
+    "original_url": "https://www.apple.com/jobs/in/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Appen",
+    "original_url": "https://appen.com/jobs/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Alibaba Group",
+    "original_url": "https://careers.alibaba.com",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Ark Info",
+    "original_url": "https://www.arkinfo.in/career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Avail Finance",
+    "original_url": "https://availfinance.in/opportunities/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Arcesium",
+    "original_url": "https://www.arcesium.com/careers.html",
+    "ats": "greenhouse",
+    "ats_url": "https://boards.greenhouse.io/arcesiumllc",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Athena Health",
+    "original_url": "https://www.athenahealth.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Atlan",
+    "original_url": "https://atlan.com/careers/",
+    "ats": "ashby",
+    "ats_url": "https://jobs.ashbyhq.com/atlan",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Atlassian",
+    "original_url": "https://www.atlassian.com/company/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Aptiv",
+    "original_url": "https://jobs.aptiv.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Asteria Aerospace Ltd",
+    "original_url": "https://asteria.co.in/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Ather Energy",
+    "original_url": "https://www.atherenergy.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Bain & Co",
+    "original_url": "https://www.bain.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "BARC India",
+    "original_url": "https://www.barcindia.co.in/life-at-barc",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Bajaj",
+    "original_url": "https://www.bajajgroup.org/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Benchmark",
+    "original_url": "https://benchmarkit.zohorecruit.com/jobs/Careers",
+    "ats": "zoho_recruit",
+    "ats_url": "benchmarkit.zohorecruit.com",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "Bellatrix Aerospace",
+    "original_url": "http://www.bellatrixaerospace.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Barclays",
+    "original_url": "https://home.barclays/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Bazaarvoice",
+    "original_url": "https://www.bazaarvoice.com/company/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Acko",
+    "original_url": "https://acko.hirexp.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Aujas",
+    "original_url": "https://www.aujas.com/cybersecurity-careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "AGC Networks",
+    "original_url": "https://www.agcnetworks.com/career/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Bacancy Technology",
+    "original_url": "https://www.bacancytechnology.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "BankBazar",
+    "original_url": "https://www.bankbazaar.com/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "BigBasket",
+    "original_url": "https://careers.bigbasket.com/",
+    "ats": "darwinbox",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Atos",
+    "original_url": "https://atos.net/en/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Ardentisys",
+    "original_url": "https://www.ardentisys.com/about-us/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "BharatPe",
+    "original_url": "https://bharatpe.com/career",
+    "ats": "darwinbox",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "BlueJeans",
+    "original_url": "https://www.bluejeans.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Biocon",
+    "original_url": "https://www.biocon.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "BlackBuck",
+    "original_url": "https://www.blackbuck.com/careers.php",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_502",
+    "has_structured_data": false
+  },
+  {
+    "company": "Bitrix Infotech",
+    "original_url": "https://bitrixinfotech.com/career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Berkshire Hathaway Inc",
+    "original_url": "https://www.bhhc.com/careers/career-opportunities.aspx",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Blackrock",
+    "original_url": "https://careers.blackrock.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Blackhawk",
+    "original_url": "https://blackhawknetwork.com/company/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "BMC Software",
+    "original_url": "https://www.bmc.com/careers/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Better",
+    "original_url": "https://better.com/about-us/careers",
+    "ats": "ashby",
+    "ats_url": "https://jobs.ashbyhq.com/better-mortgage",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Adobe",
+    "original_url": "https://www.adobe.com/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Bounce",
+    "original_url": "https://careers-bounce.peoplestrong.com/portal/job/joblist",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Boeing",
+    "original_url": "https://jobs.boeing.com/",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "BPL India",
+    "original_url": "https://www.bplindia.in/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "BearingPoint",
+    "original_url": "https://www.bearingpoint.com/en/our-people/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "BrowserStack",
+    "original_url": "https://www.browserstack.com/careers",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Booking.com",
+    "original_url": "https://jobs.booking.com/careers",
+    "ats": "icims",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Bloomberg L.P.",
+    "original_url": "https://careers.bloomberg.com/job/search",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Bluestacks",
+    "original_url": "https://www.bluestacks.com/work-at-bluestacks.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Brooklinen",
+    "original_url": "https://www.brooklinen.com/pages/careers",
+    "ats": "greenhouse",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Bosch",
+    "original_url": "https://www.bosch.in/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "BYJU\u2019S",
+    "original_url": "https://byjus.com/careers-at-byjus/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Blizzard Entertainment",
+    "original_url": "https://careers.blizzard.com/global/en",
+    "ats": "eightfold",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Cameo",
+    "original_url": "https://careers.cameo.com",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Bottemline Technologies",
+    "original_url": "https://www.bottomline.com/apac/about/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Capgemini",
+    "original_url": "https://www.capgemini.com/in-en/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Byju's",
+    "original_url": "https://byjus.com/careers/all-openings/job-category/tech/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_502",
+    "has_structured_data": false
+  },
+  {
+    "company": "BNY Mellon",
+    "original_url": "https://jobs.bnymellon.com/",
+    "ats": "eightfold",
+    "ats_url": "bnymellon.eightfold.ai",
+    "detection_method": "redirect",
+    "has_structured_data": false
+  },
+  {
+    "company": "Capillary",
+    "original_url": "https://www.capillarytech.com/about-us/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Brahmastra Aerospace",
+    "original_url": "https://www.brahmastraspace.org/career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Capita",
+    "original_url": "https://www.capita.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "CarDekho",
+    "original_url": "https://careers.cardekho.com/",
+    "ats": "darwinbox",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "CarWale",
+    "original_url": "https://www.carwale.com/career/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "CashFree",
+    "original_url": "https://www.cashfree.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "BukuWarung",
+    "original_url": "https://www.notion.so/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Avaya",
+    "original_url": "https://careers.avaya.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "BT Global Services",
+    "original_url": "https://www.bt.com/careers",
+    "ats": "structured_data",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": true
+  },
+  {
+    "company": "Chime",
+    "original_url": "https://www.chime.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "CGI Group",
+    "original_url": "https://www.cgi.com/en/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Capital Numbers",
+    "original_url": "https://www.capitalnumbers.com/careers.php",
+    "ats": "freshteam",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Cerner",
+    "original_url": "https://careers.cerner.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Cerner",
+    "original_url": "https://careers.cerner.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Armaco",
+    "original_url": "https://www.aramco.com",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Ciesto Solutions",
+    "original_url": "https://ciestosolutions.com/career-opportunities/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Celigo",
+    "original_url": "https://www.celigo.com/company/careers/",
+    "ats": "greenhouse",
+    "ats_url": "https://boards.greenhouse.io/embed",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Citrix",
+    "original_url": "https://jobs.citrix.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Chargebee",
+    "original_url": "https://careers.chargebee.com/jobs/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Chronus",
+    "original_url": "https://chronus.com/about-us/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Citicorp",
+    "original_url": "https://careers.citigroup.com/",
+    "ats": "eightfold",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Cimpress",
+    "original_url": "https://cimpress.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Classic Informatics",
+    "original_url": "https://www.classicinformatics.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Clarion Technologies",
+    "original_url": "https://www.clariontech.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "ClearTrip",
+    "original_url": "https://careers.cleartrip.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Cadence",
+    "original_url": "https://www.cadence.com/en_US/home/company/careers.html",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "ByteDance",
+    "original_url": "https://jobs.bytedance.com/en",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Clavis Technologies",
+    "original_url": "https://www.clavistechnologies.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "ClearTax",
+    "original_url": "https://cleartax.in/s/careers",
+    "ats": "darwinbox",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Cognologix",
+    "original_url": "https://cognologix.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Cisco",
+    "original_url": "https://jobs.cisco.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Cognizant",
+    "original_url": "https://careers.cognizant.com/in/en",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "CodingNinjas",
+    "original_url": "https://www.linkedin.com/jobs/coding-ninjas-jobs/?originalSubdomain=in",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Cloudera",
+    "original_url": "https://www.cloudera.com/careers.html",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Coinswitch kuber",
+    "original_url": "https://recruiterflow.com/coinswitch/jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Code Nation",
+    "original_url": "http://codenation.co.in/hiringphilosophy.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Codenation innovation labs",
+    "original_url": "http://codenation.co.in/hiringprocess.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "CoinDCX",
+    "original_url": "https://careers.coindcx.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Confluent",
+    "original_url": "https://www.confluent.io/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_429",
+    "has_structured_data": false
+  },
+  {
+    "company": "CRED",
+    "original_url": "https://careers.cred.club/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Commvault",
+    "original_url": "https://careers.commvault.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "COSGrid",
+    "original_url": "https://www.cosgrid.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Continental",
+    "original_url": "https://www.continental.com/en/career/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Crio.Do",
+    "original_url": "https://www.crio.do/recruit/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Crowdstrike",
+    "original_url": "https://www.crowdstrike.com/careers/",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Comsoft",
+    "original_url": "https://www.comsoft.com.sg/EN/html/careers.htm",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Credit Suisse",
+    "original_url": "https://www.credit-suisse.com/careers/en/apply.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "CueMath",
+    "original_url": "https://www.cuemath.com/work-from-home/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Byteridge",
+    "original_url": "https://byteridge.com/career.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Cohesity",
+    "original_url": "https://www.cohesity.com/company/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Cradlepoint",
+    "original_url": "https://cradlepoint.com/about-us/careers/job-listings/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Collabera",
+    "original_url": "https://www.collabera.com/job-apply/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Copucom",
+    "original_url": "https://www.compucom.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Curology",
+    "original_url": "https://curology.com/careers/",
+    "ats": "workable",
+    "ats_url": "https://apply.workable.com/curology",
+    "detection_method": "redirect",
+    "has_structured_data": false
+  },
+  {
+    "company": "CSS Corp",
+    "original_url": "https://www.csscorp.com/company/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "DailyHunt",
+    "original_url": "https://careers.dailyhunt.com/#!/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Crestron",
+    "original_url": "https://www.crestron.com/About/careers-jobs-employment-opportunities",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "CasaOne",
+    "original_url": "https://casaone.skillate.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "DealShare",
+    "original_url": "https://www.dealshare.in/careers#home",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Dave",
+    "original_url": "https://dave.com/careers",
+    "ats": "ashby",
+    "ats_url": "https://jobs.ashbyhq.com/dave",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Datadog",
+    "original_url": "https://www.datadoghq.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Delhivery",
+    "original_url": "https://www.delhivery.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Deolitte",
+    "original_url": "https://jobs2.deloitte.com/ui/en",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Datamatics",
+    "original_url": "http://careers.datamatics.com/dm_career/client/index.aspx",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Cure.Fit",
+    "original_url": "https://www.cure.fit/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Databricks",
+    "original_url": "https://databricks.com/company/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Dell",
+    "original_url": "https://jobs.dell.com/",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Design.codes",
+    "original_url": "https://designs.codes/career/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Cvent",
+    "original_url": "https://www.cvent.com/en/careers",
+    "ats": "icims",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Dialpad",
+    "original_url": "https://www.dialpad.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Cybage",
+    "original_url": "https://www.cybage.com/careers/current-openings",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Divvy Homes",
+    "original_url": "https://jobs.lever.co/divvyhomes",
+    "ats": "lever",
+    "ats_url": "https://jobs.lever.co/divvyhomes",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "Deutsche Bank",
+    "original_url": "https://careers.db.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Discord",
+    "original_url": "https://discord.com/jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Dhruva Space",
+    "original_url": "https://angel.co/company/dhruvaspace",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Daffodil Software",
+    "original_url": "https://www.daffodilsw.com/career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Dispatch",
+    "original_url": "https://www.naukri.com/dispatch-jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Directi",
+    "original_url": "https://careers.directi.com/",
+    "ats": "lever",
+    "ats_url": "https://jobs.lever.co/directi",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Delta Air Lines",
+    "original_url": "https://delta.avature.net/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_202",
+    "has_structured_data": false
+  },
+  {
+    "company": "DE Shaw",
+    "original_url": "https://www.deshawindia.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Diebold",
+    "original_url": "https://www.dieboldnixdorf.com/en-us/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Disney",
+    "original_url": "https://jobs.disneycareers.com/location/india-jobs/391-28648/1269750/2",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Dream11",
+    "original_url": "https://www.dreamsports.group/careers",
+    "ats": "lever",
+    "ats_url": "https://jobs.lever.co/dreamsports\\",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "DropBox",
+    "original_url": "https://www.datadoghq.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "DRDO",
+    "original_url": "https://www.drdo.gov.in/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Dell EMC",
+    "original_url": "https://www.dell.com/learn/in/en/incorp1/viewall/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "EA Games",
+    "original_url": "https://www.ea.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Ecolousys Technologies",
+    "original_url": "https://www.naukri.com/ecclousys-technologies-jobs-careers-5221778",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Dukaan",
+    "original_url": "https://angel.co/company/dukaan-app/jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "DP World",
+    "original_url": "https://ehpv.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Dunzo",
+    "original_url": "https://www.dunzo.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Duck Creek Technologies",
+    "original_url": "https://www.duckcreek.com/careers/",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Ericsson",
+    "original_url": "https://www.ericsson.com/en/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Envestnet Yodlee",
+    "original_url": "https://www.yodlee.com/company/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Cygnet",
+    "original_url": "https://www.cygnet-infotech.com/job-opportunities",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Eurofins",
+    "original_url": "https://careers.eurofins.com/in/",
+    "ats": "smartrecruiters",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Experian",
+    "original_url": "https://www.experian.in/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Exceptionaire",
+    "original_url": "https://www.exceptionaire.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Facebook",
+    "original_url": "https://www.facebook.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_400",
+    "has_structured_data": false
+  },
+  {
+    "company": "Druva",
+    "original_url": "https://www.druva.com/about/careers/",
+    "ats": "greenhouse",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "EyeROV",
+    "original_url": "https://www.eyerov.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Ecotech",
+    "original_url": "https://www.ecotech.com/careers/career-opportunities/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Fidelity investments",
+    "original_url": "https://jobs.fidelity.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "eBay",
+    "original_url": "https://careers.ebayinc.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "FamPay",
+    "original_url": "https://fampay.in/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Fidelity Investments",
+    "original_url": "https://india.fidelity.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "FlyFin",
+    "original_url": "https://www.linkedin.com/company/flyfin-ai/jobs/",
+    "ats": "linkedin",
+    "ats_url": "https://www.linkedin.com/company/flyfin-ai/jobs/",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "Discovery inc",
+    "original_url": "https://jobs.discovery.com/careers-home/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "EXL Healthcare",
+    "original_url": "https://exlservice.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Flexport",
+    "original_url": "https://www.flexport.com/careers/jobs/",
+    "ats": "greenhouse",
+    "ats_url": "https://boards.greenhouse.io/flexport",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Enfussion",
+    "original_url": "https://enfusion.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Flipkart",
+    "original_url": "https://www.flipkartcareers.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Flytxt",
+    "original_url": "https://www.flytxt.com/job/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Flock",
+    "original_url": "https://careers.flock.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Dimension Data",
+    "original_url": "https://www.dimensiondata.com/en-gb/careers",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Frappe Technologies",
+    "original_url": "https://frappe.io/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Freshworks",
+    "original_url": "https://www.freshworks.com/company/careers/",
+    "ats": "smartrecruiters",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Fynd",
+    "original_url": "https://fynd.careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "FireEye inc",
+    "original_url": "https://www.fireeye.com/company/jobs.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Expedia",
+    "original_url": "https://lifeatexpediagroup.com/jobs/",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "GE Healthcare",
+    "original_url": "https://jobs.gecareers.com/healthcare/global/en",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "FreeCharge",
+    "original_url": "https://careers.freecharge.in/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Fiserv",
+    "original_url": "https://www.careers.fiserv.com",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Furlenco",
+    "original_url": "https://jobs.furlenco.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_503",
+    "has_structured_data": false
+  },
+  {
+    "company": "Flatworld Solutions",
+    "original_url": "https://www.flatworldsolutions.com/careers/forms/apply.php",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Gartner",
+    "original_url": "https://jobs.gartner.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Fingent",
+    "original_url": "https://www.fingent.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Full Story",
+    "original_url": "https://www.fullstory.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "EY",
+    "original_url": "https://careers.ey.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Fractal",
+    "original_url": "https://fractal.ai/job-openings/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Garuda Aerospace private Ltd",
+    "original_url": "https://www.garudaaerospace.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Frugal Testing",
+    "original_url": "https://frugaltesting.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Fischer Jordan",
+    "original_url": "https://fischerjordan.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "fyle",
+    "original_url": "https://www.fylehq.com/company/team/join",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Frontrow",
+    "original_url": "https://www.gofrontrow.com/about/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Github",
+    "original_url": "https://github.com/about/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Google",
+    "original_url": "https://careers.google.com/",
+    "ats": "google_careers",
+    "ats_url": "https://careers.google.com/",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "Gitlab",
+    "original_url": "https://about.gitlab.com/jobs/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Global Logic",
+    "original_url": "https://www.globallogic.com/in/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Ghost",
+    "original_url": "https://careers.ghost.org/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "GeeksForGeeks",
+    "original_url": "https://www.geeksforgeeks.org/careers/?",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Glu",
+    "original_url": "https://www.glu.com/working-at-glu/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Gobussoft",
+    "original_url": "https://globussoft.com/vacancies/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "GoDigit",
+    "original_url": "https://www.godigit.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Global Space",
+    "original_url": "https://globalspace.in/career.php",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Groww",
+    "original_url": "https://groww.skillate.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Grab",
+    "original_url": "https://grab.careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Greysoft",
+    "original_url": "http://greysoft.co/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Groupon",
+    "original_url": "https://www.grouponcareers.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "GoDaddy",
+    "original_url": "https://careers.godaddy.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Goldman Sachs",
+    "original_url": "https://www.goldmansachs.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Gojek",
+    "original_url": "https://career.gojek.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Graviton",
+    "original_url": "https://www.gravitontrading.com/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Godrej Aerospace",
+    "original_url": "https://www.godrej.com/godrejandboyce/gnb-careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Hackerearth",
+    "original_url": "https://www.hackerearth.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Goibibo",
+    "original_url": "https://www.goibibo.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Guild Education",
+    "original_url": "https://careers.guildeducation.com",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "HBO",
+    "original_url": "https://warnermediacareers.com/hbo-jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Hashedin",
+    "original_url": "https://hashedin.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Hike messenger",
+    "original_url": "https://www.hike.in/workathike/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_502",
+    "has_structured_data": false
+  },
+  {
+    "company": "Healthify me",
+    "original_url": "https://www.healthifyme.com/careers/",
+    "ats": "darwinbox",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "HRDevi Talent Acquistion",
+    "original_url": "http://www.hrdevi.co.in",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Hitachi",
+    "original_url": "https://careers.hitachi.com",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "HERE",
+    "original_url": "https://www.here.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "GE",
+    "original_url": "https://www.ge.com/in/careers/opportunities",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "GreyOrange",
+    "original_url": "https://www.greyorange.com/about/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Hewlett-Packard",
+    "original_url": "https://jobs.hp.com/en-us/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "HIE HQ",
+    "original_url": "https://hiehq.com/career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Hyundai",
+    "original_url": "https://www.hyundai.com/in/en/hyundai-story/career/overview.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "HackerRank",
+    "original_url": "https://www.hackerrank.com/careers",
+    "ats": "greenhouse",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Iasys",
+    "original_url": "https://www.iasys.co.in/career.php",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "HubSpot",
+    "original_url": "https://www.hubspot.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Hyperlink InfoSystem",
+    "original_url": "https://www.hyperlinkinfosystem.com/career.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Hotstar",
+    "original_url": "https://tech.hotstar.com/",
+    "ats": "lever",
+    "ats_url": "https://jobs.lever.co/jiostar",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Honeywell",
+    "original_url": "https://tech.hotstar.com/",
+    "ats": "lever",
+    "ats_url": "https://jobs.lever.co/jiostar",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "HSBC",
+    "original_url": "https://www.hsbc.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Hiring Plug",
+    "original_url": "https://www.hiringplug.com/careers.php",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Indeed",
+    "original_url": "https://in.indeed.com/cmp/Indeed",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "India Mart",
+    "original_url": "https://careers.indiamart.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "HP",
+    "original_url": "https://jobs.hp.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Grofers",
+    "original_url": "https://grofers.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "IdeaForge",
+    "original_url": "https://www.ideaforge.co.in/career/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "HealthAsyst",
+    "original_url": "https://www.healthasyst.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Infilon",
+    "original_url": "https://www.infilon.com/career/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Infosys",
+    "original_url": "https://www.infosys.com/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Infor",
+    "original_url": "https://www.infor.com/about/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Infonaya",
+    "original_url": "https://www.infonaya.com/Career.aspx",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Intel",
+    "original_url": "https://www.intel.com/content/www/us/en/jobs/jobs-at-intel.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Intel",
+    "original_url": "https://www.intel.com/content/www/us/en/jobs/jobs-at-intel.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Incedoic",
+    "original_url": "https://www.incedoinc.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "ION Energy",
+    "original_url": "https://apply.workable.com/ionenergy/?lng=en",
+    "ats": "workable",
+    "ats_url": "https://apply.workable.com/ionenergy",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "Inmobi",
+    "original_url": "https://www.inmobi.com/company/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Impact Analytics",
+    "original_url": "https://www.impactanalytics.co/join-us/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Info Edge",
+    "original_url": "https://careers.infoedge.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Intuit",
+    "original_url": "https://www.intuit.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Intellika",
+    "original_url": "https://www.intellika.in/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "IHS Markit",
+    "original_url": "https://careers.ihsmarkit.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_500",
+    "has_structured_data": false
+  },
+  {
+    "company": "Harness",
+    "original_url": "https://harness.io/careers/",
+    "ats": "greenhouse",
+    "ats_url": "https://boards.greenhouse.io/harnessinc",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Informatics",
+    "original_url": "https://www.informaticsglobal.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "InApp",
+    "original_url": "https://inapp.com/careers/jobs-at-inapp/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "ISRO",
+    "original_url": "https://www.isro.gov.in/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "InVision",
+    "original_url": "https://www.invisionapp.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Innovaccer",
+    "original_url": "https://innovaccer.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Informatica",
+    "original_url": "https://informatica.gr8people.com/jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Jio",
+    "original_url": "https://careers.jio.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Junglee Games",
+    "original_url": "https://www.jungleegames.com/grow.php",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Jupiter money",
+    "original_url": "https://jobs.lever.co/jupiter",
+    "ats": "lever",
+    "ats_url": "https://jobs.lever.co/jupiter",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "IP Infusion",
+    "original_url": "https://www.ipinfusion.com/career/",
+    "ats": "jobvite",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Ixigo",
+    "original_url": "https://www.ixigo.com/about/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Itransition",
+    "original_url": "https://www.itransition.com/company/career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Jumbotail",
+    "original_url": "https://jumbotail.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Igneous Infotech",
+    "original_url": "http://ingenious-infotech.com/#career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Iron Mountain",
+    "original_url": "https://www.ironmountain.com/in/about-us/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Juspay",
+    "original_url": "https://www.juspay.in/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Kesari bharat",
+    "original_url": "https://www.linkedin.com/in/deepak-sharda-6594561b1/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_999",
+    "has_structured_data": false
+  },
+  {
+    "company": "IQVIA",
+    "original_url": "https://jobs.iqvia.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Khatabook",
+    "original_url": "https://khatabook.com/hiring",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Keyvalue",
+    "original_url": "https://keyvalue.systems/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Kickstarter",
+    "original_url": "https://jobs.kickstarter.com/",
+    "ats": "greenhouse",
+    "ats_url": "https://boards.greenhouse.io/embed",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Leap Finance",
+    "original_url": "https://leapfinance.freshteam.com/jobs",
+    "ats": "freshteam",
+    "ats_url": "leapfinance.freshteam.com",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "Jaguar",
+    "original_url": "https://www.jaguarlandrovercareers.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "iQuanti",
+    "original_url": "https://www.iquanti.com/contact-us/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Licious",
+    "original_url": "https://www.careers.in/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Kantar",
+    "original_url": "https://www.kantar.com/careers",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "IBM",
+    "original_url": "https://www.ibm.com/in-en/employment/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Kaleyra",
+    "original_url": "https://www.kaleyra.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Jeavio",
+    "original_url": "https://www.jeavio.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "KPN",
+    "original_url": "http://www.kpn-corp.com/?page_id=201",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Lenovo",
+    "original_url": "https://lenovocareers.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Livspace",
+    "original_url": "https://www.livspace.com/in/careers",
+    "ats": "recruitee",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Logicmonitor",
+    "original_url": "https://www.logicmonitor.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Lockheed Martin",
+    "original_url": "https://www.lockheedmartin.com/en-ca/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "LTI",
+    "original_url": "https://careers.lntinfotech.com/search/careers.lntinfotech.com?q=&sortColumn=referencedate&sortDirection=asc",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Magicpin",
+    "original_url": "https://magicpin.darwinbox.in/ms/candidate/careers",
+    "ats": "darwinbox",
+    "ats_url": "magicpin.darwinbox.in",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "Lenskart",
+    "original_url": "https://hiring.lenskart.com/",
+    "ats": "recruitee",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "LinkedIn",
+    "original_url": "https://careers.linkedin.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Magazine3",
+    "original_url": "https://www.naukri.com/magazine3-jobs-careers-2374534",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Khoros",
+    "original_url": "https://khoros.com/about/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Koch",
+    "original_url": "https://jobs.kochcareers.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "MakeMyTrip",
+    "original_url": "https://careers.makemytrip.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Juniper Networks",
+    "original_url": "https://www.juniper.net/us/en/company/careers/",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Master Card",
+    "original_url": "https://www.mastercard.us/en-us/vision/who-we-are/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "LogicFruit",
+    "original_url": "https://www.logic-fruit.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Logica",
+    "original_url": "https://www.naukri.com/logica-pvt-ltd-jobs-careers-333271",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "KLA Tencor",
+    "original_url": "https://www.kla-tencor.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "JP Morgan",
+    "original_url": "https://careers.jpmorgan.com/IN/en/home",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Mahindra",
+    "original_url": "https://careers.techmahindra.com",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Ishir",
+    "original_url": "https://www.ishir.com/career.htm",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Micron",
+    "original_url": "https://micron.eightfold.ai/careers",
+    "ats": "eightfold",
+    "ats_url": "micron.eightfold.ai",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "Mathworks",
+    "original_url": "https://in.mathworks.com/company/jobs/opportunities.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Maven Workforce",
+    "original_url": "https://www.mavenworkforce.com/jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Master Class",
+    "original_url": "https://careers.masterclass.com",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Meesho",
+    "original_url": "https://careers.meesho.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Meesho",
+    "original_url": "https://careers.meesho.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "MindStrong",
+    "original_url": "https://mindstrong.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Lululemon",
+    "original_url": "https://careers.lululemon.com/en_US/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Microsoft",
+    "original_url": "https://careers.microsoft.com/us/en    ",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Microsoft",
+    "original_url": "https://careers.microsoft.com/us/en",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Mind It Systems",
+    "original_url": "https://www.minditsystems.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Mobikwik",
+    "original_url": "https://www.mobikwik.com/career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Media.net",
+    "original_url": "https://careers.media.net/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Media.net",
+    "original_url": "https://careers.media.net/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Lowe's companies, inc",
+    "original_url": "https://corporate.lowes.com/careers/search-apply",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "MPL",
+    "original_url": "https://mpl.darwinbox.in/ms/candidate/careers",
+    "ats": "darwinbox",
+    "ats_url": "mpl.darwinbox.in",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "Mount talent",
+    "original_url": "https://careers.mounttalent.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_530",
+    "has_structured_data": false
+  },
+  {
+    "company": "Morgan Stanley",
+    "original_url": "https://www.morganstanley.com/articles/morgan-stanley-india-careers",
+    "ats": "taleo",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Mphasis",
+    "original_url": "https://careers.mphasis.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Memory",
+    "original_url": "https://memory.ai/jobs",
+    "ats": "freshteam",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Morgan Stanley",
+    "original_url": "https://www.morganstanley.com/people-opportunities/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Mantech International",
+    "original_url": "https://www.mantech.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "MindTickle",
+    "original_url": "https://www.mindtickle.com/careers/",
+    "ats": "lever",
+    "ats_url": "https://jobs.lever.co/mindtickle",
+    "detection_method": "redirect",
+    "has_structured_data": false
+  },
+  {
+    "company": "MindTickle",
+    "original_url": "https://www.mindtickle.com/careers/",
+    "ats": "lever",
+    "ats_url": "https://jobs.lever.co/mindtickle",
+    "detection_method": "redirect",
+    "has_structured_data": false
+  },
+  {
+    "company": "MultiGraphics Group",
+    "original_url": "https://multigraphics.in/career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Myntra",
+    "original_url": "https://careers.myntra.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Myntra",
+    "original_url": "https://careers.myntra.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Mindtree",
+    "original_url": "https://www.mindtree.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "NatWest Group",
+    "original_url": "https://jobs.natwestgroup.com/search/jobs/in/country/india",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Msys Technologies",
+    "original_url": "https://www.msystechnologies.com/company/msys-careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Nagarro",
+    "original_url": "https://www.nagarro.com/en/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Nagarro",
+    "original_url": "https://www.nagarro.com/en/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "MobiKwik",
+    "original_url": "https://mobikwik.recruiterbox.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Land rover",
+    "original_url": "https://www.jaguarlandrovercareers.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "NASSCOM",
+    "original_url": "https://nasscom.in/about-us/career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "navi",
+    "original_url": "https://www.navifinserv.com/life-at-chaitanya",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "McAfee",
+    "original_url": "https://careers.mcafee.com/search-jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Nestle",
+    "original_url": "https://www.nestle.in/jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Netmeds",
+    "original_url": "https://netmeds.darwinbox.in/ms/candidate/careers",
+    "ats": "darwinbox",
+    "ats_url": "netmeds.darwinbox.in",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "NetApp",
+    "original_url": "https://www.arista.com/en/careers/india",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_406",
+    "has_structured_data": false
+  },
+  {
+    "company": "NEC",
+    "original_url": "https://in.nec.com/en_IN/career/jobs-at-NEC.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Neosoft",
+    "original_url": "https://www.neosofttech.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "National instruments",
+    "original_url": "https://www.ni.com/en-in/about-ni/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Net Solutions",
+    "original_url": "https://www.netsolutions.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Maq",
+    "original_url": "https://maqsoftware.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "NASDAQ",
+    "original_url": "https://www.nasdaq.com/about/careers",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "NetApp",
+    "original_url": "https://www.netapp.com/company/careers/  ",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Monkhub",
+    "original_url": "https://www.monkhub.com/jobs/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Ninjacart",
+    "original_url": "https://ninjacart.in/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Ninjacart",
+    "original_url": "https://ninjacart.in/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Netcracker",
+    "original_url": "https://www.netcracker.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Mquotient",
+    "original_url": "http://www.mquotient.net/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Nuro",
+    "original_url": "https://www.nuro.ai/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "nurture.farm",
+    "original_url": "https://nurture.farm/join-us/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_500",
+    "has_structured_data": false
+  },
+  {
+    "company": "netflix",
+    "original_url": "https://jobs.netflix.com/location?slug=mumbai-india",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Netguru",
+    "original_url": "https://www.netguru.com/career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Ola",
+    "original_url": "https://ola.recruitee.com/",
+    "ats": "recruitee",
+    "ats_url": "ola.recruitee.com",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "NTT Data Corporation",
+    "original_url": "https://careers-inc.nttdata.com",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Nutanix",
+    "original_url": "https://www.nutanix.com/company/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "NCR Corporation",
+    "original_url": "https://www.ncr.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Ongil",
+    "original_url": "https://ongil.io/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Nike",
+    "original_url": "https://jobs.nike.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Nokia",
+    "original_url": "https://www.nokia.com/about-us/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Nykaa",
+    "original_url": "https://www.nykaa.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Nutanix",
+    "original_url": "https://www.nutanix.com/company/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Observe.ai",
+    "original_url": "https://www.observe.ai/careers#section-current-openings",
+    "ats": "greenhouse",
+    "ats_url": "https://boards.greenhouse.io/embed",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Optum",
+    "original_url": "https://www.optum.in/about/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "OYO",
+    "original_url": "https://www.naukri.com/oyo-jobs-careers-2884032",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Ola",
+    "original_url": "https://www.olacabs.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Oracle",
+    "original_url": "https://www.oracle.com/in/corporate/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Paramount",
+    "original_url": "http://www.psinc3.com/jobs.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Olx",
+    "original_url": "https://careers.olxgroup.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Ocrolus",
+    "original_url": "https://www.ocrolus.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Oracle",
+    "original_url": "https://www.oracle.com/apac/corporate/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Opus Consulting",
+    "original_url": "https://www.opusconsulting.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Palo Alto Networks",
+    "original_url": "https://jobs.paloaltonetworks.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Palo Alto Networks",
+    "original_url": "https://jobs.paloaltonetworks.com/en/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "O9Solutions",
+    "original_url": "https://o9solutions.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Obvious",
+    "original_url": "https://obvious.in/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Park+",
+    "original_url": "https://parkplus.io/we-are-hiring#hiring",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Paypal",
+    "original_url": "https://www.paypal.com/us/webapps/mpp/jobs/students-and-grads/internships",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "PayScale",
+    "original_url": "https://www.payscale.com/research/IN/Job",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "NVIDIA",
+    "original_url": "https://www.nvidia.com/en-in/about-nvidia/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "NortonLifeLock",
+    "original_url": "https://stage-www.nortonlifelock.com/us/en/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "OYO",
+    "original_url": "https://www.oyorooms.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Nvidia",
+    "original_url": "https://www.nvidia.com/en-in/about-nvidia/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Paytm",
+    "original_url": "https://paytm.com/careers/",
+    "ats": "lever",
+    "ats_url": "https://jobs.lever.co/paytm",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "PharmEasy",
+    "original_url": "https://pharmeasy.in/careers/",
+    "ats": "darwinbox",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Pegasystems",
+    "original_url": "https://www.pega.com/about/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Phonepe",
+    "original_url": "https://www.phonepe.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "PeopleStrong",
+    "original_url": "https://www.peoplestrong.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Postman",
+    "original_url": "https://www.postman.com/company/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Practo",
+    "original_url": "https://practo.app.param.ai/jobs/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Protegrity",
+    "original_url": "https://jobs.lever.co/protegrity?location=Bengaluru",
+    "ats": "lever",
+    "ats_url": "https://jobs.lever.co/protegrity",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "PayU",
+    "original_url": "https://payu.in/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Practo",
+    "original_url": "https://practo.app.param.ai/jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Privado.ai",
+    "original_url": "https://www.privado.ai",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Persistent",
+    "original_url": "https://www.persistent.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Prodapt",
+    "original_url": "https://www.prodapt.com/en/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "PlanView India",
+    "original_url": "https://www.planview.com/company/careers/",
+    "ats": "icims",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Philips",
+    "original_url": "https://www.careers.philips.com/global/en",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Proptiger",
+    "original_url": "https://www.proptiger.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "PixelCrayons",
+    "original_url": "https://www.pixelcrayons.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Priceline",
+    "original_url": "https://careers.priceline.com/search",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Proximity Labs",
+    "original_url": "https://www.proximity.tech/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "PubMatic",
+    "original_url": "https://pubmatic.com/careers/home/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Providence Healthcare",
+    "original_url": "https://www.providencehealthcare.org/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Procore",
+    "original_url": "https://www.procore.com/jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Playment",
+    "original_url": "https://www.playment.io/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Principal",
+    "original_url": "https://www.principal.com/about-us/careers/global-jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Plintron",
+    "original_url": "https://www.plintron.com/en/career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Quikr",
+    "original_url": "https://www.quikr.com/html/jobs.php",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Rakuten",
+    "original_url": "https://rakuten.careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Publicis Sapient",
+    "original_url": "https://careers.publicissapient.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Quora",
+    "original_url": "https://www.quora.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Qualcomm",
+    "original_url": "https://www.qualcomm.com/company/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Refinery29",
+    "original_url": "https://corporate.r29.com/careers#careers-jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "RadixWeb",
+    "original_url": "https://radixweb.com/current-openings",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Rupeek",
+    "original_url": "https://www.rivigo.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Rivigo",
+    "original_url": "https://www.rivigo.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Revalsys",
+    "original_url": "https://www.revalsys.com/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Razorpay",
+    "original_url": "https://razorpay.com/jobs/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Reliance",
+    "original_url": "https://careers.ril.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "QBurst",
+    "original_url": "https://www.qburst.com/company/career/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Rockstar Games",
+    "original_url": "https://www.rockstargames.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Rubrik",
+    "original_url": "https://www.rubrik.com/company/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Rippling",
+    "original_url": "https://www.rippling.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "RedHat",
+    "original_url": "https://www.redhat.com/en/jobs",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Reelo",
+    "original_url": "https://angel.co/company/reelohq",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Saavan",
+    "original_url": "https://www.jiosaavn.com/corporate/jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Sabre corporation",
+    "original_url": "https://www.sabre.com/careers/",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Samsung",
+    "original_url": "https://www.samsung.com/in/about-us/careers/",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Secure Logic",
+    "original_url": "https://securelogicgroup.com/about-us/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Shaadi.com",
+    "original_url": "https://careers.shaadi.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Salesforce",
+    "original_url": "https://www.salesforce.com/company/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "SerpApi",
+    "original_url": "https://serpapi.com/team",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "ShareChat",
+    "original_url": "https://sharechat.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Sapphire Solutions",
+    "original_url": "https://www.sapphiresolutions.net/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Shell",
+    "original_url": "https://www.shell.com/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Shipsy",
+    "original_url": "https://shipsy.io/career/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "S&P Global",
+    "original_url": "https://careers.spglobal.com/jobs",
+    "ats": "icims",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Scality",
+    "original_url": "https://www.scality.com/careers",
+    "ats": "lever",
+    "ats_url": "https://jobs.lever.co/scality?team=Tech%20Services%20EMEA",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Shopee",
+    "original_url": "https://careers.shopee.sg/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Siemens Healthineers",
+    "original_url": "https://www.siemens-healthineers.com/en-in/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Sidebench",
+    "original_url": "https://sidebench.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Seamless.Ai",
+    "original_url": "https://www.seamless.ai/careers",
+    "ats": "greenhouse",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Rocket Companies",
+    "original_url": "https://www.myrocketcareer.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "SAP",
+    "original_url": "https://jobs.sap.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Simform",
+    "original_url": "https://www.simform.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Skyleaf Consultants",
+    "original_url": "https://www.naukri.com/skyleaf-consultants-jobs-careers-913356",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "SkillVertex",
+    "original_url": "https://www.linkedin.com/jobs/search/?f_C=75860188&geoId=92000000",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Snapdeal",
+    "original_url": "https://qa.snapdeal.com/info/jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "SIRI Innovations",
+    "original_url": "https://www.siriinnovations.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Slack",
+    "original_url": "https://slack.com/intl/en-in/careers",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Sigmoid",
+    "original_url": "https://www.sigmoid.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Sling Media",
+    "original_url": "https://www.linkedin.com/jobs/sling-media-jobs/?originalSubdomain=in",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Sirion Labs",
+    "original_url": "https://www.sirionlabs.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Spinny",
+    "original_url": "https://spinny.freshteam.com/jobs",
+    "ats": "freshteam",
+    "ats_url": "spinny.freshteam.com",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "Skyroot Aerospace",
+    "original_url": "https://skyroot.in/join/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "SendinBlue",
+    "original_url": "https://jobs.sendinblue.com/en",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Solusoft",
+    "original_url": "https://www.solu-soft.com/careers_workinghere.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "ServiceNow",
+    "original_url": "https://www.servicenow.com/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Servicenow",
+    "original_url": "https://www.servicenow.com/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Simreka",
+    "original_url": "https://simreka.com/work-with-us/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Slice",
+    "original_url": "https://www.slice.is/work-at-slice/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Siemens",
+    "original_url": "https://new.siemens.com/global/en/company/jobs/search-careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Spectrum",
+    "original_url": "https://jobs.spectrum.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Smith Detection",
+    "original_url": "https://www.smithsdetection.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Snowflake",
+    "original_url": "https://careers.snowflake.com",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Seimens",
+    "original_url": "https://new.siemens.com/global/en/company/jobs.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Square",
+    "original_url": "https://careers.squareup.com/us/en",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Sprinklr",
+    "original_url": "https://www.sprinklr.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "SquadStack",
+    "original_url": "https://www.squadstack.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Sopra Steria",
+    "original_url": "https://www.soprasteria.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Symphoni HR Private Limited",
+    "original_url": "https://symphonihr.com",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Swiggy",
+    "original_url": "https://careers.swiggy.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Stripe",
+    "original_url": "https://stripe.com/in/jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Sunrise JOb",
+    "original_url": "http://www.sunrisejobconsultancy.com",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Spec India",
+    "original_url": "https://www.spec-india.com/career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "SumoLogic",
+    "original_url": "https://www.sumologic.com/company/careers/",
+    "ats": "greenhouse",
+    "ats_url": "https://boards.greenhouse.io/embed",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Symantec Software Company",
+    "original_url": "https://www.careerbliss.com/symantec/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Spotify",
+    "original_url": "https://www.spotifyjobs.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Sunsure Energy",
+    "original_url": "https://www.sunsure-energy.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "TATA Advanced Sysytems Ltd",
+    "original_url": "https://www.tataadvancedsystems.com/careers.php",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "TCS",
+    "original_url": "https://www.tcs.com/careers?country=IN&lang=EN",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Synopsys",
+    "original_url": "https://www.synopsys.com/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Syberry",
+    "original_url": "https://www.syberry.com/company/our-team",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Target",
+    "original_url": "https://corporate.target.com/careers",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Talent HR Networks",
+    "original_url": "https://www.naukri.com/talent-hr-networks-pvt-ltd-jobs-careers-543887",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Tekion",
+    "original_url": "https://tekion.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "SunGard",
+    "original_url": "https://careers.sungardas.com",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "TatvaSoft",
+    "original_url": "https://www.tatvasoft.com/career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Tesla",
+    "original_url": "https://www.tesla.com/about",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Syntel",
+    "original_url": "https://www.atos-syntel.net/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "ThoughtWorks",
+    "original_url": "https://www.thoughtworks.com/careers/jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Toppr",
+    "original_url": "https://www.toppr.com/jobs/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Treebo Hotels",
+    "original_url": "https://www.linkedin.com/company/treebohotels/jobs/",
+    "ats": "linkedin",
+    "ats_url": "https://www.linkedin.com/company/treebohotels/jobs/",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "Times Internet",
+    "original_url": "https://timesinternet.in/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "TE Connectivity",
+    "original_url": "https://careers.te.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "TEK Systems",
+    "original_url": "https://www.teksystems.com/en-in/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "TaskBob",
+    "original_url": "https://taskbob2015.recruiterbox.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Syska",
+    "original_url": "https://syska.co.in/career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "T Systems",
+    "original_url": "https://www.t-systems.com/in/en/careers",
+    "ats": "smartrecruiters",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Trella Health",
+    "original_url": "https://www.trellahealth.com/careers/",
+    "ats": "greenhouse",
+    "ats_url": "https://boards.greenhouse.io/trellahealth",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Texas Instruments",
+    "original_url": "https://careers.ti.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "texas instruments",
+    "original_url": "https://careers.ti.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "ThoughtSpot",
+    "original_url": "https://www.thoughtspot.com/careers-listing",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Toptal",
+    "original_url": "https://www.toptal.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Teradata",
+    "original_url": "https://careers.teradata.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Trigyn",
+    "original_url": "https://www.trigyn.com/job/etl-developer-data-engineer",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Turvo",
+    "original_url": "https://turvo.com/careers/",
+    "ats": "lever",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Ubisoft",
+    "original_url": "https://www.ubisoft.com/en-us/company/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Topcoder",
+    "original_url": "https://www.topcoder.com/company/jobs/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Trigent Software",
+    "original_url": "https://www.trigent.com/company/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_403",
+    "has_structured_data": false
+  },
+  {
+    "company": "Upstox",
+    "original_url": "https://jobs.lever.co/upstox  ",
+    "ats": "lever",
+    "ats_url": "https://jobs.lever.co/upstox  ",
+    "detection_method": "url_pattern",
+    "has_structured_data": false
+  },
+  {
+    "company": "Unacadamy",
+    "original_url": "https://unacademy.com/careers",
+    "ats": "darwinbox",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Ubique Systems",
+    "original_url": "https://www.ubique-systems.com/ubq-current-opening.php",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Tower Research",
+    "original_url": "https://www.tower-research.com/positions",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Ultimate software",
+    "original_url": "https://www.ukg.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Urban company",
+    "original_url": "https://careers.urbancompany.com/ ",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Tencent Holdings Ltd",
+    "original_url": "https://www.tencent.com/en-us/about.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Unite Us",
+    "original_url": "https://uniteus.com/our-careers/",
+    "ats": "greenhouse",
+    "ats_url": "https://boards.greenhouse.io/uniteus",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Uber",
+    "original_url": "https://www.uber.com/us/en/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Urban Ladder",
+    "original_url": "https://www.urbanladder.com/careers#undefined",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Unicommerce",
+    "original_url": "https://unicommerce.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Unisys",
+    "original_url": "https://jobs.unisys.com/us/en",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "V2soft",
+    "original_url": "https://www.v2soft.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Vicara",
+    "original_url": "https://vicara.ch/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Velotio Technologies",
+    "original_url": "https://www.velotio.com/careers",
+    "ats": "workable",
+    "ats_url": "https://apply.workable.com/velotio",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Uplers",
+    "original_url": "https://www.uplers.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Vogo",
+    "original_url": "https://vogo.in/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Twitter",
+    "original_url": "https://careers.twitter.com/",
+    "ats": "greenhouse",
+    "ats_url": "https://boards.greenhouse.io/xai",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Visa",
+    "original_url": "https://www.visa.co.in/careers.html",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Viasat",
+    "original_url": "https://careers.viasat.com/",
+    "ats": "icims",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Udaan",
+    "original_url": "https://careers.udaan.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Twilio",
+    "original_url": "https://www.twilio.com/company/jobs",
+    "ats": "eightfold",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Vokal",
+    "original_url": "https://www.vokal.io/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_404",
+    "has_structured_data": false
+  },
+  {
+    "company": "Warner Bros.",
+    "original_url": "https://warnermediacareers.com/warner-bros-jobs",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Vehant Technologies",
+    "original_url": "https://www.vehant.com/current-openings",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "ValueLabs",
+    "original_url": "https://www.valuelabs.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "VMware",
+    "original_url": "https://careers.vmware.com/main/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "timeout",
+    "has_structured_data": false
+  },
+  {
+    "company": "Wells Fargo",
+    "original_url": "https://www.wellsfargo.com/about/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Wells Fargo",
+    "original_url": "https://www.wellsfargo.com/about/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Upgrad",
+    "original_url": "https://www.upgrad.com/us/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Vsoft",
+    "original_url": "https://www.vfirst.com/join-the-joy",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "WorldQuant",
+    "original_url": "https://www.worldquant.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Wooqer",
+    "original_url": "https://wooqer.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Whatfix",
+    "original_url": "https://whatfix.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Xiaomi",
+    "original_url": "https://xiaomi.app.param.ai/jobs/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Walmart",
+    "original_url": "https://careers.walmart.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Xilinx",
+    "original_url": "https://careers.xilinx.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Wipro",
+    "original_url": "https://careers.wipro.com/careers-home/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Waymo",
+    "original_url": "https://waymo.com/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Western Digital",
+    "original_url": "https://jobs.westerndigital.com/",
+    "ats": "smartrecruiters",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Wissda Consulting",
+    "original_url": "http://www.wissda.com",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Zeta",
+    "original_url": "https://careers.zeta.tech/work-with-us/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Yobisys",
+    "original_url": "https://www.yobisys.com/career.htm",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Yulu Bikes",
+    "original_url": "https://www.yulu.bike/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Xicom Technologies",
+    "original_url": "https://www.xicom.biz/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Zerodha",
+    "original_url": "https://careers.zerodha.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Yahoo",
+    "original_url": "https://research.yahoo.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "http_error_500",
+    "has_structured_data": false
+  },
+  {
+    "company": "ZivaMe",
+    "original_url": "https://careers.zivame.com/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": "connection_error",
+    "has_structured_data": false
+  },
+  {
+    "company": "Yellow.ai",
+    "original_url": "https://yellow.ai/career",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Yelp",
+    "original_url": "https://www.yelp.careers/us/en",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Yugabyte",
+    "original_url": "https://www.yugabyte.com/careers/",
+    "ats": "greenhouse",
+    "ats_url": "https://boards.greenhouse.io/yugabyte",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Xoriant",
+    "original_url": "https://www.xoriant.com/about-xoriant/careers",
+    "ats": "taleo",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Zenmonics Software",
+    "original_url": "https://www.naukri.com/zenmonics-software-pvt-ltd-jobs-careers-644929",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "ZoomCar",
+    "original_url": "https://www.zoomcar.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Zensar Technologies",
+    "original_url": "https://zensar.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Zoom",
+    "original_url": "https://zoom.wd5.myworkdayjobs.com/Zoom",
+    "ats": "myworkdayjobs",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Zoho",
+    "original_url": "https://careers.zohocorp.com/jobs/Careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "Xero",
+    "original_url": "https://www.xero.com/about/careers/",
+    "ats": "ashby",
+    "ats_url": "https://jobs.ashbyhq.com/xero",
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Zynga",
+    "original_url": "https://www.zynga.com/jobs/careers/",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "ZS",
+    "original_url": "https://jobs.zs.com/all/jobs",
+    "ats": "icims",
+    "ats_url": null,
+    "detection_method": "html_signature",
+    "has_structured_data": false
+  },
+  {
+    "company": "Zomato",
+    "original_url": "https://www.zomato.com/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  },
+  {
+    "company": "World Wide Technology",
+    "original_url": "https://www.wwt.com/about/careers",
+    "ats": "unknown",
+    "ats_url": null,
+    "detection_method": null,
+    "has_structured_data": false
+  }
+]

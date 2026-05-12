@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume - ${name}</title>
+<style>
+/* ATS-Safe Resume Template
+   - Single column layout (no tables)
+   - No images or graphics
+   - Standard fonts
+   - Clean hierarchy for ATS parsing
+*/
+@page {
+    size: ${page_width} ${page_height};
+    margin: 0.6in 0.7in;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Calibri', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.4;
+    color: #1a1a1a;
+}
+.header {
+    text-align: center;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #2c3e50;
+}
+.header h1 {
+    font-size: 20pt;
+    color: #2c3e50;
+    margin-bottom: 4px;
+}
+.header .contact {
+    font-size: 9.5pt;
+    color: #555;
+}
+.section {
+    margin-bottom: 12px;
+}
+.section h2 {
+    font-size: 11.5pt;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 3px;
+    margin-bottom: 8px;
+}
+.skills-list {
+    font-size: 10pt;
+    line-height: 1.6;
+}
+.exp-entry {
+    margin-bottom: 10px;
+}
+.exp-title {
+    font-weight: bold;
+    font-size: 10.5pt;
+}
+.exp-company {
+    color: #444;
+}
+.exp-date {
+    float: right;
+    font-size: 9pt;
+    color: #666;
+}
+.exp-bullets {
+    padding-left: 18px;
+    margin-top: 3px;
+}
+.exp-bullets li {
+    margin-bottom: 2px;
+    font-size: 10pt;
+}
+.edu-entry {
+    margin-bottom: 6px;
+}
+.edu-degree {
+    font-weight: bold;
+}
+.edu-school {
+    color: #444;
+}
+.edu-date {
+    float: right;
+    font-size: 9pt;
+    color: #666;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>${name}</h1>
+    <div class="contact">
+        ${email} | ${phone} | ${location} | ${linkedin} | ${github}
+    </div>
+</div>
+
+<div class="section">
+    <h2>Professional Summary</h2>
+    <p>${summary}</p>
+</div>
+
+<div class="section">
+    <h2>Technical Skills</h2>
+    <p class="skills-list">${skills}</p>
+</div>
+
+<div class="section">
+    <h2>Professional Experience</h2>
+    ${experience}
+</div>
+
+<div class="section">
+    <h2>Education</h2>
+    ${education}
+</div>
+
+${certifications_section}
+
+</body>
+</html>

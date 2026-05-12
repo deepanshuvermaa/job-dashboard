@@ -1,0 +1,125 @@
+# Your Professional Profile
+# This information is used to answer job application questions
+
+personal_info:
+  name: "John Doe"
+  email: "john.doe@example.com"
+  phone: "+1 (555) 123-4567"
+  linkedin_url: "https://linkedin.com/in/johndoe"
+  github_url: "https://github.com/johndoe"
+  portfolio_url: "https://johndoe.dev"
+
+  location:
+    city: "San Francisco"
+    state: "CA"
+    country: "United States"
+
+education:
+  degree: "Bachelor of Science"
+  field: "Computer Science"
+  university: "Stanford University"
+  graduation_year: 2019
+  gpa: "3.8"  # Optional
+
+experience:
+  years_total: 5
+  years_professional: 4
+
+  current_role:
+    title: "Senior Full Stack Engineer"
+    company: "Tech Startup Inc"
+    start_date: "2021-03"
+    current: true
+
+  previous_roles:
+    - title: "Software Engineer"
+      company: "Previous Company"
+      start_date: "2019-06"
+      end_date: "2021-02"
+
+skills:
+  programming_languages:
+    - "Python"
+    - "JavaScript"
+    - "TypeScript"
+    - "SQL"
+
+  frameworks:
+    - "React"
+    - "Node.js"
+    - "FastAPI"
+    - "Django"
+    - "Next.js"
+
+  databases:
+    - "PostgreSQL"
+    - "MongoDB"
+    - "Redis"
+
+  cloud:
+    - "AWS"
+    - "Docker"
+    - "Kubernetes"
+
+  tools:
+    - "Git"
+    - "CI/CD"
+    - "Linux"
+
+# Common application questions
+common_answers:
+  authorized_to_work_us: "Yes"
+  require_sponsorship: "No"
+  willing_to_relocate: "Yes"
+  willing_to_travel: "Occasionally"
+
+  notice_period: "2 weeks"
+  salary_expectation: "130000-160000"
+
+  security_clearance: "None"
+  veteran_status: "Not a veteran"
+  disability_status: "No disability"
+
+  # Gender/race (optional, for EEO)
+  gender: "Prefer not to say"
+  race: "Prefer not to say"
+
+# Cover letter template
+cover_letter_template: |
+  I'm excited to apply for the {job_title} position at {company}.
+
+  With {years_experience} years of experience building scalable web applications,
+  I believe I'd be a great fit for this role.
+
+  {specific_project_mention}
+
+  I'm particularly drawn to {company} because of {company_value}.
+
+  I'd love to discuss how my experience with {relevant_skills} could contribute
+  to your team.
+
+# Recent projects (for content generation)
+recent_projects:
+  - name: "Real-time Collaboration Platform"
+    description: "Built websocket-based collaboration with 10k concurrent users"
+    tech_stack: ["React", "Node.js", "Redis", "WebSockets"]
+    achievements:
+      - "Handled 10k concurrent connections"
+      - "99.9% uptime"
+      - "Sub-50ms latency"
+
+  - name: "Microservices API Gateway"
+    description: "Designed and implemented API gateway for 20+ microservices"
+    tech_stack: ["Python", "FastAPI", "Kong", "PostgreSQL"]
+    achievements:
+      - "Reduced response time by 60%"
+      - "Simplified authentication"
+      - "Better monitoring"
+
+# Professional summary
+summary: |
+  Full Stack Engineer with 5 years of experience building scalable web applications.
+  Passionate about clean code, great UX, and solving complex technical problems.
+
+  Specialized in React, Node.js, and Python. Experience with cloud architecture,
+  microservices, and DevOps. Always learning and sharing knowledge with the team.

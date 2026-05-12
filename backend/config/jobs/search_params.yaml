@@ -1,0 +1,88 @@
+# Job Search Configuration
+
+# Keywords to search for
+keywords:
+  - "Full Stack Engineer"
+  - "Full Stack Developer"
+  - "Software Engineer"
+  - "React Developer"
+  - "Python Developer"
+  - "Node.js Developer"
+  - "Backend Engineer"
+  - "Frontend Engineer"
+
+# Locations
+locations:
+  - "United States"
+  - "Remote"
+  - "San Francisco Bay Area"
+  - "New York City"
+  - "Seattle"
+
+# Company blacklist (avoid these)
+blacklist:
+  - "Crossover"
+  - "Turing"
+  - "Toptal"  # Remove if you want to apply to these platforms
+
+# Company whitelist (prioritize these)
+whitelist:
+  - "Google"
+  - "Microsoft"
+  - "Amazon"
+  - "Meta"
+  - "Apple"
+  - "Netflix"
+  - "Airbnb"
+
+# Filters
+filters:
+  experience_level:
+    - "entry"
+    - "mid"
+    - "senior"
+
+  job_type:
+    - "full-time"
+    # - "contract"
+    # - "part-time"
+
+  easy_apply_only: true
+  posted_within_days: 7
+
+  salary_minimum: 100000  # USD, optional
+
+# Skills to avoid (skip jobs requiring these)
+avoid_skills:
+  - ".NET"
+  - "PHP"
+  - "Ruby"
+  - "Java Enterprise"
+  # Remove skills you're comfortable with
+
+# Required skills (only apply if job mentions these)
+preferred_skills:
+  - "React"
+  - "Python"
+  - "Node.js"
+  - "TypeScript"
+  - "PostgreSQL"
+  - "AWS"
+  - "Docker"
+
+# Application limits
+limits:
+  max_per_day: 30
+  max_per_hour: 5
+  max_per_company: 2  # Don't spam same company
+
+# Relevance scoring
+relevance:
+  min_score: 0.7  # Only apply if AI scores >= 0.7
+
+  # Score weights
+  weights:
+    skills_match: 0.4
+    experience_match: 0.3
+    location_match: 0.2
+    company_reputation: 0.1

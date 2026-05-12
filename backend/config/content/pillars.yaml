@@ -1,0 +1,51 @@
+# Content Pillars Configuration
+
+project_breakdown:
+  name: "Project Breakdown"
+  description: "Share technical projects you've built"
+  tone: "technical but accessible"
+  length: "8-12 lines"
+  structure: "problem → approach → result → learning"
+  example_posts:
+    - "Built a rate limiter that handles 10k requests/sec using Redis and Lua scripts. The key was..."
+    - "Just deployed a real-time collaboration feature. Here's how I handled websocket scaling..."
+
+debugging_story:
+  name: "Debugging Story"
+  description: "Share interesting bugs and how you fixed them"
+  tone: "frustrated → curious → triumphant"
+  length: "6-10 lines"
+  structure: "bug symptom → investigation → aha moment → takeaway"
+  example_posts:
+    - "Spent 3 hours debugging a memory leak. The culprit? Event listeners I forgot to remove."
+    - "Production was down. The logs showed nothing. Here's how I found the issue..."
+
+learning_reflection:
+  name: "Learning Reflection"
+  description: "Share insights and lessons learned"
+  tone: "thoughtful and honest"
+  length: "7-10 lines"
+  structure: "what I believed → what I learned → why it matters"
+  example_posts:
+    - "I used to think microservices were always better. I was wrong. Here's why..."
+    - "The best code I ever wrote was code I deleted. Let me explain..."
+
+how_to:
+  name: "How-To Guide"
+  description: "Teach something practical and actionable"
+  tone: "teaching, patient"
+  length: "10-15 lines"
+  structure: "why → how (steps) → gotchas → try it"
+  example_posts:
+    - "How to set up CI/CD in 10 minutes: 1) Install GitHub Actions 2) ..."
+    - "3 steps to make your API 10x faster: 1) Add caching 2) ..."
+
+hot_take:
+  name: "Hot Take"
+  description: "Share strong opinions backed by experience"
+  tone: "opinionated but respectful"
+  length: "5-8 lines"
+  structure: "common belief → my view → why → open question"
+  example_posts:
+    - "Hot take: Code reviews are overrated. Pair programming is better. Here's why..."
+    - "Everyone says 'don't optimize early'. I disagree. Performance should be a feature..."

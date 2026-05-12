@@ -1,0 +1,490 @@
+# ============================================================
+# Portal Scanner Configuration
+# Add/remove companies and search queries as needed
+# ============================================================
+
+portals:
+  # --- AI Labs ---
+  - name: "Anthropic"
+    ats: "ashby"
+    url: "https://jobs.ashbyhq.com/anthropic"
+    enabled: false  # Moved off Ashby
+  - name: "OpenAI"
+    ats: "ashby"
+    url: "https://jobs.ashbyhq.com/openai"
+    enabled: false  # Moved off Ashby
+  - name: "Mistral AI"
+    ats: "lever"
+    url: "https://jobs.lever.co/mistral"
+    enabled: true
+  - name: "Cohere"
+    ats: "lever"
+    url: "https://jobs.lever.co/cohere"
+    enabled: true
+  - name: "Hugging Face"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/huggingface"
+    enabled: true
+  - name: "Stability AI"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/stabilityai"
+    enabled: true
+
+  # --- Voice & AI Platforms ---
+  - name: "ElevenLabs"
+    ats: "ashby"
+    url: "https://jobs.ashbyhq.com/elevenlabs"
+    enabled: true
+  - name: "Deepgram"
+    ats: "ashby"
+    url: "https://jobs.ashbyhq.com/deepgram"
+    enabled: true
+
+  # --- Dev Tools & Automation ---
+  - name: "Vercel"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/vercel"
+    enabled: true
+  - name: "Supabase"
+    ats: "ashby"
+    url: "https://jobs.ashbyhq.com/supabase"
+    enabled: true
+  - name: "Neon"
+    ats: "ashby"
+    url: "https://jobs.ashbyhq.com/neondatabase"
+    enabled: true
+  - name: "Railway"
+    ats: "ashby"
+    url: "https://jobs.ashbyhq.com/railway"
+    enabled: true
+  - name: "Replit"
+    ats: "ashby"
+    url: "https://jobs.ashbyhq.com/replit"
+    enabled: true
+  - name: "n8n"
+    ats: "lever"
+    url: "https://jobs.lever.co/n8n"
+    enabled: true
+  - name: "Zapier"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/zapier"
+    enabled: true
+
+  # --- Fintech ---
+  - name: "Stripe"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/stripe"
+    enabled: true
+  - name: "Plaid"
+    ats: "lever"
+    url: "https://jobs.lever.co/plaid"
+    enabled: true
+  - name: "Brex"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/brex"
+    enabled: true
+  - name: "Ramp"
+    ats: "ashby"
+    url: "https://jobs.ashbyhq.com/ramp"
+    enabled: true
+  - name: "Mercury"
+    ats: "ashby"
+    url: "https://jobs.ashbyhq.com/mercury"
+    enabled: true
+
+  # --- SaaS & Collaboration ---
+  - name: "Notion"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/notion"
+    enabled: true
+  - name: "Linear"
+    ats: "ashby"
+    url: "https://jobs.ashbyhq.com/linear"
+    enabled: true
+  - name: "Figma"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/figma"
+    enabled: true
+  - name: "Miro"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/miro"
+    enabled: true
+  - name: "Loom"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/loom"
+    enabled: true
+  - name: "Cal.com"
+    ats: "ashby"
+    url: "https://jobs.ashbyhq.com/cal.com"
+    enabled: true
+
+  # --- Infrastructure & Cloud ---
+  - name: "Cloudflare"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/cloudflare"
+    enabled: true
+  - name: "Datadog"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/datadog"
+    enabled: true
+  - name: "PlanetScale"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/planetscale"
+    enabled: true
+  - name: "Fly.io"
+    ats: "lever"
+    url: "https://jobs.lever.co/fly"
+    enabled: true
+
+  # --- Security ---
+  - name: "1Password"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/1password"
+    enabled: true
+  - name: "CrowdStrike"
+    ats: "lever"
+    url: "https://jobs.lever.co/crowdstrike"
+    enabled: true
+
+  # --- European Companies ---
+  - name: "Factorial"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/factorial"
+    enabled: true
+  - name: "Tinybird"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/tinybird"
+    enabled: true
+  - name: "Attio"
+    ats: "ashby"
+    url: "https://jobs.ashbyhq.com/attio"
+    enabled: true
+
+  # --- Data & Analytics ---
+  - name: "dbt Labs"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/dbtlabsinc"
+    enabled: true
+  - name: "Hex"
+    ats: "lever"
+    url: "https://jobs.lever.co/hex"
+    enabled: true
+  - name: "Monte Carlo"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/montecarlodata"
+    enabled: true
+
+  # --- Health & Biotech ---
+  - name: "Tempus"
+    ats: "lever"
+    url: "https://jobs.lever.co/tempus"
+    enabled: true
+
+  # --- E-commerce ---
+  - name: "Shopify"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/shopify"
+    enabled: true
+
+  # --- Workable Companies ---
+  - name: "TestGorilla"
+    ats: "workable"
+    url: "https://apply.workable.com/testgorilla/"
+    enabled: true
+
+  # --- Reddit Job Subreddits ---
+  - name: "r/hiring"
+    ats: "reddit"
+    url: "https://www.reddit.com/r/hiring"
+    enabled: true
+  - name: "r/forhire"
+    ats: "reddit"
+    url: "https://www.reddit.com/r/forhire"
+    enabled: true
+  - name: "r/remotejobs"
+    ats: "reddit"
+    url: "https://www.reddit.com/r/remotejobs"
+    enabled: true
+  - name: "r/remotework"
+    ats: "reddit"
+    url: "https://www.reddit.com/r/remotework"
+    enabled: true
+  - name: "r/WorkOnline"
+    ats: "reddit"
+    url: "https://www.reddit.com/r/WorkOnline"
+    enabled: true
+  - name: "r/webdev"
+    ats: "reddit"
+    url: "https://www.reddit.com/r/webdev"
+    enabled: true
+  - name: "r/freelance"
+    ats: "reddit"
+    url: "https://www.reddit.com/r/freelance"
+    enabled: true
+  - name: "r/datascience"
+    ats: "reddit"
+    url: "https://www.reddit.com/r/datascience"
+    enabled: true
+  - name: "r/digitalnomad"
+    ats: "reddit"
+    url: "https://www.reddit.com/r/digitalnomad"
+    enabled: true
+  - name: "r/jobbit"
+    ats: "reddit"
+    url: "https://www.reddit.com/r/jobbit"
+    enabled: true
+
+  # --- INDIA: Unicorns & Startups ---
+  - name: "Razorpay"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/razorpay"
+    enabled: true
+  - name: "CRED"
+    ats: "lever"
+    url: "https://jobs.lever.co/cred"
+    enabled: true
+  - name: "Groww"
+    ats: "lever"
+    url: "https://jobs.lever.co/groww"
+    enabled: true
+  - name: "Postman"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/postman"
+    enabled: true
+  - name: "BrowserStack"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/browserstack"
+    enabled: true
+  - name: "Chargebee"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/chargebee"
+    enabled: true
+  - name: "Freshworks"
+    ats: "generic"
+    url: "https://www.freshworks.com/company/careers/"
+    enabled: true
+  - name: "Hasura"
+    ats: "ashby"
+    url: "https://jobs.ashbyhq.com/hasura"
+    enabled: true
+  - name: "Zerodha"
+    ats: "generic"
+    url: "https://zerodha.com/careers/"
+    enabled: true
+  - name: "Zoho"
+    ats: "generic"
+    url: "https://www.zoho.com/careers/"
+    enabled: true
+  - name: "InMobi"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/inmobi"
+    enabled: true
+  - name: "Flipkart"
+    ats: "generic"
+    url: "https://www.flipkartcareers.com/"
+    enabled: true
+  - name: "Swiggy"
+    ats: "generic"
+    url: "https://careers.swiggy.com/"
+    enabled: true
+  - name: "Zomato"
+    ats: "generic"
+    url: "https://www.zomato.com/careers"
+    enabled: true
+  - name: "PhonePe"
+    ats: "generic"
+    url: "https://www.phonepe.com/careers/"
+    enabled: true
+  - name: "Meesho"
+    ats: "lever"
+    url: "https://jobs.lever.co/meesho"
+    enabled: true
+  - name: "Ola"
+    ats: "generic"
+    url: "https://www.olacabs.com/careers"
+    enabled: true
+  - name: "Paytm"
+    ats: "generic"
+    url: "https://paytm.com/careers"
+    enabled: true
+  - name: "Myntra"
+    ats: "generic"
+    url: "https://www.myntra.com/careers"
+    enabled: true
+  - name: "Unacademy"
+    ats: "lever"
+    url: "https://jobs.lever.co/unacademy"
+    enabled: true
+  - name: "Lenskart"
+    ats: "generic"
+    url: "https://www.lenskart.com/careers.html"
+    enabled: true
+  - name: "Dream11"
+    ats: "lever"
+    url: "https://jobs.lever.co/dream11"
+    enabled: true
+  - name: "Slice"
+    ats: "lever"
+    url: "https://jobs.lever.co/sliceit"
+    enabled: true
+  - name: "Nykaa"
+    ats: "generic"
+    url: "https://www.nykaa.com/careers"
+    enabled: true
+  - name: "Cars24"
+    ats: "lever"
+    url: "https://jobs.lever.co/cars24"
+    enabled: true
+  - name: "Udaan"
+    ats: "lever"
+    url: "https://jobs.lever.co/udaan"
+    enabled: true
+  - name: "ShareChat"
+    ats: "lever"
+    url: "https://jobs.lever.co/sharechat"
+    enabled: true
+  - name: "Delhivery"
+    ats: "generic"
+    url: "https://www.delhivery.com/careers/"
+    enabled: true
+
+  # --- INDIA: MNC Engineering Offices ---
+  - name: "Google India"
+    ats: "google_careers"
+    url: "https://careers.google.com/jobs/results/?location=India"
+    enabled: false
+  - name: "Amazon India"
+    ats: "amazon_jobs"
+    url: "https://www.amazon.jobs/en/locations/india"
+    enabled: false
+  - name: "Microsoft India"
+    ats: "generic"
+    url: "https://careers.microsoft.com/us/en/search-results?keywords=&location=India"
+    enabled: false
+  - name: "Adobe India"
+    ats: "generic"
+    url: "https://careers.adobe.com/us/en/search-results?keywords=&location=India"
+    enabled: false
+  - name: "Goldman Sachs India"
+    ats: "generic"
+    url: "https://www.goldmansachs.com/careers/find-a-job/?location=India"
+    enabled: false
+  - name: "Uber India"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/uber"
+    enabled: true
+  - name: "Atlassian India"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/atlassian"
+    enabled: true
+  - name: "Salesforce India"
+    ats: "generic"
+    url: "https://careers.salesforce.com/en/jobs/?search=&location=India"
+    enabled: false
+  - name: "ServiceNow India"
+    ats: "generic"
+    url: "https://careers.servicenow.com/jobs/search?location=India"
+    enabled: false
+  - name: "Intuit India"
+    ats: "generic"
+    url: "https://jobs.intuit.com/search-jobs/India"
+    enabled: false
+  - name: "VMware India"
+    ats: "generic"
+    url: "https://careers.vmware.com/main/jobs?location=India"
+    enabled: false
+  - name: "ThoughtSpot"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/thoughtspot"
+    enabled: true
+  - name: "Twilio"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/twilio"
+    enabled: true
+  - name: "Rubrik"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/rubrik"
+    enabled: true
+  - name: "Confluent"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/confluent"
+    enabled: true
+  - name: "HashiCorp"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/hashicorp"
+    enabled: true
+  - name: "Elastic"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/elastic"
+    enabled: true
+  - name: "MongoDB"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/mongodb"
+    enabled: true
+  - name: "GitLab"
+    ats: "greenhouse"
+    url: "https://boards.greenhouse.io/gitlab"
+    enabled: true
+  - name: "Grafana Labs"
+    ats: "ashby"
+    url: "https://jobs.ashbyhq.com/grafana"
+    enabled: true
+
+# Search queries for aggregator job boards
+search_queries:
+  - keywords: "Software Engineer"
+    boards: ["wellfound", "dailyremote", "remotefront", "reddit"]
+  - keywords: "Full Stack Developer"
+    boards: ["wellfound", "dailyremote", "remotefront", "reddit"]
+  - keywords: "Backend Engineer"
+    boards: ["wellfound", "dailyremote", "reddit"]
+  - keywords: "Frontend Developer"
+    boards: ["wellfound", "dailyremote", "remotefront"]
+  - keywords: "Python Developer"
+    boards: ["wellfound", "dailyremote", "remotefront"]
+  - keywords: "React Developer"
+    boards: ["wellfound", "dailyremote"]
+  - keywords: "DevOps Engineer"
+    boards: ["wellfound", "dailyremote", "reddit"]
+  - keywords: "Data Engineer"
+    boards: ["wellfound", "dailyremote", "remotefront"]
+  - keywords: "Machine Learning Engineer"
+    boards: ["wellfound", "dailyremote", "reddit"]
+  - keywords: "AI Engineer"
+    boards: ["wellfound", "dailyremote", "remotefront"]
+  - keywords: "Cloud Engineer"
+    boards: ["dailyremote"]
+  - keywords: "Node.js Developer"
+    boards: ["wellfound", "dailyremote"]
+  - keywords: "TypeScript Developer"
+    boards: ["wellfound", "remotefront"]
+  - keywords: "Platform Engineer"
+    boards: ["wellfound", "dailyremote"]
+  - keywords: "Site Reliability Engineer"
+    boards: ["wellfound", "dailyremote"]
+  - keywords: "Solutions Architect"
+    boards: ["dailyremote"]
+  - keywords: "Technical Lead"
+    boards: ["wellfound", "dailyremote"]
+  - keywords: "Engineering Manager"
+    boards: ["wellfound", "dailyremote"]
+  - keywords: "Product Engineer"
+    boards: ["wellfound", "remotefront"]
+
+# Rate limiting per board (milliseconds between requests)
+board_settings:
+  greenhouse:
+    rate_limit_ms: 1000
+    max_pages: 10
+  ashby:
+    rate_limit_ms: 1500
+  lever:
+    rate_limit_ms: 1000
+  wellfound:
+    rate_limit_ms: 2000
+  workable:
+    rate_limit_ms: 1500
+  dailyremote:
+    rate_limit_ms: 2000
+  remotefront:
+    rate_limit_ms: 2000
