@@ -504,28 +504,50 @@ def main():
         for k in grand: grand[k] += s.get(k, 0)
         board_stats[label] = {"count": len(jobs), "secs": time.time() - t0}
 
-    # ── LinkedIn: ingest per-keyword immediately so data isn't lost on crash ──
-    li_budget = alloc.get("LinkedIn", 180)
-    li_per_kw = max(60, li_budget // max(len(p["keywords"]), 1))
+    # ── LinkedIn: call scraper directly (no HTTP timeout), ingest per-keyword ─
+    sys.path.insert(0, str(BACKEND_DIR))
     li_total = 0
-    for kw in p["keywords"]:
-        section(f"LinkedIn '{kw}'")
-        jobs = []
+    _li_scraper = None
+    try:
+        from modules.linkedin_job_scraper import LinkedInJobScraper
+        _li_scraper = LinkedInJobScraper()
+        if not _li_scraper.login():
+            warn("LinkedIn login failed — skipping LinkedIn")
+            _li_scraper = None
+    except Exception as e:
+        warn(f"LinkedIn init failed: {e}")
+        _li_scraper = None
+
+    if _li_scraper:
+        li_budget = alloc.get("LinkedIn", 180)
+        li_per_kw = max(60, li_budget // max(len(p["keywords"]), 1))
+        for kw in p["keywords"]:
+            section(f"LinkedIn '{kw}' in '{p['location']}'")
+            try:
+                jobs = _li_scraper.search_jobs(
+                    keywords=kw,
+                    location=p["location"],
+                    posted_within=p["dur_code"],
+                    max_results=p["max_li"],
+                )
+                for j in jobs:
+                    j.setdefault("source", "linkedin")
+                if jobs:
+                    jobs = _dedup(jobs)
+                    ok(f"LinkedIn '{kw}' -> {len(jobs)} jobs — ingesting now...")
+                    s = ingest(base, token, jobs, "linkedin")
+                    for k in grand: grand[k] += s.get(k, 0)
+                    li_total += len(jobs)
+                else:
+                    warn(f"LinkedIn '{kw}' -> 0 jobs")
+            except Exception as e:
+                warn(f"LinkedIn '{kw}' error: {e}")
+        # Close Chrome after all LinkedIn keywords done
         try:
-            with ThreadPoolExecutor(max_workers=1) as ex:
-                jobs = ex.submit(
-                    scrape_linkedin, base, kw, p["dur_code"], p["location"], p["max_li"], li_per_kw
-                ).result(timeout=li_per_kw + 30)
-        except FutureTimeout:
-            warn(f"LinkedIn '{kw}' timed out")
-        except Exception as e:
-            warn(f"LinkedIn '{kw}' error: {e}")
-        if jobs:
-            jobs = _dedup(jobs)
-            s = ingest(base, token, jobs, "linkedin")
-            for k in grand: grand[k] += s.get(k, 0)
-            li_total += len(jobs)
-    board_stats["LinkedIn"] = {"count": li_total, "secs": li_per_kw * len(p["keywords"])}
+            _li_scraper.driver.quit()
+            ok("Chrome closed")
+        except: pass
+    board_stats["LinkedIn"] = {"count": li_total, "secs": 0}
 
     # ── Naukri: one search per keyword ────────────────────────────────────────
     def _naukri():
