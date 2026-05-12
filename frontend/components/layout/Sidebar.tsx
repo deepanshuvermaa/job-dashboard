@@ -9,7 +9,6 @@ const NAV = [
     items: [
       { name: "Home", href: "/dashboard", d: "M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z M9 22V12h6v10" },
       { name: "Jobs", href: "/jobs", d: "M2 7h20v14H2z M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" },
-      { name: "Search", href: "/jobs/search", d: "M11 3a8 8 0 100 16 8 8 0 000-16z M21 21l-4.35-4.35" },
       { name: "Applications", href: "/jobs/applications", d: "M22 11.08V12a10 10 0 11-5.93-9.14 M22 4L12 14.01l-3-3" },
       { name: "Portals", href: "/jobs/portals", d: "M12 2a10 10 0 100 20 10 10 0 000-20z M2 12h20 M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" },
       { name: "Evaluations", href: "/jobs/evaluations", d: "M18 20V10 M12 20V4 M6 20v-6" },

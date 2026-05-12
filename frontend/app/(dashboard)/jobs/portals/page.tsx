@@ -4,14 +4,6 @@ import { api } from "@/lib/api";
 
 export default function PortalsPage() {
   const [config, setConfig] = useState<any>(null);
-  const [scanning, setScanning] = useState(false);
-  const [scanProgress, setScanProgress] = useState<any>(null);
-  const [results, setResults] = useState<any>(null);
-  const [keywordFilter, setKeywordFilter] = useState("");
-  const [locationFilter, setLocationFilter] = useState("");
-  const [showFilters, setShowFilters] = useState(false);
-  const [detecting, setDetecting] = useState(false);
-  const [detectProgress, setDetectProgress] = useState<any>(null);
   const pollRef = useRef<any>(null);
 
   useEffect(() => {
@@ -80,85 +72,6 @@ export default function PortalsPage() {
       <p className="text-body text-gravel mt-1">
         Scan {enabledCount} career pages + {queries.length} search queries across 696+ companies
       </p>
-
-      {/* Scan Controls */}
-      <div className="card mb-6 mt-8">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-body-medium text-obsidian">Scan Configuration</h2>
-          <button onClick={() => setShowFilters(!showFilters)} className="text-caption text-obsidian hover:underline">
-            {showFilters ? "Hide Filters" : "Show Filters"}
-          </button>
-        </div>
-
-        {showFilters && (
-          <div className="grid grid-cols-2 gap-4 mb-4 p-4 bg-powder rounded-lg">
-            <div>
-              <label className="block text-caption text-gravel mb-1">Keyword Filter</label>
-              <input value={keywordFilter} onChange={(e) => setKeywordFilter(e.target.value)} className="input-el !rounded-sm text-caption" placeholder="e.g. Python, React" />
-            </div>
-            <div>
-              <label className="block text-caption text-gravel mb-1">Location Filter</label>
-              <input value={locationFilter} onChange={(e) => setLocationFilter(e.target.value)} className="input-el !rounded-sm text-caption" placeholder="e.g. Remote, San Francisco" />
-            </div>
-          </div>
-        )}
-
-        <div className="flex gap-3">
-          <button onClick={startScan} disabled={scanning} className="btn-primary disabled:opacity-50">
-            {scanning ? "Scanning..." : "Scan All Portals"}
-          </button>
-          <button onClick={startDetect} disabled={detecting} className="btn-secondary disabled:opacity-50">
-            {detecting ? "Detecting..." : "Detect ATS (600+ Companies)"}
-          </button>
-        </div>
-      </div>
-
-      {/* Scan Progress */}
-      {scanning && scanProgress && (
-        <div className="card mb-6 border-obsidian/20">
-          <h3 className="text-body-medium text-obsidian mb-3">Scanning in progress...</h3>
-          <div className="w-full h-2 bg-powder rounded-full overflow-hidden mb-2">
-            <div
-              className="h-full bg-obsidian rounded-full transition-all duration-300"
-              style={{ width: `${((scanProgress.completed || 0) / Math.max(1, scanProgress.total || 1)) * 100}%` }}
-            />
-          </div>
-          <div className="flex justify-between text-caption text-gravel">
-            <span>Portal: {scanProgress.current_portal || "..."}</span>
-            <span>{scanProgress.completed || 0}/{scanProgress.total || "?"} complete</span>
-          </div>
-          {scanProgress.jobs_found > 0 && (
-            <p className="text-caption text-grade-a mt-2">{scanProgress.jobs_found} jobs found so far</p>
-          )}
-        </div>
-      )}
-
-      {/* ATS Detection Progress */}
-      {detecting && detectProgress && (
-        <div className="card mb-6 border-obsidian/20">
-          <h3 className="text-body-medium text-obsidian mb-3">Detecting ATS types...</h3>
-          <div className="w-full h-2 bg-powder rounded-full overflow-hidden mb-2">
-            <div
-              className="h-full bg-grade-c rounded-full transition-all duration-300"
-              style={{ width: `${((detectProgress.completed || 0) / Math.max(1, detectProgress.total || 1)) * 100}%` }}
-            />
-          </div>
-          <p className="text-caption text-gravel">{detectProgress.completed || 0}/{detectProgress.total || "?"} companies analyzed</p>
-        </div>
-      )}
-
-      {/* Scan Results */}
-      {results && (
-        <div className="card mb-6 border-grade-a/30">
-          <h3 className="text-body-medium text-obsidian mb-3">Scan Complete</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div><p className="text-caption text-gravel">Total Scraped</p><p className="text-heading text-obsidian">{results.total_scraped || 0}</p></div>
-            <div><p className="text-caption text-gravel">New Jobs</p><p className="text-heading text-grade-a">{results.new_jobs || 0}</p></div>
-            <div><p className="text-caption text-gravel">Duplicates</p><p className="text-heading text-gravel">{results.duplicates_skipped || 0}</p></div>
-            <div><p className="text-caption text-gravel">Saved to DB</p><p className="text-heading text-obsidian">{results.saved_to_db || 0}</p></div>
-          </div>
-        </div>
-      )}
 
       {/* ATS Type Breakdown */}
       <div className="card mb-6">
