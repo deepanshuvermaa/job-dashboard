@@ -1,4 +1,4 @@
-"""Database connection — PostgreSQL via DATABASE_URL (Railway sets this automatically)."""
+"""Database connection — PostgreSQL via DATABASE_URL."""
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -7,24 +7,18 @@ from pathlib import Path
 
 load_dotenv(Path(__file__).parent.parent.parent / ".env")
 
-DATABASE_URL = os.environ["DATABASE_URL"]
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL environment variable is not set")
 
-# Railway uses postgres:// but SQLAlchemy requires postgresql://
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
-engine = create_engine(
-    DATABASE_URL,
-    pool_pre_ping=True,
-    pool_size=5,
-    max_overflow=10,
-)
-
+engine = create_engine(DATABASE_URL, pool_pre_ping=True, pool_size=5, max_overflow=10)
 SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 
 
 def get_db():
-    """FastAPI dependency — yields a DB session per request."""
     db = SessionLocal()
     try:
         yield db
@@ -37,7 +31,6 @@ def get_db():
 
 
 def init_db():
-    """Create all tables on startup. Safe to call multiple times."""
     from models.base import Base
-    import models  # noqa: F401 — registers all models
+    import models  # noqa
     Base.metadata.create_all(bind=engine)
