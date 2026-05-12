@@ -1,17 +1,20 @@
 """
-Unified FastAPI app — v2 auth/jobs.
-Legacy routes only loaded when ENABLE_LEGACY=true (local dev only).
+Unified FastAPI app — v2 auth/jobs + frontend proxy.
 """
 import sys
 import os
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 backend_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 if backend_root not in sys.path:
     sys.path.insert(0, backend_root)
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
+from fastapi.staticfiles import StaticFiles
+import httpx
 
 
 @asynccontextmanager
@@ -35,7 +38,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Legacy routes (SQLite + Selenium) — only in local dev
 if os.getenv("ENABLE_LEGACY", "true").lower() == "true":
     try:
         from api.v2.legacy import router as legacy_router
@@ -50,12 +52,24 @@ from api.v2.jobs import router as jobs_router
 app.include_router(jobs_router)
 
 
-# ── Proxy all non-API requests to Next.js frontend on port 3000 ──
-import httpx
-from fastapi import Request
-from fastapi.responses import Response
+@app.get("/health")
+def health():
+    return {"status": "ok", "version": "3.0.0"}
 
 
+# ── Serve Next.js static assets directly (bypass proxy) ──────────────────────
+FRONTEND_DIR = Path("/app/frontend")
+STATIC_DIR = FRONTEND_DIR / ".next" / "static"
+PUBLIC_DIR = FRONTEND_DIR / "public"
+
+if STATIC_DIR.exists():
+    app.mount("/_next/static", StaticFiles(directory=str(STATIC_DIR)), name="next-static")
+
+if PUBLIC_DIR.exists():
+    app.mount("/public", StaticFiles(directory=str(PUBLIC_DIR)), name="public")
+
+
+# ── Proxy all page requests to Next.js on port 3000 ──────────────────────────
 async def _proxy(request: Request, path: str = ""):
     url = f"http://localhost:3000/{path}"
     if request.url.query:
@@ -69,15 +83,12 @@ async def _proxy(request: Request, path: str = ""):
                 content=await request.body(),
                 timeout=30,
             )
-            return Response(content=resp.content, status_code=resp.status_code,
-                            headers=dict(resp.headers))
+            # Don't forward transfer-encoding — causes issues
+            headers = {k: v for k, v in resp.headers.items()
+                       if k.lower() not in ("transfer-encoding", "content-encoding")}
+            return Response(content=resp.content, status_code=resp.status_code, headers=headers)
         except Exception as e:
             return Response(content=f"Frontend unavailable: {e}".encode(), status_code=503)
-
-
-@app.get("/health")
-def health():
-    return {"status": "ok", "version": "3.0.0"}
 
 
 @app.api_route("/", methods=["GET", "HEAD"])
