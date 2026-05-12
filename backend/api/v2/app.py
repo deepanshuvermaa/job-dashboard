@@ -1,5 +1,6 @@
 """
-Unified FastAPI app — v2 auth/jobs + legacy wrappers.
+Unified FastAPI app — v2 auth/jobs.
+Legacy routes only loaded when ENABLE_LEGACY=true (local dev only).
 """
 import sys
 import os
@@ -30,15 +31,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ── IMPORTANT: Legacy routes FIRST (they have specific paths like /api/jobs/search) ──
-from api.v2.legacy import router as legacy_router
-app.include_router(legacy_router)
+# Legacy routes (SQLite + Selenium) — only in local dev
+if os.getenv("ENABLE_LEGACY", "true").lower() == "true":
+    try:
+        from api.v2.legacy import router as legacy_router
+        app.include_router(legacy_router)
+    except Exception as e:
+        print(f"[WARN] Legacy router not loaded: {e}")
 
-# ── Auth routes ──
 from api.v2.auth import router as auth_router
 app.include_router(auth_router)
 
-# ── V2 jobs routes LAST (contains /api/jobs/{job_id} wildcard) ──
 from api.v2.jobs import router as jobs_router
 app.include_router(jobs_router)
 

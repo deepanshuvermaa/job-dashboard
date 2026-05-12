@@ -202,12 +202,46 @@ class LinkedInJobScraper:
         start: int = 0
     ) -> str:
         """Build LinkedIn search URL with all filters and pagination"""
-        search_url = f"https://www.linkedin.com/jobs/search/?keywords={keywords.replace(' ', '%20')}"
+        # LinkedIn geoId mapping — text-only location is unreliable for country-level searches
+        GEO_IDS = {
+            "india": "102713980",
+            "united states": "103644278",
+            "usa": "103644278",
+            "us": "103644278",
+            "united kingdom": "101165590",
+            "uk": "101165590",
+            "canada": "101174742",
+            "australia": "101452733",
+            "germany": "101282230",
+            "singapore": "102454443",
+            "remote": None,  # no geoId for remote — use f_WT=2
+            # Indian cities
+            "bangalore": "105214831",
+            "bengaluru": "105214831",
+            "mumbai": "102717819",
+            "hyderabad": "102562005",
+            "pune": "115524",
+            "delhi": "102713980",
+            "gurgaon": "102713980",
+            "noida": "102713980",
+            "chennai": "102572908",
+        }
+        from urllib.parse import quote
+        encoded_kw = quote(keywords)
+        search_url = f"https://www.linkedin.com/jobs/search/?keywords={encoded_kw}"
+
         if location:
-            search_url += f"&location={location.replace(' ', '%20')}"
+            loc_lower = location.lower().strip()
+            geo_id = GEO_IDS.get(loc_lower)
+            if geo_id:
+                search_url += f"&geoId={geo_id}&location={quote(location)}"
+            elif loc_lower == "remote":
+                pass  # handled by f_WT below
+            else:
+                search_url += f"&location={quote(location)}"
         if easy_apply:
             search_url += "&f_AL=true"
-        if remote:
+        if remote or (location and location.lower().strip() == "remote"):
             search_url += "&f_WT=2"
 
         # Job type filters
