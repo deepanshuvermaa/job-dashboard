@@ -54,20 +54,13 @@ class LinkedInJobScraper:
         self.logged_in = False
 
     def _init_driver(self):
-        """Initialize undetected Chrome driver with persistent profile"""
-        import os
+        """Initialize undetected Chrome driver."""
         options = ChromeOptions()
         if self.headless:
             options.add_argument('--headless')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
         options.add_argument('--disable-blink-features=AutomationControlled')
-
-        # Use persistent profile so login session/cookies survive restarts
-        profile_dir = os.path.join(os.path.expanduser('~'), '.linkedin_automation_profile')
-        os.makedirs(profile_dir, exist_ok=True)
-        options.add_argument(f'--user-data-dir={profile_dir}')
-
         self.driver = Chrome(options=options, version_main=147)
         self.driver.maximize_window()
 
