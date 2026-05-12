@@ -1,80 +1,32 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { api } from "@/lib/api";
 
 export default function PortalsPage() {
   const [config, setConfig] = useState<any>(null);
-  const pollRef = useRef<any>(null);
 
   useEffect(() => {
     api.getPortalConfig().then(setConfig).catch(console.error);
-    return () => { if (pollRef.current) clearInterval(pollRef.current); };
   }, []);
-
-  const startScan = async () => {
-    setScanning(true);
-    setResults(null);
-    try {
-      await api.scanPortals({
-        keyword_filter: keywordFilter || undefined,
-        location_filter: locationFilter || undefined,
-      });
-      // Poll for status
-      pollRef.current = setInterval(async () => {
-        try {
-          const status = await api.getScanStatus();
-          setScanProgress(status);
-          if (status.complete || status.status === "complete") {
-            clearInterval(pollRef.current);
-            setScanning(false);
-            setResults(status);
-            // Ingest results into v2 table
-            if (status.jobs?.length > 0) {
-              try { await api.ingestJobs(status.jobs, "portal_scan"); } catch {}
-            }
-          }
-        } catch { clearInterval(pollRef.current); setScanning(false); }
-      }, 2000);
-    } catch (err: any) {
-      setScanning(false);
-      alert(err.message);
-    }
-  };
-
-  const startDetect = async () => {
-    setDetecting(true);
-    try {
-      await api.detectATS();
-      const poll = setInterval(async () => {
-        try {
-          const status = await api.getDetectStatus();
-          setDetectProgress(status);
-          if (status.complete) { clearInterval(poll); setDetecting(false); }
-        } catch { clearInterval(poll); setDetecting(false); }
-      }, 3000);
-    } catch (err: any) {
-      setDetecting(false);
-      alert(err.message);
-    }
-  };
 
   const portals = config?.portals || [];
   const queries = config?.search_queries || [];
   const enabledCount = portals.filter((p: any) => p.enabled !== false).length;
 
-  // Group by ATS
   const atsCounts: Record<string, number> = {};
-  portals.forEach((p: any) => { const ats = p.ats || "unknown"; atsCounts[ats] = (atsCounts[ats] || 0) + 1; });
+  portals.forEach((p: any) => {
+    const ats = p.ats || "unknown";
+    atsCounts[ats] = (atsCounts[ats] || 0) + 1;
+  });
 
   return (
     <div className="px-8 py-6 max-w-wide mx-auto">
       <h1 className="text-heading text-obsidian font-display">Portal Scanner</h1>
       <p className="text-body text-gravel mt-1">
-        Scan {enabledCount} career pages + {queries.length} search queries across 696+ companies
+        {enabledCount} career pages + {queries.length} search queries across 696+ companies
       </p>
 
-      {/* ATS Type Breakdown */}
-      <div className="card mb-6">
+      <div className="card mb-6 mt-8">
         <h2 className="text-body-medium text-obsidian mb-4">ATS Type Breakdown</h2>
         <div className="flex flex-wrap gap-2">
           {Object.entries(atsCounts)
@@ -87,21 +39,11 @@ export default function PortalsPage() {
         </div>
       </div>
 
-      {/* Portal Grid */}
       <div className="card">
-        <h2 className="text-body-medium text-obsidian mb-4">
-          Configured Portals ({portals.length})
-        </h2>
+        <h2 className="text-body-medium text-obsidian mb-4">Configured Portals ({portals.length})</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
           {portals.map((portal: any, i: number) => (
-            <div
-              key={i}
-              className={`p-3 rounded-lg border text-center transition-colors ${
-                portal.enabled !== false
-                  ? "border-chalk bg-powder hover:border-gravel"
-                  : "border-chalk bg-powder opacity-50"
-              }`}
-            >
+            <div key={i} className={`p-3 rounded-lg border text-center ${portal.enabled !== false ? "border-chalk bg-powder" : "border-chalk bg-powder opacity-50"}`}>
               <p className="text-caption-strong text-obsidian truncate">{portal.name}</p>
               <p className="text-caption text-gravel mt-0.5">{portal.ats}</p>
               <span className={`inline-block mt-1 w-2 h-2 rounded-full ${portal.enabled !== false ? "bg-grade-a" : "bg-gravel"}`} />
@@ -109,20 +51,6 @@ export default function PortalsPage() {
           ))}
         </div>
       </div>
-
-      {/* Search Queries */}
-      {queries.length > 0 && (
-        <div className="card mt-6">
-          <h2 className="text-body-medium text-obsidian mb-4">Search Queries ({queries.length})</h2>
-          <div className="flex flex-wrap gap-2">
-            {queries.map((q: any, i: number) => (
-              <span key={i} className="px-3 py-1.5 bg-powder rounded-full text-caption text-cinder">
-                {typeof q === "string" ? q : q.keywords || q.query || JSON.stringify(q)}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 }
