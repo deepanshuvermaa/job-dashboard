@@ -7,18 +7,21 @@ from pathlib import Path
 
 load_dotenv(Path(__file__).parent.parent.parent / ".env")
 
-DATABASE_URL = os.getenv("DATABASE_URL")
-if not DATABASE_URL:
-    raise RuntimeError("DATABASE_URL environment variable is not set")
-
+DATABASE_URL = os.getenv("DATABASE_URL", "")
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
-engine = create_engine(DATABASE_URL, pool_pre_ping=True, pool_size=5, max_overflow=10)
-SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+engine = None
+SessionLocal = None
+
+if DATABASE_URL:
+    engine = create_engine(DATABASE_URL, pool_pre_ping=True, pool_size=5, max_overflow=10)
+    SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 
 
 def get_db():
+    if not SessionLocal:
+        raise RuntimeError("DATABASE_URL not configured")
     db = SessionLocal()
     try:
         yield db
@@ -31,6 +34,8 @@ def get_db():
 
 
 def init_db():
+    if not engine:
+        raise RuntimeError("DATABASE_URL not configured")
     from models.base import Base
     import models  # noqa
     Base.metadata.create_all(bind=engine)

@@ -16,8 +16,12 @@ from fastapi.middleware.cors import CORSMiddleware
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    from core.database import init_db
-    init_db()
+    try:
+        from core.database import init_db
+        init_db()
+        print("[DB] Tables ready")
+    except Exception as e:
+        print(f"[DB] WARNING: init_db failed: {e}")
     yield
 
 
