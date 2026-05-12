@@ -504,15 +504,28 @@ def main():
         for k in grand: grand[k] += s.get(k, 0)
         board_stats[label] = {"count": len(jobs), "secs": time.time() - t0}
 
-    # ── LinkedIn: one search per keyword ──────────────────────────────────────
+    # ── LinkedIn: ingest per-keyword immediately so data isn't lost on crash ──
     li_budget = alloc.get("LinkedIn", 180)
-    def _li():
-        out = []
-        per_kw = max(30, li_budget // max(len(p["keywords"]), 1))
-        for kw in p["keywords"]:
-            out += scrape_linkedin(base, kw, p["dur_code"], p["location"], p["max_li"], timeout_secs=per_kw)
-        return _dedup(out)
-    _run_board("LinkedIn", _li, "linkedin")
+    li_per_kw = max(60, li_budget // max(len(p["keywords"]), 1))
+    li_total = 0
+    for kw in p["keywords"]:
+        section(f"LinkedIn '{kw}'")
+        jobs = []
+        try:
+            with ThreadPoolExecutor(max_workers=1) as ex:
+                jobs = ex.submit(
+                    scrape_linkedin, base, kw, p["dur_code"], p["location"], p["max_li"], li_per_kw
+                ).result(timeout=li_per_kw + 30)
+        except FutureTimeout:
+            warn(f"LinkedIn '{kw}' timed out")
+        except Exception as e:
+            warn(f"LinkedIn '{kw}' error: {e}")
+        if jobs:
+            jobs = _dedup(jobs)
+            s = ingest(base, token, jobs, "linkedin")
+            for k in grand: grand[k] += s.get(k, 0)
+            li_total += len(jobs)
+    board_stats["LinkedIn"] = {"count": li_total, "secs": li_per_kw * len(p["keywords"])}
 
     # ── Naukri: one search per keyword ────────────────────────────────────────
     def _naukri():

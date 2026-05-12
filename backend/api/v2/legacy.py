@@ -110,6 +110,16 @@ def source_stats():
 # JOB SEARCH (LinkedIn scraper)
 # ══════════════════════════════════════════
 
+# Singleton scraper — reuse Chrome session across requests
+_linkedin_scraper = None
+
+def _get_scraper():
+    global _linkedin_scraper
+    if _linkedin_scraper is None or _linkedin_scraper.driver is None:
+        from modules.linkedin_job_scraper import LinkedInJobScraper
+        _linkedin_scraper = LinkedInJobScraper()
+    return _linkedin_scraper
+
 @router.get("/api/jobs/search")
 def search_jobs(
     keywords: Optional[str] = None,
@@ -126,11 +136,10 @@ def search_jobs(
         if not keywords:
             return {"jobs": [], "message": "Please provide search keywords"}
 
-        from modules.linkedin_job_scraper import LinkedInJobScraper
-        scraper = LinkedInJobScraper()
+        scraper = _get_scraper()
         jobs = scraper.search_jobs(
             keywords=keywords,
-            location=location or "United States",
+            location=location or "India",
             job_type=job_type,
             experience_level=experience_level,
             easy_apply=easy_apply or False,
