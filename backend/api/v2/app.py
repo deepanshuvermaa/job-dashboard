@@ -50,32 +50,41 @@ from api.v2.jobs import router as jobs_router
 app.include_router(jobs_router)
 
 
-@app.get("/health")
-def health():
-    return {"status": "ok", "version": "3.0.0"}
-
-
 # ── Proxy all non-API requests to Next.js frontend on port 3000 ──
 import httpx
 from fastapi import Request
 from fastapi.responses import Response
 
-@app.api_route("/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"])
-async def proxy_frontend(request: Request, path: str):
-    frontend_url = f"http://localhost:3000/{path}"
-    params = str(request.url.query)
-    if params:
-        frontend_url += f"?{params}"
+
+async def _proxy(request: Request, path: str = ""):
+    url = f"http://localhost:3000/{path}"
+    if request.url.query:
+        url += f"?{request.url.query}"
     async with httpx.AsyncClient() as client:
         try:
             resp = await client.request(
                 method=request.method,
-                url=frontend_url,
+                url=url,
                 headers={k: v for k, v in request.headers.items() if k.lower() != "host"},
                 content=await request.body(),
                 timeout=30,
             )
             return Response(content=resp.content, status_code=resp.status_code,
                             headers=dict(resp.headers))
-        except Exception:
-            return Response(content=b"Frontend not available", status_code=503)
+        except Exception as e:
+            return Response(content=f"Frontend unavailable: {e}".encode(), status_code=503)
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok", "version": "3.0.0"}
+
+
+@app.api_route("/", methods=["GET", "HEAD"])
+async def proxy_root(request: Request):
+    return await _proxy(request, "")
+
+
+@app.api_route("/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"])
+async def proxy_frontend(request: Request, path: str):
+    return await _proxy(request, path)
