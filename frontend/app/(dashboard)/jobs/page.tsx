@@ -112,6 +112,26 @@ export default function JobsPage() {
     }
   };
 
+  const handleMarkApplied = async (id: string) => {
+    try {
+      await api.markApplied(id);
+      setJobs((prev) => prev.filter((j) => j.id !== id));
+    } catch (err) {
+      console.error("Mark applied failed:", err);
+    }
+  };
+
+  const handleExport = async () => {
+    try {
+      const data = await api.exportJobs();
+      if (data?.download_url) {
+        window.open(data.download_url, "_blank");
+      }
+    } catch (err) {
+      console.error("Export failed:", err);
+    }
+  };
+
   const handleJobClick = async (job: any) => {
     try {
       const detail = await api.getJob(job.id);
@@ -123,14 +143,25 @@ export default function JobsPage() {
 
   return (
     <div>
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-heading text-obsidian font-display">
-          Discover your next role
-        </h1>
-        <p className="text-body text-gravel mt-1">
-          AI-powered job discovery across 696+ sources
-        </p>
+      <div className="mb-8 flex items-center justify-between">
+        <div>
+          <h1 className="text-heading text-obsidian font-display">
+            Discover your next role
+          </h1>
+          <p className="text-body text-gravel mt-1">
+            AI-powered job discovery across 696+ sources
+          </p>
+        </div>
+        <div className="flex gap-2">
+          <button onClick={async () => { await api.evaluateAll(); fetchJobs(); }} className="btn-secondary flex items-center gap-2">
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+            Evaluate
+          </button>
+          <button onClick={handleExport} className="btn-secondary flex items-center gap-2">
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Export
+          </button>
+        </div>
       </div>
 
       {/* Filters */}
@@ -162,6 +193,7 @@ export default function JobsPage() {
                 job={job}
                 onClick={handleJobClick}
                 onBookmark={handleBookmark}
+                onMarkApplied={handleMarkApplied}
               />
             ))}
           </div>

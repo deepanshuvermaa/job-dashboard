@@ -94,10 +94,10 @@ class LinkedInJobScraper:
             if li_at:
                 print("Trying cookie-based login...")
                 self.driver.get("https://www.linkedin.com")
-                time.sleep(2)
+                time.sleep(3)
                 self.driver.add_cookie({"name": "li_at", "value": li_at, "domain": ".linkedin.com"})
                 self.driver.get("https://www.linkedin.com/feed/")
-                time.sleep(3)
+                time.sleep(4)
                 if "/feed" in self.driver.current_url:
                     print("Cookie login successful!")
                     self.logged_in = True
@@ -320,13 +320,12 @@ class LinkedInJobScraper:
         posted_within: str = None
     ) -> List[Dict]:
         """Search for jobs on LinkedIn using URL-based pagination (no scroll limit)"""
+        jobs = []
+        seen_urls = set()
         try:
             if not self.logged_in:
                 if not self.login():
                     return []
-
-            jobs = []
-            seen_urls = set()
             page_size = 25  # LinkedIn returns 25 jobs per page
             max_pages = (max_results + page_size - 1) // page_size  # Ceiling division
             empty_pages = 0
@@ -401,10 +400,20 @@ class LinkedInJobScraper:
 
                 # Extract jobs from this page
                 page_jobs = 0
-                for i, card in enumerate(job_cards):
+                for i in range(len(job_cards)):
                     if len(jobs) >= max_results:
                         break
                     try:
+                        # Re-find cards each iteration to avoid stale element references
+                        fresh_cards = []
+                        for selector in selectors:
+                            fresh_cards = self.driver.find_elements(By.CSS_SELECTOR, selector)
+                            if fresh_cards:
+                                break
+                        if i >= len(fresh_cards):
+                            break
+                        card = fresh_cards[i]
+
                         job = self._extract_job_info(card, start + i)
                         if job and job.get('job_url') not in seen_urls:
                             seen_urls.add(job.get('job_url'))
@@ -439,7 +448,14 @@ class LinkedInJobScraper:
 
         except Exception as e:
             print(f"Error searching jobs: {e}")
-            return []
+            if jobs:
+                print(f"Returning {len(jobs)} partial results scraped before crash")
+                from datetime import datetime as dt
+                now = dt.now().isoformat()
+                for job in jobs:
+                    job.setdefault('source', 'linkedin')
+                    job.setdefault('scraped_at', now)
+            return jobs
 
     def search_jobs_multi(
         self,
@@ -493,9 +509,18 @@ class LinkedInJobScraper:
         try:
             # Scroll card into view and click via JS to avoid nav bar interception
             self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", card)
-            time.sleep(0.3)
+            time.sleep(0.5)
             self.driver.execute_script("arguments[0].click();", card)
-            time.sleep(2)
+
+            # Wait for side panel to load by checking for job details content change
+            for _ in range(8):
+                time.sleep(0.5)
+                try:
+                    detail = self.driver.find_element(By.CSS_SELECTOR, '.jobs-search__job-details--wrapper, .scaffold-layout__detail')
+                    if detail and detail.text and len(detail.text) > 50:
+                        break
+                except:
+                    pass
 
             # Try multiple selectors for title (LinkedIn updates these frequently)
             title = None
@@ -829,27 +854,34 @@ class LinkedInJobScraper:
 
             # Multiple selector strategies for recruiter
             recruiter_strategies = [
-                # Strategy 1: Job poster name (most common)
+                # Strategy 1: Hirer card (promoted jobs - most reliable in 2025)
+                {
+                    'container': '.hirer-card__hirer-information',
+                    'name': 'a[href*="/in/"]',
+                    'title': '.hirer-card__hirer-information span:not(a)',
+                    'link': 'a[href*="/in/"]'
+                },
+                # Strategy 2: Job poster name
                 {
                     'container': '.jobs-poster__name',
                     'name': 'a',
                     'link': 'a'
                 },
-                # Strategy 2: Hiring team member
+                # Strategy 3: Hiring team member
                 {
                     'container': '.hiring-team__member',
                     'name': '.artdeco-entity-lockup__title',
                     'title': '.artdeco-entity-lockup__subtitle',
                     'link': 'a'
                 },
-                # Strategy 3: Meet the hiring team section
+                # Strategy 4: Meet the hiring team section
                 {
                     'container': '[data-test-job-details-hiring-team] .artdeco-entity-lockup',
                     'name': '.artdeco-entity-lockup__title',
                     'title': '.artdeco-entity-lockup__subtitle',
                     'link': 'a'
                 },
-                # Strategy 4: Job details top card
+                # Strategy 5: Job details top card
                 {
                     'container': '.job-details-jobs-unified-top-card__hiring-team',
                     'name': 'a',
@@ -898,20 +930,35 @@ class LinkedInJobScraper:
                 except Exception as e:
                     continue
 
-            # If no recruiter found, try to extract from "About the job" section
+            # If no recruiter found, search for profile links in the job details panel
             if not recruiter:
                 try:
-                    # Look for any LinkedIn profile links in the job description
-                    links = self.driver.find_elements(By.CSS_SELECTOR, 'a[href*="/in/"]')
-                    for link in links[:3]:  # Check first 3 profile links
-                        href = link.get_attribute('href')
+                    # Search within job details panel specifically (not nav bar)
+                    containers = [
+                        '.jobs-search__job-details',
+                        '.job-view-layout',
+                        '.jobs-details',
+                        '#job-details',
+                        '.jobs-description',
+                    ]
+                    detail_panel = None
+                    for sel in containers:
+                        elems = self.driver.find_elements(By.CSS_SELECTOR, sel)
+                        if elems:
+                            detail_panel = elems[0]
+                            break
+
+                    search_root = detail_panel if detail_panel else self.driver
+                    links = search_root.find_elements(By.CSS_SELECTOR, 'a[href*="/in/"]')
+                    for link in links[:5]:
+                        href = link.get_attribute('href') or ''
                         text = link.text.strip()
-                        if text and len(text) < 50 and '/in/' in href:  # Likely a person's name
+                        if text and 2 < len(text) < 50 and '/in/' in href:
                             recruiter['name'] = text
                             recruiter['profile_url'] = href
                             profile_id = href.split('/in/')[1].split('/')[0].split('?')[0]
                             recruiter['dm_link'] = f"https://www.linkedin.com/messaging/compose/?recipient={profile_id}"
-                            print(f"✓ Found recruiter from description: {text}")
+                            print(f"✓ Found recruiter from job details: {text}")
                             break
                 except:
                     pass

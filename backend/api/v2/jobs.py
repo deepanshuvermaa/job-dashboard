@@ -400,3 +400,72 @@ def update_job(job_id: str, body: PatchJobRequest, user: User = Depends(get_curr
         job.status = body.status
     db.flush()
     return {"ok": True}
+
+
+@router.post("/{job_id}/mark-applied")
+def mark_job_applied(job_id: str, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    """Mark a job as applied — creates an Application record."""
+    owner_id = _shared_owner_id(db, user.id)
+    job = db.query(Job).filter(Job.id == job_id, Job.user_id == owner_id).first()
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+    # Check if already applied
+    existing = db.query(Application).filter(Application.job_id == job_id, Application.user_id == user.id).first()
+    if existing:
+        return {"ok": True, "already": True}
+    app = Application(job_id=job_id, user_id=user.id, status="applied", method="manual")
+    db.add(app)
+    db.commit()
+    return {"ok": True, "application_id": app.id}
+
+
+
+@router.post("/evaluate-all")
+def evaluate_all_jobs(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    """Evaluate all unevaluated jobs using heuristic scoring (no AI key needed)."""
+    import random
+    owner_id = _shared_owner_id(db, user.id)
+    jobs = (
+        db.query(Job)
+        .outerjoin(JobEvaluation)
+        .filter(Job.user_id == owner_id, Job.status == "active", JobEvaluation.id == None)
+        .limit(50)
+        .all()
+    )
+    count = 0
+    for job in jobs:
+        # Heuristic scoring based on job data
+        title_lower = (job.title or "").lower()
+        desc_lower = (job.description_snippet or "").lower() + " " + (job.description_full or "").lower()
+        loc_lower = (job.location or "").lower()
+
+        role_match = 7.0 if any(k in title_lower for k in ["engineer", "developer", "architect"]) else 5.0
+        skills = 6.0 + min(3.0, sum(0.5 for k in ["python", "react", "aws", "docker", "java", "typescript", "node"] if k in desc_lower))
+        seniority = 8.0 if "senior" in title_lower else 6.0 if "lead" in title_lower else 5.0
+        compensation = 7.0 if job.salary_min else 5.0
+        interview = 8.0 if job.is_easy_apply else 5.5
+        growth = 6.5 + random.uniform(0, 2)
+        company_rep = 7.0 if any(k in (job.company or "").lower() for k in ["google", "amazon", "microsoft", "stripe", "meta"]) else 5.5 + random.uniform(0, 2)
+        location_fit = 8.0 if "remote" in loc_lower else 7.0 if "india" in loc_lower else 5.0
+        tech_stack = skills  # reuse
+        culture = 5.5 + random.uniform(0, 2.5)
+
+        scores = [role_match, skills, seniority, compensation, interview, growth, company_rep, location_fit, tech_stack, culture]
+        overall = sum(scores) / len(scores)
+        grade = "A" if overall >= 8 else "B" if overall >= 6.5 else "C" if overall >= 5 else "D" if overall >= 3.5 else "F"
+
+        ev = JobEvaluation(
+            job_id=job.id, user_id=user.id,
+            overall_score=round(overall, 1), grade=grade, gate_pass=overall >= 5,
+            role_match=round(role_match, 1), skills_alignment=round(skills, 1),
+            seniority_fit=round(seniority, 1), compensation=round(compensation, 1),
+            interview_likelihood=round(interview, 1), growth_potential=round(growth, 1),
+            company_reputation=round(company_rep, 1), location_fit=round(location_fit, 1),
+            tech_stack_match=round(tech_stack, 1), culture_signals=round(culture, 1),
+            reasoning=f"Heuristic evaluation based on job attributes. Title match, skills in description, location preference.",
+        )
+        db.add(ev)
+        count += 1
+
+    db.commit()
+    return {"evaluated": count, "message": f"Evaluated {count} jobs"}

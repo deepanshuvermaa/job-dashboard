@@ -125,4 +125,43 @@ export const api = {
   // ── Legacy: Automation ──
   runAutomation: (data: any) =>
     request("/api/automation/run", { method: "POST", body: JSON.stringify(data) }),
+
+  // ── Mark Applied ──
+  markApplied: (jobId: string) =>
+    request(`/api/jobs/${jobId}/mark-applied`, { method: "POST" }),
+
+  // ── Outreach ──
+  getOutreachTemplates: () => request("/api/outreach/templates"),
+  generateOutreach: (data: any) =>
+    request("/api/outreach/generate", { method: "POST", body: JSON.stringify(data) }),
+  sendOutreach: (data: any) =>
+    request("/api/outreach/send", { method: "POST", body: JSON.stringify(data) }),
+  getOutreachLog: () => request("/api/outreach/log"),
+  bulkOutreach: (data: any) =>
+    request("/api/outreach/bulk", { method: "POST", body: JSON.stringify(data) }),
+  importOutreachContacts: (file: File, template?: string) => {
+    const form = new FormData();
+    form.append("file", file);
+    if (template) form.append("template", template);
+    return request("/api/outreach/import", { method: "POST", body: form });
+  },
+
+  // ── Hacks ──
+  getSavedSearches: () => request("/api/hacks/saved-searches"),
+  saveSearch: (data: any) =>
+    request("/api/hacks/saved-searches", { method: "POST", body: JSON.stringify(data) }),
+  deleteSavedSearch: (id: string) =>
+    request(`/api/hacks/saved-searches/${id}`, { method: "DELETE" }),
+  generateGoogleDork: (data: any) =>
+    request("/api/hacks/google-dork", { method: "POST", body: JSON.stringify(data) }),
+  recruiterEngage: (data: any) =>
+    request("/api/hacks/recruiter-engage", { method: "POST", body: JSON.stringify(data) }),
+  groupMessage: (data: any) =>
+    request("/api/hacks/group-message", { method: "POST", body: JSON.stringify(data) }),
+
+  // ── Export ──
+  exportJobs: () => request("/api/jobs/export"),
+
+  // ── Evaluate ──
+  evaluateAll: () => request("/api/jobs/evaluate-all", { method: "POST" }),
 };

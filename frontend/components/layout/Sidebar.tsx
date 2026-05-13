@@ -10,8 +10,16 @@ const NAV = [
       { name: "Home", href: "/dashboard", d: "M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z M9 22V12h6v10" },
       { name: "Jobs", href: "/jobs", d: "M2 7h20v14H2z M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" },
       { name: "Applications", href: "/jobs/applications", d: "M22 11.08V12a10 10 0 11-5.93-9.14 M22 4L12 14.01l-3-3" },
-      { name: "Portals", href: "/jobs/portals", d: "M12 2a10 10 0 100 20 10 10 0 000-20z M2 12h20 M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" },
       { name: "Evaluations", href: "/jobs/evaluations", d: "M18 20V10 M12 20V4 M6 20v-6" },
+      { name: "Portals", href: "/jobs/portals", d: "M12 2a10 10 0 100 20 10 10 0 000-20z M2 12h20 M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" },
+    ],
+  },
+  {
+    label: "OUTREACH",
+    items: [
+      { name: "Cold Email", href: "/outreach", d: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" },
+      { name: "Recruiters", href: "/recruiters", d: "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2 M9 3a4 4 0 100 8 4 4 0 000-8z M23 21v-2a4 4 0 00-3-3.87 M16 3.13a4 4 0 010 7.75" },
+      { name: "Hacks", href: "/hacks", d: "M13 2L3 14h9l-1 8 10-12h-9l1-8" },
     ],
   },
   {
