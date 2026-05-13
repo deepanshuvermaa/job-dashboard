@@ -1,8 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { api } from "@/lib/api";
 
 export default function OutreachPage() {
+  const searchParams = useSearchParams();
   const [emails, setEmails] = useState("");
   const [role, setRole] = useState("");
   const [resume, setResume] = useState<File | null>(null);
@@ -10,7 +12,17 @@ export default function OutreachPage() {
   const [generated, setGenerated] = useState<any[]>([]);
   const [sending, setSending] = useState(false);
   const [log, setLog] = useState<any[]>([]);
-  const [tab, setTab] = useState<"compose" | "log">("compose");
+  const [tab, setTab] = useState<"compose" | "log" | "pick">("compose");
+  const [savedRecruiters, setSavedRecruiters] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Pre-fill from URL params (from recruiters page)
+    const urlEmails = searchParams.get("emails");
+    if (urlEmails) setEmails(urlEmails);
+    // Load saved recruiters
+    const saved = JSON.parse(localStorage.getItem("saved_recruiters") || "[]");
+    setSavedRecruiters(saved);
+  }, [searchParams]);
 
   const handleGenerate = async () => {
     if (!emails.trim()) return;
@@ -29,11 +41,8 @@ export default function OutreachPage() {
         results.push({ ...res, recruiter_email: email });
       }
       setGenerated(results);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setSending(false);
-    }
+    } catch (err) { console.error(err); }
+    finally { setSending(false); }
   };
 
   const handleSendAll = async () => {
@@ -53,25 +62,25 @@ export default function OutreachPage() {
       const logData = await api.getOutreachLog();
       setLog(logData.log || []);
       setTab("log");
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setSending(false);
-    }
+    } catch (err) { console.error(err); }
+    finally { setSending(false); }
   };
 
   const handleFileImport = async (file: File) => {
     setSending(true);
     try {
-      const res = await api.importOutreachContacts(file, "introduction");
+      await api.importOutreachContacts(file, "introduction");
       const logData = await api.getOutreachLog();
       setLog(logData.log || []);
       setTab("log");
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setSending(false);
-    }
+    } catch (err) { console.error(err); }
+    finally { setSending(false); }
+  };
+
+  const addFromRecruiters = (selected: any[]) => {
+    const newEmails = selected.filter(r => r.email).map(r => r.email).join("\n");
+    setEmails(prev => prev ? prev + "\n" + newEmails : newEmails);
+    setTab("compose");
   };
 
   return (
@@ -84,10 +93,14 @@ export default function OutreachPage() {
       {/* Tabs */}
       <div className="flex gap-4 mb-6 border-b border-chalk">
         <button onClick={() => setTab("compose")} className={`pb-2 text-[13px] font-medium border-b-2 transition-colors ${tab === "compose" ? "border-obsidian text-obsidian" : "border-transparent text-gravel hover:text-obsidian"}`}>Compose</button>
-        <button onClick={() => { setTab("log"); api.getOutreachLog().then(d => setLog(d.log || [])); }} className={`pb-2 text-[13px] font-medium border-b-2 transition-colors ${tab === "log" ? "border-obsidian text-obsidian" : "border-transparent text-gravel hover:text-obsidian"}`}>Sent Log</button>
+        <button onClick={() => setTab("pick")} className={`pb-2 text-[13px] font-medium border-b-2 transition-colors ${tab === "pick" ? "border-obsidian text-obsidian" : "border-transparent text-gravel hover:text-obsidian"}`}>Pick from Contacts ({savedRecruiters.length})</button>
+        <button onClick={() => { setTab("log"); api.getOutreachLog().then(d => setLog(d.log || [])).catch(() => {}); }} className={`pb-2 text-[13px] font-medium border-b-2 transition-colors ${tab === "log" ? "border-obsidian text-obsidian" : "border-transparent text-gravel hover:text-obsidian"}`}>Sent Log</button>
       </div>
 
-      {tab === "compose" ? (
+      {tab === "pick" ? (
+        /* Pick from saved recruiters */
+        <RecruiterPicker recruiters={savedRecruiters} onSelect={addFromRecruiters} />
+      ) : tab === "compose" ? (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left: Input */}
           <div className="space-y-4">
@@ -96,7 +109,7 @@ export default function OutreachPage() {
               <textarea
                 value={emails}
                 onChange={(e) => setEmails(e.target.value)}
-                placeholder="Paste emails (one per line, comma or semicolon separated)&#10;e.g. recruiter@company.com&#10;hr@startup.io"
+                placeholder={"Paste emails (one per line, comma or semicolon separated)\ne.g. recruiter@company.com\nhr@startup.io"}
                 className="w-full h-32 px-3 py-2 border border-chalk rounded-lg text-[13px] text-obsidian bg-eggshell focus:outline-none focus:border-obsidian resize-none"
               />
               <p className="text-[11px] text-fog mt-1">{emails.split(/[\n,;]+/).filter(e => e.trim().includes("@")).length} emails detected</p>
@@ -104,18 +117,8 @@ export default function OutreachPage() {
 
             <div className="card">
               <h3 className="text-body-medium text-obsidian mb-3">Your Details</h3>
-              <input
-                value={senderEmail}
-                onChange={(e) => setSenderEmail(e.target.value)}
-                placeholder="Your email (sender)"
-                className="w-full px-3 py-2 border border-chalk rounded-lg text-[13px] text-obsidian bg-eggshell focus:outline-none focus:border-obsidian mb-3"
-              />
-              <input
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                placeholder="Target role (e.g. Full Stack Developer, Cloud Engineer)"
-                className="w-full px-3 py-2 border border-chalk rounded-lg text-[13px] text-obsidian bg-eggshell focus:outline-none focus:border-obsidian mb-3"
-              />
+              <input value={senderEmail} onChange={(e) => setSenderEmail(e.target.value)} placeholder="Your email (sender)" className="w-full px-3 py-2 border border-chalk rounded-lg text-[13px] text-obsidian bg-eggshell focus:outline-none focus:border-obsidian mb-3" />
+              <input value={role} onChange={(e) => setRole(e.target.value)} placeholder="Target role (e.g. Full Stack Developer, Cloud Engineer)" className="w-full px-3 py-2 border border-chalk rounded-lg text-[13px] text-obsidian bg-eggshell focus:outline-none focus:border-obsidian mb-3" />
               <label className="flex items-center gap-2 px-3 py-2 border border-chalk rounded-lg cursor-pointer hover:bg-powder transition-colors">
                 <svg className="w-4 h-4 text-gravel" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15h6"/></svg>
                 <span className="text-[13px] text-gravel">{resume ? resume.name : "Attach Resume (PDF)"}</span>
@@ -162,7 +165,7 @@ export default function OutreachPage() {
             ) : (
               <div className="card text-center py-12">
                 <svg className="w-12 h-12 text-chalk mx-auto mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
-                <p className="text-body text-gravel">Paste emails and generate personalized outreach</p>
+                <p className="text-body text-gravel">Paste emails or pick from contacts</p>
                 <p className="text-caption text-fog mt-1">Each email is AI-curated with your resume highlights & projects</p>
               </div>
             )}
@@ -172,9 +175,7 @@ export default function OutreachPage() {
         /* Log Tab */
         <div className="space-y-3">
           {log.length === 0 ? (
-            <div className="card text-center py-12">
-              <p className="text-body text-gravel">No emails sent yet</p>
-            </div>
+            <div className="card text-center py-12"><p className="text-body text-gravel">No emails sent yet</p></div>
           ) : log.map((entry, i) => (
             <div key={i} className="card flex items-center gap-4">
               <div className="flex-1 min-w-0">
@@ -187,6 +188,51 @@ export default function OutreachPage() {
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+function RecruiterPicker({ recruiters, onSelect }: { recruiters: any[]; onSelect: (selected: any[]) => void }) {
+  const [selected, setSelected] = useState<Set<number>>(new Set());
+
+  const toggle = (i: number) => {
+    setSelected(prev => { const n = new Set(prev); n.has(i) ? n.delete(i) : n.add(i); return n; });
+  };
+
+  const selectAll = () => {
+    const withEmail = recruiters.map((_, i) => i).filter(i => recruiters[i].email);
+    setSelected(new Set(withEmail));
+  };
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <p className="text-caption text-gravel">{selected.size} selected</p>
+        <div className="flex gap-2">
+          <button onClick={selectAll} className="btn-secondary text-[11px]">Select All with Email</button>
+          <button onClick={() => onSelect(Array.from(selected).map(i => recruiters[i]))} disabled={selected.size === 0} className="btn-primary text-[11px] disabled:opacity-50">
+            Add {selected.size} to Compose
+          </button>
+        </div>
+      </div>
+      <div className="space-y-1.5 max-h-[500px] overflow-y-auto">
+        {recruiters.length === 0 ? (
+          <div className="card text-center py-8">
+            <p className="text-body text-gravel">No saved contacts</p>
+            <p className="text-caption text-fog mt-1">Add contacts on the Recruiters page or import a CSV</p>
+          </div>
+        ) : recruiters.map((r, i) => (
+          <div key={i} onClick={() => toggle(i)} className={`card flex items-center gap-3 cursor-pointer transition-colors ${selected.has(i) ? "!border-obsidian !bg-powder" : ""}`}>
+            <div className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${selected.has(i) ? "border-obsidian bg-obsidian" : "border-chalk"}`}>
+              {selected.has(i) && <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M20 6L9 17l-5-5"/></svg>}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[13px] text-obsidian truncate">{r.name || "Unknown"}</p>
+              <p className="text-[11px] text-gravel truncate">{r.company}{r.email ? ` · ${r.email}` : " · no email"}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
