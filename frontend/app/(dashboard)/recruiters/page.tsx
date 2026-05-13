@@ -11,6 +11,26 @@ interface Recruiter {
   source: string;
 }
 
+const SEED_CONTACTS: Recruiter[] = [
+  { name: "Sergio Saborio", company: "Flexport", profile_url: "https://linkedin.com/in/sergiosaborio", source: "spreadsheet" },
+  { name: "Dmitry Aflitonov", company: "Bolt (EU)", profile_url: "https://linkedin.com/in/dmitry-aflitonov-3a784b9b", source: "spreadsheet" },
+  { name: "N. Stachowicz", company: "CKSource", email: "n.stachowicz@cksource.com", source: "spreadsheet" },
+  { name: "Pragati Singh", company: "GrayQuest", profile_url: "https://linkedin.com/in/pragati-singh-bb9388191", source: "spreadsheet" },
+  { name: "C. Goncalves", company: "Benevity", email: "Cgoncalves@benevity.com", source: "spreadsheet" },
+  { name: "C. Deveis", company: "Pure Storage", email: "cdeveis@purestorage.com", source: "spreadsheet" },
+  { name: "Rachel", company: "Grow Therapy", email: "rachel@growtherapy.com", source: "spreadsheet" },
+  { name: "Tech Hiring", company: "Monzo", email: "tech-hiring@monzo.com", source: "spreadsheet" },
+  { name: "Tech", company: "Walgreens", email: "tech@wba.com", source: "spreadsheet" },
+  { name: "Carrie Collier", company: "Appian", email: "carrie.collier@appian.com", source: "spreadsheet" },
+  { name: "Andrew Joynt", company: "Olo", email: "andrew.joynt@olo.com", source: "spreadsheet" },
+  { name: "Jin Wu", company: "PlayStation (Sony)", profile_url: "https://linkedin.com/in/jinwurecruits", source: "spreadsheet" },
+  { name: "Tanzeem Nayaz", company: "TuringMinds", profile_url: "https://linkedin.com/in/tanzeemnayaz", source: "spreadsheet" },
+  { name: "Careers", company: "Condor Software", email: "careers@condorsoftware.com", source: "spreadsheet" },
+  { name: "Careers", company: "TLG Aerospace", email: "careers@tlgaerospace.com", source: "spreadsheet" },
+  { name: "Yana Busko", company: "Planner 5D", profile_url: "https://linkedin.com/in/yana-busko-98bb2572", source: "spreadsheet" },
+  { name: "Matthew Blais", company: "In-House", profile_url: "https://linkedin.com/in/matthew-blais-b68472121", source: "spreadsheet" },
+];
+
 export default function RecruitersPage() {
   const [recruiters, setRecruiters] = useState<Recruiter[]>([]);
   const [loading, setLoading] = useState(true);
@@ -33,7 +53,14 @@ export default function RecruitersPage() {
         }
       }
       const saved = JSON.parse(localStorage.getItem("saved_recruiters") || "[]");
-      setRecruiters([...saved, ...found]);
+      // Seed with spreadsheet contacts if localStorage is empty
+      if (saved.length === 0) {
+        const seed = SEED_CONTACTS.filter(c => c.name && c.name !== "Careers" && c.name !== "Tech-Hiring");
+        localStorage.setItem("saved_recruiters", JSON.stringify(seed));
+        setRecruiters([...seed, ...found]);
+      } else {
+        setRecruiters([...saved, ...found]);
+      }
     } catch (err) { console.error(err); }
     finally { setLoading(false); }
   };
