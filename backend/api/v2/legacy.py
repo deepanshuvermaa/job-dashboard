@@ -658,6 +658,7 @@ def tailor_resume(request: dict):
     from openai import OpenAI
     from core.database import SessionLocal
     from models.job import Job
+    from pathlib import Path
 
     job_id = request.get("job_id")
     if not job_id:
@@ -669,13 +670,20 @@ def tailor_resume(request: dict):
     if not job:
         raise HTTPException(status_code=404, detail="Job not found")
 
-    # Get user profile
+    # Get user profile - try global first, then file
     try:
         from api.main import user_profile
     except:
         user_profile = {}
     if not user_profile:
-        raise HTTPException(status_code=400, detail="Upload your resume first")
+        # Try loading from saved profile file
+        profile_path = Path(__file__).parent.parent.parent / "backend" / "data" / "user_profile.json"
+        if not profile_path.exists():
+            profile_path = Path(__file__).parent.parent / "data" / "user_profile.json"
+        if profile_path.exists():
+            user_profile = _json.loads(profile_path.read_text())
+    if not user_profile:
+        raise HTTPException(status_code=400, detail="Upload your resume first in Profile section")
 
     groq_key = os.getenv('GROQ_API_KEY')
     deepseek_key = os.getenv('DEEPSEEK_API_KEY')
@@ -734,6 +742,7 @@ def generate_cover_letter(request: dict):
     from openai import OpenAI
     from core.database import SessionLocal
     from models.job import Job
+    from pathlib import Path
 
     job_id = request.get("job_id")
     if not job_id:
@@ -749,6 +758,10 @@ def generate_cover_letter(request: dict):
         from api.main import user_profile
     except:
         user_profile = {}
+    if not user_profile:
+        profile_path = Path(__file__).parent.parent / "data" / "user_profile.json"
+        if profile_path.exists():
+            user_profile = _json.loads(profile_path.read_text())
     if not user_profile:
         raise HTTPException(status_code=400, detail="Upload your resume first")
 

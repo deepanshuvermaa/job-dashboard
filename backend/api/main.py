@@ -1044,6 +1044,12 @@ async def upload_resume(file: UploadFile = File(...)):
         if result.get('success'):
             user_profile = result['data']
 
+            # Persist to file so it survives redeploys
+            import json as _json
+            profile_path = Path(__file__).parent.parent / "data" / "user_profile.json"
+            profile_path.parent.mkdir(exist_ok=True)
+            profile_path.write_text(_json.dumps(user_profile, default=str))
+
             return {
                 "success": True,
                 "message": "Resume parsed successfully using AI",
@@ -1066,6 +1072,13 @@ async def upload_resume(file: UploadFile = File(...)):
 async def get_user_profile():
     """Get the current user profile"""
     global user_profile
+
+    if not user_profile:
+        # Try loading from persisted file
+        import json as _json
+        profile_path = Path(__file__).parent.parent / "data" / "user_profile.json"
+        if profile_path.exists():
+            user_profile = _json.loads(profile_path.read_text())
 
     if not user_profile:
         return {
