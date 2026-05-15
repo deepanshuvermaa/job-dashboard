@@ -730,7 +730,19 @@ Return JSON:
         if raw.startswith("```"): raw = raw.split("\n", 1)[1] if "\n" in raw else raw[3:]
         if raw.endswith("```"): raw = raw[:-3]
         if raw.startswith("json"): raw = raw[4:]
-        result = _json.loads(raw.strip())
+        raw = raw.strip()
+        # Handle extra data after JSON - find the closing brace
+        brace_count = 0
+        end_idx = 0
+        for i, ch in enumerate(raw):
+            if ch == '{': brace_count += 1
+            elif ch == '}': brace_count -= 1
+            if brace_count == 0 and i > 0:
+                end_idx = i + 1
+                break
+        if end_idx > 0:
+            raw = raw[:end_idx]
+        result = _json.loads(raw)
         result["job_title"] = job.title
         result["company"] = job.company
         return {"success": True, **result}
