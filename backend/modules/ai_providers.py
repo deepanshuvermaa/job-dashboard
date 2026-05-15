@@ -163,6 +163,43 @@ class GeminiProvider(AIProvider):
         return self.model
 
 
+class GroqProvider(AIProvider):
+    """Groq provider (OpenAI-compatible API, fast inference, free tier)"""
+
+    def __init__(self, api_key: str, model: str = "llama-3.3-70b-versatile"):
+        self.client = OpenAI(api_key=api_key, base_url="https://api.groq.com/openai/v1")
+        self.model = model
+
+    def generate_completion(self, prompt: str, max_tokens: int = 150, temperature: float = 0.7) -> Optional[str]:
+        try:
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=max_tokens,
+                temperature=temperature
+            )
+            return response.choices[0].message.content.strip()
+        except Exception as e:
+            print(f"Groq API error: {e}")
+            return None
+
+    def generate_chat_completion(self, messages: List[Dict], max_tokens: int = 150, temperature: float = 0.7) -> Optional[str]:
+        try:
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=messages,
+                max_tokens=max_tokens,
+                temperature=temperature
+            )
+            return response.choices[0].message.content.strip()
+        except Exception as e:
+            print(f"Groq API error: {e}")
+            return None
+
+    def get_client(self):
+        return self.client
+
+
 class AIProviderManager:
     """Manage multiple AI providers with fallback"""
 
@@ -173,8 +210,8 @@ class AIProviderManager:
         Args:
             config: Dictionary with provider configurations
                 {
-                    'primary_provider': 'openai' | 'deepseek' | 'gemini',
-                    'fallback_providers': ['openai', 'deepseek', 'gemini'],
+                    'primary_provider': 'openai' | 'deepseek' | 'gemini' | 'groq',
+                    'fallback_providers': ['groq', 'openai', 'deepseek', 'gemini'],
                     'openai_api_key': str,
                     'openai_model': str,
                     'deepseek_api_key': str,
@@ -188,12 +225,12 @@ class AIProviderManager:
         self._initialize_providers()
 
         # Set primary provider
-        primary = self.config.get('primary_provider', 'openai')
+        primary = self.config.get('primary_provider', 'groq')
         self.primary_provider_name = primary
         self.primary_provider = self.providers.get(primary)
 
-        # Set fallback order
-        fallback_order = self.config.get('fallback_providers', ['openai', 'deepseek', 'gemini'])
+        # Set fallback order (Groq first - free tier, then OpenAI)
+        fallback_order = self.config.get('fallback_providers', ['groq', 'openai', 'deepseek', 'gemini'])
         self.fallback_providers = [self.providers.get(name) for name in fallback_order if self.providers.get(name)]
 
     def _initialize_providers(self):
@@ -202,12 +239,22 @@ class AIProviderManager:
         # OpenAI
         openai_key = self.config.get('openai_api_key') or os.getenv('OPENAI_API_KEY')
         if openai_key:
-            model = self.config.get('openai_model', 'gpt-3.5-turbo')
+            model = self.config.get('openai_model', 'gpt-4o-mini')
             try:
                 self.providers['openai'] = OpenAIProvider(openai_key, model)
                 print("[OK] OpenAI provider initialized")
             except Exception as e:
                 print(f"[ERROR] OpenAI provider failed: {e}")
+
+        # Groq (free tier, fast inference)
+        groq_key = self.config.get('groq_api_key') or os.getenv('GROQ_API_KEY')
+        if groq_key:
+            model = self.config.get('groq_model', 'llama-3.3-70b-versatile')
+            try:
+                self.providers['groq'] = GroqProvider(groq_key, model)
+                print("[OK] Groq provider initialized (llama-3.3-70b)")
+            except Exception as e:
+                print(f"[ERROR] Groq provider failed: {e}")
 
         # DeepSeek
         deepseek_key = self.config.get('deepseek_api_key') or os.getenv('DEEPSEEK_API_KEY')
