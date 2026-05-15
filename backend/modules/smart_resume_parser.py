@@ -22,11 +22,27 @@ class SmartResumeParser:
     """AI-powered resume parser that adapts to different resume formats"""
 
     def __init__(self):
-        api_key = os.getenv('OPENAI_API_KEY')
-        if not api_key:
-            raise ValueError("OPENAI_API_KEY not found in environment variables")
+        # Try providers in order: Groq (free) -> DeepSeek -> OpenAI
+        from openai import OpenAI
+        self.openai_client = None
+        self.model = "gpt-4o-mini"
 
-        self.openai_client = OpenAI(api_key=api_key)
+        groq_key = os.getenv('GROQ_API_KEY')
+        deepseek_key = os.getenv('DEEPSEEK_API_KEY')
+        openai_key = os.getenv('OPENAI_API_KEY')
+
+        if groq_key:
+            self.openai_client = OpenAI(api_key=groq_key, base_url="https://api.groq.com/openai/v1")
+            self.model = "llama-3.3-70b-versatile"
+        elif deepseek_key:
+            self.openai_client = OpenAI(api_key=deepseek_key, base_url="https://api.deepseek.com")
+            self.model = "deepseek-chat"
+        elif openai_key:
+            self.openai_client = OpenAI(api_key=openai_key)
+            self.model = "gpt-4o-mini"
+        else:
+            raise ValueError("No AI API key found (GROQ_API_KEY, DEEPSEEK_API_KEY, or OPENAI_API_KEY)")
+
         self.resume_text = ""
         self.structured_data = {}
 
@@ -235,7 +251,7 @@ REMEMBER: Extract EVERYTHING. Better to have complete information than incomplet
 
         try:
             response = self.openai_client.chat.completions.create(
-                model="gpt-4o-mini",
+                model=self.model,
                 messages=[
                     {
                         "role": "system",
@@ -247,8 +263,7 @@ REMEMBER: Extract EVERYTHING. Better to have complete information than incomplet
                     }
                 ],
                 temperature=0.1,
-                max_tokens=4000,  # Increased for detailed output
-                response_format={"type": "json_object"}
+                max_tokens=4000,
             )
 
             import json
