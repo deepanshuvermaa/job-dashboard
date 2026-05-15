@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
-  // v2
+  generateBuildId: () => `v${Date.now()}`,
 }
 
 module.exports = nextConfig
