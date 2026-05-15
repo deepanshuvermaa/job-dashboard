@@ -14,7 +14,7 @@ const DIMS = [
 
 function RadarChart({ ev }: { ev: any }) {
   const s = 200, cx = s/2, cy = s/2, maxR = 80;
-  const dims = DIMS.map((d, i) => ({ ...d, angle: (Math.PI * 2 * i) / DIMS.length - Math.PI / 2, value: (ev[d.key] || 0) / 100 }));
+  const dims = DIMS.map((d, i) => ({ ...d, angle: (Math.PI * 2 * i) / DIMS.length - Math.PI / 2, value: (ev[d.key] || 0) / 10 }));
   const gridPaths = [0.25, 0.5, 0.75, 1].map(level => {
     const pts = dims.map(d => `${cx + maxR * level * Math.cos(d.angle)},${cy + maxR * level * Math.sin(d.angle)}`).join(" ");
     return `M${pts.split(" ")[0]} L${pts.split(" ").slice(1).join(" L")} Z`;
@@ -124,7 +124,7 @@ export default function JobDetailDrawer({ job, onClose, onBookmark }: Props) {
                 {DIMS.map((d) => (
                   <div key={d.key} className="flex items-center gap-3">
                     <span className="text-caption text-gravel w-24 text-right flex-shrink-0">{d.label}</span>
-                    <div className="flex-1 score-track"><div className="score-fill bg-obsidian" style={{ width: `${ev[d.key] || 0}%` }} /></div>
+                    <div className="flex-1 score-track"><div className="score-fill bg-obsidian" style={{ width: `${(ev[d.key] || 0) * 10}%` }} /></div>
                     <span className="text-caption text-cinder w-6">{Math.round(ev[d.key] || 0)}</span>
                   </div>
                 ))}

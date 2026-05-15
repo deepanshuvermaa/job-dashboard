@@ -157,6 +157,12 @@ def list_jobs(
         Job.is_ignored == False,
     )
 
+    # Exclude D and F grade jobs from feed (only show A/B/C or unevaluated)
+    if not grade:  # Don't apply if user explicitly filters by grade
+        q = q.outerjoin(JobEvaluation, Job.id == JobEvaluation.job_id).filter(
+            (JobEvaluation.id == None) | (JobEvaluation.grade.in_(["A", "B", "C"]))
+        )
+
     if status:
         q = q.filter(Job.status == status)
     else:
@@ -478,16 +484,30 @@ def evaluate_all_jobs(user: User = Depends(get_current_user), db: Session = Depe
         skills_found = sum(1 for s in user_skills if s in desc_lower)
         skills_alignment = min(10, 3 + skills_found * 0.7)
 
-        # 3. Seniority Fit
+        # 3. Seniority Fit - NEVER remove jobs up to 2x user experience
+        # If user has 1.8yr, show jobs up to ~4yr requirement
         job_senior = "senior" in title_lower or "staff" in title_lower or "principal" in title_lower
         job_lead = "lead" in title_lower or "manager" in title_lower
         job_junior = "junior" in title_lower or "intern" in title_lower or "entry" in title_lower
-        if user_experience_years >= 5:
-            seniority_fit = 9.0 if job_senior else 7.0 if job_lead else 5.0 if not job_junior else 3.0
-        elif user_experience_years >= 2:
-            seniority_fit = 7.0 if not job_senior and not job_junior else 5.0
+        # Extract years requirement from description
+        import re as _re
+        yr_match = _re.search(r'(\d+)\+?\s*(?:years|yrs|yr)', desc_lower)
+        required_years = int(yr_match.group(1)) if yr_match else 0
+
+        if required_years <= user_experience_years * 2:
+            # Within 2x range - good fit
+            if required_years <= user_experience_years:
+                seniority_fit = 9.0  # Perfect match
+            else:
+                seniority_fit = 7.0  # Stretch but doable
         else:
-            seniority_fit = 8.0 if job_junior else 6.0 if not job_senior else 3.0
+            seniority_fit = 5.0  # Beyond 2x but still show it
+
+        # Boost for matching level keywords
+        if user_experience_years >= 5 and job_senior:
+            seniority_fit = min(10, seniority_fit + 1)
+        elif user_experience_years < 2 and job_junior:
+            seniority_fit = min(10, seniority_fit + 1)
 
         # 4. Compensation
         compensation = 7.0 if job.salary_min and job.salary_min > 50000 else 5.5 if job.salary_min else 5.0
