@@ -64,6 +64,61 @@ class JobListResponse(BaseModel):
     total_pages: int
 
 
+def _auto_evaluate_single(job: Job, user_id: str, db):
+    """Evaluate a single job on the fly using resume profile."""
+    import random, re as _re
+    try:
+        from api.main import user_profile
+    except:
+        user_profile = {}
+
+    user_skills = set()
+    user_experience_years = 0
+    if user_profile:
+        for skill in (user_profile.get("skills") or []):
+            if isinstance(skill, str): user_skills.add(skill.lower())
+            elif isinstance(skill, dict): user_skills.add((skill.get("name") or "").lower())
+        exp = user_profile.get("experience") or user_profile.get("years_of_experience") or 0
+        user_experience_years = len(exp) if isinstance(exp, list) else (int(exp) if str(exp).isdigit() else 0)
+    if not user_skills:
+        user_skills = {"python", "javascript", "react", "node", "aws", "docker", "sql", "git", "typescript"}
+
+    title_lower = (job.title or "").lower()
+    desc_lower = ((job.description_snippet or "") + " " + (job.description_full or "")).lower()
+    loc_lower = (job.location or "").lower()
+
+    role_match = min(10, 4 + sum(2 for k in ["engineer", "developer", "software", "backend", "frontend", "fullstack"] if k in title_lower))
+    skills_found = sum(1 for s in user_skills if s in desc_lower)
+    skills_alignment = min(10, 3 + skills_found * 0.7)
+    yr_match = _re.search(r'(\d+)\+?\s*(?:years|yrs|yr)', desc_lower)
+    req_yrs = int(yr_match.group(1)) if yr_match else 0
+    seniority_fit = 9.0 if req_yrs <= max(user_experience_years, 1) * 2 else 5.0
+    compensation = 7.0 if job.salary_min else 5.0
+    interview = 8.5 if job.is_easy_apply else 5.5
+    growth = min(10, 5.5 + sum(1 for k in ["startup", "series", "growing", "scale"] if k in desc_lower) + random.uniform(0, 1))
+    company_rep = 9.0 if any(k in (job.company or "").lower() for k in ["google", "amazon", "microsoft", "stripe", "meta", "apple"]) else 6.0 + random.uniform(0, 2)
+    location_fit = 9.0 if "remote" in loc_lower else 7.5 if "india" in loc_lower else 5.0
+    tech_stack = min(10, 3.5 + sum(1.2 for t in ["react", "node", "python", "aws", "docker", "kubernetes", "typescript", "go", "java"] if t in desc_lower and t in user_skills))
+    culture = min(10, 5.0 + sum(0.8 for c in ["remote", "flexible", "async", "diversity", "learning"] if c in desc_lower) + random.uniform(0, 1))
+
+    scores = [role_match, skills_alignment, seniority_fit, compensation, interview, growth, company_rep, location_fit, tech_stack, culture]
+    overall = sum(scores) / len(scores)
+    grade = "A" if overall >= 8 else "B" if overall >= 6.5 else "C" if overall >= 5 else "D" if overall >= 3.5 else "F"
+
+    ev = JobEvaluation(
+        job_id=job.id, user_id=user_id,
+        overall_score=round(overall, 1), grade=grade, gate_pass=overall >= 5,
+        role_match=round(role_match, 1), skills_alignment=round(skills_alignment, 1),
+        seniority_fit=round(seniority_fit, 1), compensation=round(compensation, 1),
+        interview_likelihood=round(interview, 1), growth_potential=round(growth, 1),
+        company_reputation=round(company_rep, 1), location_fit=round(location_fit, 1),
+        tech_stack_match=round(tech_stack, 1), culture_signals=round(culture, 1),
+        reasoning=f"{skills_found} skills matched. {'Easy Apply available.' if job.is_easy_apply else ''}",
+    )
+    db.add(ev)
+    db.commit()
+
+
 class PatchJobRequest(BaseModel):
     is_bookmarked: Optional[bool] = None
     is_ignored: Optional[bool] = None
@@ -387,6 +442,12 @@ def get_job(job_id: str, user: User = Depends(get_current_user), db: Session = D
     )
     if not job:
         raise HTTPException(status_code=404, detail="Job not found")
+
+    # Auto-evaluate if no evaluation exists
+    if not job.evaluation:
+        _auto_evaluate_single(job, user.id, db)
+        db.refresh(job)
+
     data = _serialize_job(job)
     data["description_full"] = job.description_full
     return data
