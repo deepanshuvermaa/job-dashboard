@@ -20,8 +20,16 @@ import httpx
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     try:
-        from core.database import init_db
+        from core.database import init_db, engine
         init_db()
+        # Add missing columns if they don't exist
+        from sqlalchemy import text
+        with engine.connect() as conn:
+            try:
+                conn.execute(text("ALTER TABLE user_profiles ADD COLUMN IF NOT EXISTS resume_data JSONB"))
+                conn.commit()
+            except:
+                pass
         print("[DB] Tables ready")
     except Exception as e:
         print(f"[DB] WARNING: init_db failed: {e}")
