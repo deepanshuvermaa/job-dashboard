@@ -669,7 +669,7 @@ def tailor_resume(request: dict):
     if not job:
         raise HTTPException(status_code=404, detail="Job not found")
 
-    # Get user profile - access the LIVE global from main module
+    # Get user profile - access live global OR load from DB (skills column stores full profile)
     user_profile = None
     try:
         import api.main as _main
@@ -678,14 +678,15 @@ def tailor_resume(request: dict):
     except:
         pass
     if not user_profile:
-        from models.user import User, UserProfile
+        from models.user import UserProfile
         db2 = SessionLocal()
         try:
-            p = db2.query(UserProfile).filter(UserProfile.resume_data != None).first()
-            if p and p.resume_data:
-                user_profile = p.resume_data
-        except Exception as e:
-            print(f"[tailor] DB error: {e}")
+            p = db2.query(UserProfile).first()
+            if p and p.skills:
+                # skills column stores the full resume profile as JSON
+                user_profile = p.skills if isinstance(p.skills, dict) else None
+        except:
+            pass
         finally:
             db2.close()
     if not user_profile:
@@ -768,12 +769,12 @@ def generate_cover_letter(request: dict):
     except:
         pass
     if not user_profile:
-        from models.user import User, UserProfile
+        from models.user import UserProfile
         db2 = SessionLocal()
         try:
-            p = db2.query(UserProfile).filter(UserProfile.resume_data != None).first()
-            if p and p.resume_data:
-                user_profile = p.resume_data
+            p = db2.query(UserProfile).first()
+            if p and p.skills:
+                user_profile = p.skills if isinstance(p.skills, dict) else None
         except:
             pass
         finally:
