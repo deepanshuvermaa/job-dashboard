@@ -658,7 +658,6 @@ def tailor_resume(request: dict):
     from openai import OpenAI
     from core.database import SessionLocal
     from models.job import Job
-    from pathlib import Path
 
     job_id = request.get("job_id")
     if not job_id:
@@ -670,18 +669,20 @@ def tailor_resume(request: dict):
     if not job:
         raise HTTPException(status_code=404, detail="Job not found")
 
-    # Get user profile - try global first, then file
+    # Get user profile - try global first, then DB
     try:
         from api.main import user_profile
     except:
         user_profile = {}
     if not user_profile:
-        # Try loading from saved profile file
-        profile_path = Path(__file__).parent.parent.parent / "backend" / "data" / "user_profile.json"
-        if not profile_path.exists():
-            profile_path = Path(__file__).parent.parent / "data" / "user_profile.json"
-        if profile_path.exists():
-            user_profile = _json.loads(profile_path.read_text())
+        from models.user import User, UserProfile
+        db2 = SessionLocal()
+        u = db2.query(User).first()
+        if u:
+            p = db2.query(UserProfile).filter(UserProfile.user_id == u.id).first()
+            if p and p.resume_data:
+                user_profile = p.resume_data
+        db2.close()
     if not user_profile:
         raise HTTPException(status_code=400, detail="Upload your resume first in Profile section")
 
@@ -743,7 +744,6 @@ def generate_cover_letter(request: dict):
     from openai import OpenAI
     from core.database import SessionLocal
     from models.job import Job
-    from pathlib import Path
 
     job_id = request.get("job_id")
     if not job_id:
@@ -760,9 +760,14 @@ def generate_cover_letter(request: dict):
     except:
         user_profile = {}
     if not user_profile:
-        profile_path = Path(__file__).parent.parent / "data" / "user_profile.json"
-        if profile_path.exists():
-            user_profile = _json.loads(profile_path.read_text())
+        from models.user import User, UserProfile
+        db2 = SessionLocal()
+        u = db2.query(User).first()
+        if u:
+            p = db2.query(UserProfile).filter(UserProfile.user_id == u.id).first()
+            if p and p.resume_data:
+                user_profile = p.resume_data
+        db2.close()
     if not user_profile:
         raise HTTPException(status_code=400, detail="Upload your resume first")
 

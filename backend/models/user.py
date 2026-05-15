@@ -40,5 +40,6 @@ class UserProfile(Base, TimestampMixin):
     preferred_work_mode = Column(String(20))  # remote, hybrid, onsite
     preferred_locations = Column(JSON, default=list)
     resume_base_path = Column(String(512))
+    resume_data = Column(JSON)  # Full parsed resume JSON from AI
 
     user = relationship("User", back_populates="profile")

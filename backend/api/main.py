@@ -1044,11 +1044,28 @@ async def upload_resume(file: UploadFile = File(...)):
         if result.get('success'):
             user_profile = result['data']
 
-            # Persist to file so it survives redeploys
-            import json as _json
-            profile_path = Path(__file__).parent.parent / "data" / "user_profile.json"
-            profile_path.parent.mkdir(exist_ok=True)
-            profile_path.write_text(_json.dumps(user_profile, default=str))
+            # Persist to database so it survives redeploys
+            try:
+                from core.database import SessionLocal
+                from models.user import User, UserProfile
+                db_session = SessionLocal()
+                # Find scraper user or first user
+                user = db_session.query(User).first()
+                if user:
+                    profile = db_session.query(UserProfile).filter(UserProfile.user_id == user.id).first()
+                    if not profile:
+                        profile = UserProfile(user_id=user.id)
+                        db_session.add(profile)
+                    profile.resume_data = user_profile
+                    profile.headline = user_profile.get("name", "")
+                    profile.summary = user_profile.get("summary", "")
+                    profile.skills = user_profile.get("skills", [])
+                    profile.experience = user_profile.get("experience", [])
+                    profile.education = user_profile.get("education", [])
+                    db_session.commit()
+                db_session.close()
+            except Exception as db_err:
+                print(f"[WARN] Failed to persist profile to DB: {db_err}")
 
             return {
                 "success": True,
@@ -1074,11 +1091,19 @@ async def get_user_profile():
     global user_profile
 
     if not user_profile:
-        # Try loading from persisted file
-        import json as _json
-        profile_path = Path(__file__).parent.parent / "data" / "user_profile.json"
-        if profile_path.exists():
-            user_profile = _json.loads(profile_path.read_text())
+        # Load from database
+        try:
+            from core.database import SessionLocal
+            from models.user import User, UserProfile
+            db_session = SessionLocal()
+            user = db_session.query(User).first()
+            if user:
+                profile = db_session.query(UserProfile).filter(UserProfile.user_id == user.id).first()
+                if profile and profile.resume_data:
+                    user_profile = profile.resume_data
+            db_session.close()
+        except Exception as e:
+            print(f"[WARN] Failed to load profile from DB: {e}")
 
     if not user_profile:
         return {
