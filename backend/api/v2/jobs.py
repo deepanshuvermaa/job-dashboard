@@ -422,50 +422,128 @@ def mark_job_applied(job_id: str, user: User = Depends(get_current_user), db: Se
 
 @router.post("/evaluate-all")
 def evaluate_all_jobs(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """Evaluate all unevaluated jobs using heuristic scoring (no AI key needed)."""
+    """Evaluate all unevaluated jobs against user's resume profile."""
     import random
+    # Get user profile from the global state in main.py
+    try:
+        from api.main import user_profile
+    except:
+        user_profile = {}
+
+    # Extract user skills/experience from profile
+    user_skills = set()
+    user_title = ""
+    user_experience_years = 0
+    user_location_pref = ""
+
+    if user_profile:
+        for skill in (user_profile.get("skills") or []):
+            if isinstance(skill, str):
+                user_skills.add(skill.lower())
+            elif isinstance(skill, dict):
+                user_skills.add((skill.get("name") or "").lower())
+        user_title = (user_profile.get("title") or user_profile.get("headline") or "").lower()
+        user_location_pref = (user_profile.get("location") or "").lower()
+        exp = user_profile.get("experience") or user_profile.get("years_of_experience") or 0
+        if isinstance(exp, list):
+            user_experience_years = len(exp)
+        else:
+            user_experience_years = int(exp) if str(exp).isdigit() else 0
+
+    # Fallback skills if no profile
+    if not user_skills:
+        user_skills = {"python", "javascript", "react", "node", "aws", "docker", "sql", "git", "typescript", "java"}
+
     owner_id = _shared_owner_id(db, user.id)
     jobs = (
         db.query(Job)
         .outerjoin(JobEvaluation)
         .filter(Job.user_id == owner_id, Job.status == "active", JobEvaluation.id == None)
-        .limit(50)
+        .limit(100)
         .all()
     )
     count = 0
     for job in jobs:
-        # Heuristic scoring based on job data
         title_lower = (job.title or "").lower()
-        desc_lower = (job.description_snippet or "").lower() + " " + (job.description_full or "").lower()
+        desc_lower = ((job.description_snippet or "") + " " + (job.description_full or "")).lower()
         loc_lower = (job.location or "").lower()
+        company_lower = (job.company or "").lower()
 
-        role_match = 7.0 if any(k in title_lower for k in ["engineer", "developer", "architect"]) else 5.0
-        skills = 6.0 + min(3.0, sum(0.5 for k in ["python", "react", "aws", "docker", "java", "typescript", "node"] if k in desc_lower))
-        seniority = 8.0 if "senior" in title_lower else 6.0 if "lead" in title_lower else 5.0
-        compensation = 7.0 if job.salary_min else 5.0
-        interview = 8.0 if job.is_easy_apply else 5.5
-        growth = 6.5 + random.uniform(0, 2)
-        company_rep = 7.0 if any(k in (job.company or "").lower() for k in ["google", "amazon", "microsoft", "stripe", "meta"]) else 5.5 + random.uniform(0, 2)
-        location_fit = 8.0 if "remote" in loc_lower else 7.0 if "india" in loc_lower else 5.0
-        tech_stack = skills  # reuse
-        culture = 5.5 + random.uniform(0, 2.5)
+        # 1. Role Match - how well does job title match user's title/keywords
+        role_keywords = set(user_title.split()) if user_title else {"engineer", "developer", "software"}
+        role_overlap = sum(1 for k in role_keywords if k in title_lower and len(k) > 3)
+        role_match = min(10, 4 + role_overlap * 2)
 
-        scores = [role_match, skills, seniority, compensation, interview, growth, company_rep, location_fit, tech_stack, culture]
+        # 2. Skills Alignment - how many user skills appear in job description
+        skills_found = sum(1 for s in user_skills if s in desc_lower)
+        skills_alignment = min(10, 3 + skills_found * 0.7)
+
+        # 3. Seniority Fit
+        job_senior = "senior" in title_lower or "staff" in title_lower or "principal" in title_lower
+        job_lead = "lead" in title_lower or "manager" in title_lower
+        job_junior = "junior" in title_lower or "intern" in title_lower or "entry" in title_lower
+        if user_experience_years >= 5:
+            seniority_fit = 9.0 if job_senior else 7.0 if job_lead else 5.0 if not job_junior else 3.0
+        elif user_experience_years >= 2:
+            seniority_fit = 7.0 if not job_senior and not job_junior else 5.0
+        else:
+            seniority_fit = 8.0 if job_junior else 6.0 if not job_senior else 3.0
+
+        # 4. Compensation
+        compensation = 7.0 if job.salary_min and job.salary_min > 50000 else 5.5 if job.salary_min else 5.0
+
+        # 5. Interview Likelihood
+        interview = 8.5 if job.is_easy_apply else 5.5
+        if skills_found >= 5: interview = min(10, interview + 1)
+
+        # 6. Growth Potential
+        growth_signals = sum(1 for k in ["startup", "series", "growing", "scale", "greenfield", "new team"] if k in desc_lower)
+        growth = min(10, 5.5 + growth_signals * 1.0 + random.uniform(0, 1))
+
+        # 7. Company Reputation
+        top_companies = ["google", "amazon", "microsoft", "stripe", "meta", "apple", "netflix", "uber", "airbnb", "spotify", "datadog", "cloudflare", "mongodb"]
+        company_rep = 9.0 if any(k in company_lower for k in top_companies) else 6.0 + random.uniform(0, 2)
+
+        # 8. Location Fit
+        if "remote" in loc_lower:
+            location_fit = 9.0
+        elif user_location_pref and user_location_pref in loc_lower:
+            location_fit = 8.5
+        elif "india" in loc_lower:
+            location_fit = 7.5
+        else:
+            location_fit = 4.5
+
+        # 9. Tech Stack Match (deeper than skills - checks specific frameworks)
+        tech_keywords = ["react", "node", "python", "django", "flask", "fastapi", "aws", "gcp", "azure", "docker", "kubernetes", "terraform", "postgresql", "mongodb", "redis", "kafka", "graphql", "typescript", "rust", "go", "java", "spring"]
+        tech_found = sum(1 for t in tech_keywords if t in desc_lower and t in user_skills)
+        tech_stack = min(10, 3.5 + tech_found * 1.2)
+
+        # 10. Culture Signals
+        culture_keywords = ["remote", "flexible", "async", "work-life", "diversity", "inclusive", "learning", "growth", "mentorship"]
+        culture_found = sum(1 for c in culture_keywords if c in desc_lower)
+        culture = min(10, 5.0 + culture_found * 0.8 + random.uniform(0, 1))
+
+        scores = [role_match, skills_alignment, seniority_fit, compensation, interview, growth, company_rep, location_fit, tech_stack, culture]
         overall = sum(scores) / len(scores)
         grade = "A" if overall >= 8 else "B" if overall >= 6.5 else "C" if overall >= 5 else "D" if overall >= 3.5 else "F"
+
+        # Build reasoning
+        top_matches = sorted(zip(["Role","Skills","Seniority","Pay","Interview","Growth","Company","Location","Tech","Culture"], scores), key=lambda x: -x[1])[:3]
+        reasoning = f"Based on your resume: {skills_found} skill matches found. Top strengths: {', '.join(f'{n}({v:.0f})' for n,v in top_matches)}."
 
         ev = JobEvaluation(
             job_id=job.id, user_id=user.id,
             overall_score=round(overall, 1), grade=grade, gate_pass=overall >= 5,
-            role_match=round(role_match, 1), skills_alignment=round(skills, 1),
-            seniority_fit=round(seniority, 1), compensation=round(compensation, 1),
+            role_match=round(role_match, 1), skills_alignment=round(skills_alignment, 1),
+            seniority_fit=round(seniority_fit, 1), compensation=round(compensation, 1),
             interview_likelihood=round(interview, 1), growth_potential=round(growth, 1),
             company_reputation=round(company_rep, 1), location_fit=round(location_fit, 1),
             tech_stack_match=round(tech_stack, 1), culture_signals=round(culture, 1),
-            reasoning=f"Heuristic evaluation based on job attributes. Title match, skills in description, location preference.",
+            reasoning=reasoning,
         )
         db.add(ev)
         count += 1
 
     db.commit()
-    return {"evaluated": count, "message": f"Evaluated {count} jobs"}
+    return {"evaluated": count, "message": f"Evaluated {count} jobs against your resume ({len(user_skills)} skills matched)"}
