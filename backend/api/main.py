@@ -1763,6 +1763,165 @@ async def download_resume(filename: str):
 
     return FileResponse(file_path, media_type=media_type, filename=safe_filename)
 
+
+@app.post("/api/resume/tailor")
+async def tailor_resume(request: dict):
+    """Tailor user's resume to match a specific job description"""
+    from openai import OpenAI
+    import json as _json
+
+    job_id = request.get("job_id")
+    if not job_id:
+        raise HTTPException(status_code=400, detail="job_id required")
+
+    # Get job from DB
+    from core.database import get_db_session
+    from models.job import Job
+    db_session = next(get_db_session())
+    job = db_session.query(Job).filter(Job.id == job_id).first()
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+
+    # Get user profile
+    if not user_profile:
+        raise HTTPException(status_code=400, detail="Upload your resume first")
+
+    # Setup AI client
+    groq_key = os.getenv('GROQ_API_KEY')
+    deepseek_key = os.getenv('DEEPSEEK_API_KEY')
+    openai_key = os.getenv('OPENAI_API_KEY')
+
+    if groq_key:
+        client = OpenAI(api_key=groq_key, base_url="https://api.groq.com/openai/v1")
+        model = "llama-3.3-70b-versatile"
+    elif deepseek_key:
+        client = OpenAI(api_key=deepseek_key, base_url="https://api.deepseek.com")
+        model = "deepseek-chat"
+    elif openai_key:
+        client = OpenAI(api_key=openai_key)
+        model = "gpt-4o-mini"
+    else:
+        raise HTTPException(status_code=500, detail="No AI API key configured")
+
+    jd = job.description_full or job.description_snippet or ""
+    profile_json = _json.dumps(user_profile, default=str)[:3000]
+
+    prompt = f"""You are an expert resume tailor. Given the user's resume data and a job description, rewrite the resume content to better match the JD.
+
+RULES:
+- Keep EXACT same sections, structure, and approximate word count
+- Do NOT invent experience or skills the user doesn't have
+- Reword bullet points to use JD keywords where the user has relevant experience
+- Prioritize matching skills and achievements
+- Keep it truthful - only rephrase, don't fabricate
+
+USER RESUME:
+{profile_json}
+
+JOB TITLE: {job.title}
+COMPANY: {job.company}
+JOB DESCRIPTION:
+{jd[:2000]}
+
+Return JSON with:
+- "summary": tailored summary (2-3 lines)
+- "experience": array of {{"company","title","bullets":["..."]}}
+- "skills_highlighted": array of skills from user that match JD
+- "keywords_added": array of JD keywords incorporated
+- "keywords_missing": array of JD keywords user lacks
+- "ats_score": number 0-100 estimated ATS match percentage
+"""
+
+    try:
+        response = client.chat.completions.create(
+            model=model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3,
+            max_tokens=3000,
+        )
+        raw = response.choices[0].message.content or ""
+        raw = raw.strip()
+        if raw.startswith("```"): raw = raw.split("\n", 1)[1] if "\n" in raw else raw[3:]
+        if raw.endswith("```"): raw = raw[:-3]
+        if raw.startswith("json"): raw = raw[4:]
+        result = _json.loads(raw.strip())
+        result["job_title"] = job.title
+        result["company"] = job.company
+        result["original_profile"] = user_profile
+        return {"success": True, **result}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"AI tailoring failed: {str(e)}")
+
+
+@app.post("/api/resume/cover-letter")
+async def generate_cover_letter(request: dict):
+    """Generate a cover letter for a specific job"""
+    from openai import OpenAI
+    import json as _json
+
+    job_id = request.get("job_id")
+    if not job_id:
+        raise HTTPException(status_code=400, detail="job_id required")
+
+    from core.database import get_db_session
+    from models.job import Job
+    db_session = next(get_db_session())
+    job = db_session.query(Job).filter(Job.id == job_id).first()
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+
+    if not user_profile:
+        raise HTTPException(status_code=400, detail="Upload your resume first")
+
+    groq_key = os.getenv('GROQ_API_KEY')
+    deepseek_key = os.getenv('DEEPSEEK_API_KEY')
+    openai_key = os.getenv('OPENAI_API_KEY')
+
+    if groq_key:
+        client = OpenAI(api_key=groq_key, base_url="https://api.groq.com/openai/v1")
+        model = "llama-3.3-70b-versatile"
+    elif deepseek_key:
+        client = OpenAI(api_key=deepseek_key, base_url="https://api.deepseek.com")
+        model = "deepseek-chat"
+    elif openai_key:
+        client = OpenAI(api_key=openai_key)
+        model = "gpt-4o-mini"
+    else:
+        raise HTTPException(status_code=500, detail="No AI API key configured")
+
+    name = user_profile.get("name", "Candidate")
+    skills = user_profile.get("skills", [])
+    if isinstance(skills, dict):
+        skills = [s for v in skills.values() if isinstance(v, list) for s in v]
+
+    prompt = f"""Write a concise, professional cover letter (200-250 words) for:
+
+Candidate: {name}
+Key Skills: {', '.join(skills[:15]) if skills else 'Software Engineering'}
+Applying for: {job.title} at {job.company}
+Job Description: {(job.description_full or job.description_snippet or '')[:1500]}
+
+Rules:
+- Professional but not generic
+- Reference specific skills that match the JD
+- Show enthusiasm for the company/role
+- Keep it concise (3-4 paragraphs)
+- Don't use clichés like "I am writing to express my interest"
+"""
+
+    try:
+        response = client.chat.completions.create(
+            model=model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.5,
+            max_tokens=1000,
+        )
+        letter = response.choices[0].message.content or ""
+        return {"success": True, "cover_letter": letter.strip(), "job_title": job.title, "company": job.company}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Cover letter generation failed: {str(e)}")
+
+
 @app.get("/api/resume/archetypes")
 async def get_archetypes():
     """List available resume archetypes"""

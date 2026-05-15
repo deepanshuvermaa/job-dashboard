@@ -32,6 +32,9 @@ def get_db():
     finally:
         db.close()
 
+# Alias for use outside FastAPI dependency injection
+get_db_session = get_db
+
 
 def init_db():
     if not engine:

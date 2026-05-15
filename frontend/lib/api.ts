@@ -164,4 +164,10 @@ export const api = {
 
   // ── Evaluate ──
   evaluateAll: () => request("/api/jobs/evaluate-all", { method: "POST" }),
+
+  // ── Tailor Resume ──
+  tailorResume: (jobId: string) =>
+    request("/api/resume/tailor", { method: "POST", body: JSON.stringify({ job_id: jobId }) }),
+  generateCoverLetter: (jobId: string) =>
+    request("/api/resume/cover-letter", { method: "POST", body: JSON.stringify({ job_id: jobId }) }),
 };

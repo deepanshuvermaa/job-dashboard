@@ -1,6 +1,7 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import GradeBadge from "./GradeBadge";
+import TailorResumeModal from "./TailorResumeModal";
 
 interface Props { job: any | null; onClose: () => void; onBookmark: (id: string, val: boolean) => void; }
 
@@ -32,6 +33,8 @@ function RadarChart({ ev }: { ev: any }) {
 }
 
 export default function JobDetailDrawer({ job, onClose, onBookmark }: Props) {
+  const [showTailor, setShowTailor] = useState(false);
+
   useEffect(() => {
     const fn = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     document.addEventListener("keydown", fn);
@@ -73,6 +76,7 @@ export default function JobDetailDrawer({ job, onClose, onBookmark }: Props) {
           {/* Actions */}
           <div className="flex gap-3">
             <a href={job.job_url} target="_blank" rel="noopener noreferrer" className="btn-primary flex-1 text-center">Apply Now</a>
+            <button onClick={() => setShowTailor(true)} className="btn-secondary flex-1">Tailor Resume</button>
             <button onClick={() => onBookmark(job.id, !job.is_bookmarked)} className="btn-secondary">{job.is_bookmarked ? "Saved" : "Save"}</button>
           </div>
 
@@ -146,6 +150,7 @@ export default function JobDetailDrawer({ job, onClose, onBookmark }: Props) {
           </div>
         </div>
       </div>
+      {showTailor && <TailorResumeModal job={job} onClose={() => setShowTailor(false)} />}
     </>
   );
 }
