@@ -150,11 +150,18 @@ export default function ProfilePage() {
             {profile.experience.map((exp: any, i: number) => (
               <div key={i} className="border-l-2 border-obsidian/20 pl-4">
                 <h3 className="text-body-medium text-obsidian">{exp.title || exp.role}</h3>
-                <p className="text-caption text-gravel">{exp.company} · {exp.duration || `${exp.start_date || ""} - ${exp.end_date || "Present"}`}</p>
+                <p className="text-caption text-gravel">{exp.company} · {exp.duration || exp.duration_display || `${exp.start_date || ""} - ${exp.end_date || "Present"}`}</p>
                 {exp.responsibilities && (
                   <ul className="mt-2 space-y-1">
                     {(Array.isArray(exp.responsibilities) ? exp.responsibilities : [exp.responsibilities]).map((r: string, j: number) => (
                       <li key={j} className="text-caption text-cinder">- {r}</li>
+                    ))}
+                  </ul>
+                )}
+                {exp.achievements && (
+                  <ul className="mt-1 space-y-1">
+                    {(Array.isArray(exp.achievements) ? exp.achievements : []).map((a: string, j: number) => (
+                      <li key={j} className="text-caption text-green-700">★ {a}</li>
                     ))}
                   </ul>
                 )}
@@ -168,6 +175,62 @@ export default function ProfilePage() {
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {/* Projects */}
+      {profile.projects?.length > 0 && (
+        <div className="card mb-6">
+          <h2 className="text-body-medium text-obsidian mb-3">Projects</h2>
+          <div className="space-y-4">
+            {profile.projects.map((proj: any, i: number) => (
+              <div key={i} className="border-l-2 border-green-300 pl-4">
+                <div className="flex items-center gap-2">
+                  <h3 className="text-body-medium text-obsidian">{proj.name}</h3>
+                  {proj.link && <a href={proj.link} target="_blank" rel="noopener" className="text-[11px] text-blue-600 hover:underline">↗ Link</a>}
+                </div>
+                <p className="text-caption text-cinder mt-1">{proj.description}</p>
+                {proj.outcomes && (
+                  <ul className="mt-1 space-y-0.5">
+                    {(Array.isArray(proj.outcomes) ? proj.outcomes : []).map((o: string, j: number) => (
+                      <li key={j} className="text-caption text-green-700">→ {o}</li>
+                    ))}
+                  </ul>
+                )}
+                {proj.technologies && (
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {(Array.isArray(proj.technologies) ? proj.technologies : []).map((t: string) => (
+                      <span key={t} className="px-1.5 py-0.5 bg-green-50 text-green-700 rounded-xs text-[10px]">{t}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Certifications */}
+      {profile.certifications?.length > 0 && (
+        <div className="card mb-6">
+          <h2 className="text-body-medium text-obsidian mb-3">Certifications</h2>
+          {profile.certifications.map((cert: any, i: number) => (
+            <div key={i} className="mb-2">
+              <p className="text-caption text-obsidian">{typeof cert === 'string' ? cert : `${cert.name}${cert.issuer ? ` · ${cert.issuer}` : ''}${cert.date ? ` (${cert.date})` : ''}`}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Achievements */}
+      {profile.achievements?.length > 0 && (
+        <div className="card mb-6">
+          <h2 className="text-body-medium text-obsidian mb-3">Achievements</h2>
+          <ul className="space-y-1">
+            {profile.achievements.map((a: string, i: number) => (
+              <li key={i} className="text-caption text-cinder">★ {a}</li>
+            ))}
+          </ul>
         </div>
       )}
 
