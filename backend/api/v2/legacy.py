@@ -669,7 +669,7 @@ def tailor_resume(request: dict):
     if not job:
         raise HTTPException(status_code=404, detail="Job not found")
 
-    # Get user profile - live global first, then DB
+    # Get user profile - live global first, then DB with raw SQL
     user_profile = None
     try:
         import api.main as _main
@@ -678,16 +678,12 @@ def tailor_resume(request: dict):
     except:
         pass
     if not user_profile:
-        from models.user import UserProfile
-        db2 = SessionLocal()
-        try:
-            p = db2.query(UserProfile).filter(UserProfile.resume_data != None).first()
-            if p:
-                user_profile = p.resume_data
-        except:
-            pass
-        finally:
-            db2.close()
+        from core.database import engine
+        from sqlalchemy import text
+        with engine.connect() as conn:
+            row = conn.execute(text("SELECT resume_data FROM user_profiles WHERE resume_data IS NOT NULL LIMIT 1")).fetchone()
+            if row and row[0]:
+                user_profile = row[0] if isinstance(row[0], dict) else _json.loads(row[0])
     if not user_profile:
         raise HTTPException(status_code=400, detail="Upload your resume first in Profile section")
 
@@ -768,16 +764,12 @@ def generate_cover_letter(request: dict):
     except:
         pass
     if not user_profile:
-        from models.user import UserProfile
-        db2 = SessionLocal()
-        try:
-            p = db2.query(UserProfile).filter(UserProfile.resume_data != None).first()
-            if p:
-                user_profile = p.resume_data
-        except:
-            pass
-        finally:
-            db2.close()
+        from core.database import engine
+        from sqlalchemy import text
+        with engine.connect() as conn:
+            row = conn.execute(text("SELECT resume_data FROM user_profiles WHERE resume_data IS NOT NULL LIMIT 1")).fetchone()
+            if row and row[0]:
+                user_profile = row[0] if isinstance(row[0], dict) else _json.loads(row[0])
     if not user_profile:
         raise HTTPException(status_code=400, detail="Upload your resume first")
 

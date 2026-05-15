@@ -1044,27 +1044,32 @@ async def upload_resume(file: UploadFile = File(...)):
         if result.get('success'):
             user_profile = result['data']
 
-            # Persist to database so it survives redeploys
+            # Persist to database with raw SQL (guaranteed to work)
             try:
-                from core.database import SessionLocal
-                from models.user import User, UserProfile
-                db_session = SessionLocal()
-                user = db_session.query(User).first()
-                if user:
-                    profile = db_session.query(UserProfile).filter(UserProfile.user_id == user.id).first()
-                    if not profile:
-                        profile = UserProfile(user_id=user.id)
-                        db_session.add(profile)
-                    profile.resume_data = user_profile
-                    profile.headline = user_profile.get("name", "")
-                    profile.summary = (user_profile.get("summary") or "")[:500]
-                    db_session.commit()
-                    print(f"[Resume] Profile saved to DB for user {user.email}")
-                else:
-                    print("[Resume] WARNING: No user found in DB")
-                db_session.close()
+                from core.database import engine
+                from sqlalchemy import text
+                import json as _json
+                profile_json = _json.dumps(user_profile, default=str)
+                with engine.connect() as conn:
+                    # Get first user
+                    user_row = conn.execute(text("SELECT id FROM users LIMIT 1")).fetchone()
+                    if user_row:
+                        uid = user_row[0]
+                        # Upsert: update if exists, insert if not
+                        existing = conn.execute(text("SELECT id FROM user_profiles WHERE user_id = :uid"), {"uid": uid}).fetchone()
+                        if existing:
+                            conn.execute(text("UPDATE user_profiles SET resume_data = :data, headline = :name WHERE user_id = :uid"),
+                                         {"data": profile_json, "name": user_profile.get("name", ""), "uid": uid})
+                        else:
+                            import uuid
+                            conn.execute(text("INSERT INTO user_profiles (id, user_id, resume_data, headline) VALUES (:id, :uid, :data, :name)"),
+                                         {"id": str(uuid.uuid4()), "uid": uid, "data": profile_json, "name": user_profile.get("name", "")})
+                        conn.commit()
+                        print(f"[Resume] Saved to DB successfully")
+                    else:
+                        print("[Resume] No user in DB")
             except Exception as db_err:
-                print(f"[Resume] FAILED to save: {db_err}")
+                print(f"[Resume] DB save error: {db_err}")
 
             return {
                 "success": True,
@@ -1092,15 +1097,13 @@ async def get_user_profile():
     if not user_profile:
         # Load from database
         try:
-            from core.database import SessionLocal
-            from models.user import User, UserProfile
-            db_session = SessionLocal()
-            user = db_session.query(User).first()
-            if user:
-                profile = db_session.query(UserProfile).filter(UserProfile.user_id == user.id).first()
-                if profile and profile.resume_data:
-                    user_profile = profile.resume_data
-            db_session.close()
+            from core.database import engine
+            from sqlalchemy import text
+            import json as _json
+            with engine.connect() as conn:
+                row = conn.execute(text("SELECT resume_data FROM user_profiles WHERE resume_data IS NOT NULL LIMIT 1")).fetchone()
+                if row and row[0]:
+                    user_profile = row[0] if isinstance(row[0], dict) else _json.loads(row[0])
         except Exception as e:
             print(f"[Profile] Failed to load from DB: {e}")
 
