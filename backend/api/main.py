@@ -1055,19 +1055,16 @@ async def upload_resume(file: UploadFile = File(...)):
                     if not profile:
                         profile = UserProfile(user_id=user.id)
                         db_session.add(profile)
-                    # Store FULL parsed resume in skills column (JSON, already exists)
-                    profile.skills = user_profile
+                    profile.resume_data = user_profile
                     profile.headline = user_profile.get("name", "")
                     profile.summary = (user_profile.get("summary") or "")[:500]
                     db_session.commit()
                     print(f"[Resume] Profile saved to DB for user {user.email}")
                 else:
-                    print("[Resume] WARNING: No user found in DB to save profile")
+                    print("[Resume] WARNING: No user found in DB")
                 db_session.close()
             except Exception as db_err:
-                print(f"[Resume] FAILED to persist profile to DB: {db_err}")
-                import traceback
-                traceback.print_exc()
+                print(f"[Resume] FAILED to save: {db_err}")
 
             return {
                 "success": True,
@@ -1101,11 +1098,11 @@ async def get_user_profile():
             user = db_session.query(User).first()
             if user:
                 profile = db_session.query(UserProfile).filter(UserProfile.user_id == user.id).first()
-                if profile and profile.skills and isinstance(profile.skills, dict):
-                    user_profile = profile.skills
+                if profile and profile.resume_data:
+                    user_profile = profile.resume_data
             db_session.close()
         except Exception as e:
-            print(f"[WARN] Failed to load profile from DB: {e}")
+            print(f"[Profile] Failed to load from DB: {e}")
 
     if not user_profile:
         return {
