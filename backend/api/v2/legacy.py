@@ -710,6 +710,7 @@ RULES:
 - Do NOT invent experience the user doesn't have
 - Reword bullet points to use JD keywords where relevant
 - Keep it truthful
+- Include BOTH work experience AND projects
 
 USER RESUME:
 {profile_json}
@@ -718,7 +719,7 @@ JOB: {job.title} at {job.company}
 JD: {jd[:2000]}
 
 Return JSON:
-{{"summary":"tailored summary","experience":[{{"company":"...","title":"...","bullets":["..."]}}],"skills_highlighted":["matched skills"],"keywords_added":["JD keywords used"],"keywords_missing":["JD keywords user lacks"],"ats_score":75}}"""
+{{"summary":"tailored summary","experience":[{{"company":"...","title":"...","bullets":["..."]}}],"projects":[{{"name":"...","description":"tailored description using JD keywords","technologies":["..."],"link":"..."}}],"skills_highlighted":["matched skills"],"keywords_added":["JD keywords used"],"keywords_missing":["JD keywords user lacks"],"ats_score":75}}"""
 
     try:
         response = client.chat.completions.create(model=model, messages=[{"role": "user", "content": prompt}], temperature=0.3, max_tokens=3000)

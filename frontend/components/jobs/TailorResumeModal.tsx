@@ -47,6 +47,14 @@ export default function TailorResumeModal({ job, onClose }: Props) {
         for (const b of (exp.bullets || [])) content += `• ${b}\n`;
       }
     }
+    if (result.projects) {
+      content += `\nPROJECTS\n${"-".repeat(30)}\n`;
+      for (const proj of result.projects) {
+        content += `\n${proj.name}${proj.link ? ` (${proj.link})` : ""}\n`;
+        content += `${proj.description}\n`;
+        if (proj.technologies) content += `Tech: ${proj.technologies.join(", ")}\n`;
+      }
+    }
     content += `\nSKILLS HIGHLIGHTED\n${"-".repeat(30)}\n${(result.skills_highlighted || []).join(", ")}\n`;
     if (coverLetter) {
       content += `\n\nCOVER LETTER\n${"=".repeat(50)}\n${coverLetter}\n`;
@@ -133,6 +141,22 @@ export default function TailorResumeModal({ job, onClose }: Props) {
                             <li key={j} className="text-[12px] text-gravel leading-relaxed">• {b}</li>
                           ))}
                         </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Projects */}
+              {result.projects && result.projects.length > 0 && (
+                <div>
+                  <h3 className="text-body-medium text-obsidian mb-2">Tailored Projects</h3>
+                  <div className="space-y-3">
+                    {result.projects.map((proj: any, i: number) => (
+                      <div key={i} className="pl-3 border-l-2 border-green-200">
+                        <p className="text-[13px] font-medium text-obsidian">{proj.name} {proj.link && <a href={proj.link} target="_blank" className="text-blue-600 text-[11px] ml-1">↗</a>}</p>
+                        <p className="text-[12px] text-gravel mt-0.5">{proj.description}</p>
+                        {proj.technologies && <p className="text-[11px] text-fog mt-1">{proj.technologies.join(" · ")}</p>}
                       </div>
                     ))}
                   </div>
