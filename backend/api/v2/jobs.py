@@ -235,7 +235,7 @@ def job_stats(user: User = Depends(get_current_user), db: Session = Depends(get_
     active = base.filter(Job.status == "active").count()
     stale = base.filter(Job.status == "stale").count()
     bookmarked = base.filter(Job.is_bookmarked == True).count()
-    applied = base.join(Job.applications).distinct().count()
+    applied = db.query(func.count(func.distinct(Application.job_id))).filter(Application.user_id == user.id).scalar() or 0
 
     grades = (
         db.query(JobEvaluation.grade, func.count(JobEvaluation.id))
