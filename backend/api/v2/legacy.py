@@ -644,3 +644,145 @@ def get_published():
         return {"posts": _db().get_posts(status="published")}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+
+# ══════════════════════════════════════════
+# RESUME TAILOR & COVER LETTER
+# ══════════════════════════════════════════
+
+@router.post("/api/resume/tailor")
+def tailor_resume(request: dict):
+    """Tailor user's resume to match a specific job description"""
+    import json as _json, os
+    from openai import OpenAI
+    from core.database import SessionLocal
+    from models.job import Job
+
+    job_id = request.get("job_id")
+    if not job_id:
+        raise HTTPException(status_code=400, detail="job_id required")
+
+    db = SessionLocal()
+    job = db.query(Job).filter(Job.id == job_id).first()
+    db.close()
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+
+    # Get user profile
+    try:
+        from api.main import user_profile
+    except:
+        user_profile = {}
+    if not user_profile:
+        raise HTTPException(status_code=400, detail="Upload your resume first")
+
+    groq_key = os.getenv('GROQ_API_KEY')
+    deepseek_key = os.getenv('DEEPSEEK_API_KEY')
+    openai_key = os.getenv('OPENAI_API_KEY')
+    if groq_key:
+        client = OpenAI(api_key=groq_key, base_url="https://api.groq.com/openai/v1")
+        model = "llama-3.3-70b-versatile"
+    elif deepseek_key:
+        client = OpenAI(api_key=deepseek_key, base_url="https://api.deepseek.com")
+        model = "deepseek-chat"
+    elif openai_key:
+        client = OpenAI(api_key=openai_key)
+        model = "gpt-4o-mini"
+    else:
+        raise HTTPException(status_code=500, detail="No AI API key configured")
+
+    jd = job.description_full or job.description_snippet or ""
+    profile_json = _json.dumps(user_profile, default=str)[:3000]
+
+    prompt = f"""You are an expert resume tailor. Rewrite the resume content to match the JD.
+
+RULES:
+- Keep EXACT same sections and approximate word count
+- Do NOT invent experience the user doesn't have
+- Reword bullet points to use JD keywords where relevant
+- Keep it truthful
+
+USER RESUME:
+{profile_json}
+
+JOB: {job.title} at {job.company}
+JD: {jd[:2000]}
+
+Return JSON:
+{{"summary":"tailored summary","experience":[{{"company":"...","title":"...","bullets":["..."]}}],"skills_highlighted":["matched skills"],"keywords_added":["JD keywords used"],"keywords_missing":["JD keywords user lacks"],"ats_score":75}}"""
+
+    try:
+        response = client.chat.completions.create(model=model, messages=[{"role": "user", "content": prompt}], temperature=0.3, max_tokens=3000)
+        raw = response.choices[0].message.content or ""
+        raw = raw.strip()
+        if raw.startswith("```"): raw = raw.split("\n", 1)[1] if "\n" in raw else raw[3:]
+        if raw.endswith("```"): raw = raw[:-3]
+        if raw.startswith("json"): raw = raw[4:]
+        result = _json.loads(raw.strip())
+        result["job_title"] = job.title
+        result["company"] = job.company
+        return {"success": True, **result}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"AI tailoring failed: {str(e)}")
+
+
+@router.post("/api/resume/cover-letter")
+def generate_cover_letter(request: dict):
+    """Generate a cover letter for a specific job"""
+    import json as _json, os
+    from openai import OpenAI
+    from core.database import SessionLocal
+    from models.job import Job
+
+    job_id = request.get("job_id")
+    if not job_id:
+        raise HTTPException(status_code=400, detail="job_id required")
+
+    db = SessionLocal()
+    job = db.query(Job).filter(Job.id == job_id).first()
+    db.close()
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+
+    try:
+        from api.main import user_profile
+    except:
+        user_profile = {}
+    if not user_profile:
+        raise HTTPException(status_code=400, detail="Upload your resume first")
+
+    groq_key = os.getenv('GROQ_API_KEY')
+    deepseek_key = os.getenv('DEEPSEEK_API_KEY')
+    openai_key = os.getenv('OPENAI_API_KEY')
+    if groq_key:
+        client = OpenAI(api_key=groq_key, base_url="https://api.groq.com/openai/v1")
+        model = "llama-3.3-70b-versatile"
+    elif deepseek_key:
+        client = OpenAI(api_key=deepseek_key, base_url="https://api.deepseek.com")
+        model = "deepseek-chat"
+    elif openai_key:
+        client = OpenAI(api_key=openai_key)
+        model = "gpt-4o-mini"
+    else:
+        raise HTTPException(status_code=500, detail="No AI API key configured")
+
+    name = user_profile.get("name", "Candidate")
+    skills = user_profile.get("skills", [])
+    if isinstance(skills, dict):
+        skills = [s for v in skills.values() if isinstance(v, list) for s in v]
+
+    prompt = f"""Write a concise professional cover letter (200-250 words):
+Candidate: {name}
+Skills: {', '.join(skills[:15]) if skills else 'Software Engineering'}
+Role: {job.title} at {job.company}
+JD: {(job.description_full or job.description_snippet or '')[:1500]}
+
+Be specific, not generic. 3-4 paragraphs. No clichés."""
+
+    try:
+        response = client.chat.completions.create(model=model, messages=[{"role": "user", "content": prompt}], temperature=0.5, max_tokens=1000)
+        letter = response.choices[0].message.content or ""
+        return {"success": True, "cover_letter": letter.strip(), "job_title": job.title, "company": job.company}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Cover letter failed: {str(e)}")
