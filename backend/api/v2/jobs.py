@@ -398,7 +398,7 @@ def update_job(job_id: str, body: PatchJobRequest, user: User = Depends(get_curr
         job.is_ignored = body.is_ignored
     if body.status is not None:
         job.status = body.status
-    db.flush()
+    db.commit()
     return {"ok": True}
 
 
