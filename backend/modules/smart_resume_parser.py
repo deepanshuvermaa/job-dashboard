@@ -33,14 +33,18 @@ class SmartResumeParser:
         if groq_key:
             self.openai_client = OpenAI(api_key=groq_key, base_url="https://api.groq.com/openai/v1")
             self.model = "llama-3.3-70b-versatile"
+            print("[Resume Parser] Using Groq (llama-3.3-70b)")
         elif deepseek_key:
             self.openai_client = OpenAI(api_key=deepseek_key, base_url="https://api.deepseek.com")
             self.model = "deepseek-chat"
+            print("[Resume Parser] Using DeepSeek")
         elif openai_key:
             self.openai_client = OpenAI(api_key=openai_key)
             self.model = "gpt-4o-mini"
+            print("[Resume Parser] Using OpenAI (gpt-4o-mini)")
         else:
-            raise ValueError("No AI API key found (GROQ_API_KEY, DEEPSEEK_API_KEY, or OPENAI_API_KEY)")
+            print("[Resume Parser] WARNING: No AI key found! Will use fallback text parsing.")
+            self.openai_client = None
 
         self.resume_text = ""
         self.structured_data = {}
@@ -249,12 +253,17 @@ REMEMBER: Extract EVERYTHING. Better to have complete information than incomplet
 """
 
         try:
+            if not self.openai_client:
+                print("[Resume Parser] No AI client, using fallback")
+                return self._fallback_parse()
+
+            print(f"[Resume Parser] Using model: {self.model}")
             response = self.openai_client.chat.completions.create(
                 model=self.model,
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are an expert resume parser with extreme attention to detail. Extract EVERY piece of information. Don't summarize or skip anything. Return complete JSON with ALL details."
+                        "content": "You are an expert resume parser. Extract ALL information from the resume. Return ONLY valid JSON, no markdown, no code blocks, no explanation."
                     },
                     {
                         "role": "user",
@@ -266,7 +275,22 @@ REMEMBER: Extract EVERYTHING. Better to have complete information than incomplet
             )
 
             import json
-            parsed_data = json.loads(response.choices[0].message.content)
+            raw = response.choices[0].message.content or ""
+            # Strip markdown code blocks if present
+            raw = raw.strip()
+            if raw.startswith("```"):
+                raw = raw.split("\n", 1)[1] if "\n" in raw else raw[3:]
+            if raw.endswith("```"):
+                raw = raw[:-3]
+            raw = raw.strip()
+            if raw.startswith("json"):
+                raw = raw[4:].strip()
+
+            if not raw:
+                print(f"[Resume Parser] Empty response from {self.model}")
+                return self._fallback_parse()
+
+            parsed_data = json.loads(raw)
 
             # Calculate display format if not provided
             if 'total_experience_months' in parsed_data:
@@ -289,10 +313,39 @@ REMEMBER: Extract EVERYTHING. Better to have complete information than incomplet
 
         except Exception as e:
             print(f"Error in AI parsing: {e}")
-            return {
-                'error': str(e),
-                'success': False
-            }
+            # Fallback to basic text extraction
+            return self._fallback_parse()
+
+    def _fallback_parse(self) -> Dict:
+        """Basic regex-based parsing when AI fails"""
+        import re
+        text = self.resume_text
+        data = {}
+        # Extract email
+        emails = re.findall(r'[\w.+-]+@[\w-]+\.[a-zA-Z]{2,}', text)
+        if emails: data['email'] = emails[0]
+        # Extract phone
+        phones = re.findall(r'[\+]?[\d\s\-\(\)]{10,15}', text)
+        if phones: data['phone'] = phones[0].strip()
+        # Extract name (first line usually)
+        lines = [l.strip() for l in text.split('\n') if l.strip()]
+        if lines: data['name'] = lines[0][:60]
+        # Extract skills (common tech keywords)
+        all_skills = ["python", "javascript", "typescript", "react", "node", "java", "go", "rust", "c++",
+                      "aws", "gcp", "azure", "docker", "kubernetes", "sql", "postgresql", "mongodb",
+                      "redis", "kafka", "graphql", "django", "flask", "fastapi", "spring", "angular",
+                      "vue", "next.js", "terraform", "git", "linux", "ci/cd"]
+        found_skills = [s for s in all_skills if s.lower() in text.lower()]
+        data['skills'] = found_skills
+        # Extract LinkedIn
+        li = re.findall(r'linkedin\.com/in/[\w-]+', text)
+        if li: data['linkedin'] = f"https://{li[0]}"
+        # Extract GitHub
+        gh = re.findall(r'github\.com/[\w-]+', text)
+        if gh: data['github'] = f"https://{gh[0]}"
+        data['summary'] = text[:500]
+        data['total_experience_years'] = 0
+        return data
 
     def update_user_profile(self, user_edits: Dict) -> Dict:
         """Allow user to edit and update the parsed data"""
