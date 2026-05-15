@@ -6,6 +6,7 @@ interface JobCardProps {
   onClick: (job: any) => void;
   onBookmark: (id: string, val: boolean) => void;
   onMarkApplied?: (id: string) => void;
+  onNotInterested?: (id: string) => void;
 }
 
 function formatSalary(min?: number, max?: number, period?: string) {
@@ -17,6 +18,27 @@ function formatSalary(min?: number, max?: number, period?: string) {
   return `Up to ${fmt(max!)}${p}`;
 }
 
+function cleanTitle(title: string) {
+  if (!title) return "";
+  let t = title.replace(/\s*with verification\s*$/i, "").trim();
+  const half = Math.floor(t.length / 2);
+  if (half > 3 && t.substring(0, half).trim() === t.substring(half).trim()) {
+    t = t.substring(0, half).trim();
+  }
+  return t;
+}
+
+function timeAgo(dateStr?: string) {
+  if (!dateStr) return null;
+  const d = new Date(dateStr);
+  const now = new Date();
+  const hrs = Math.floor((now.getTime() - d.getTime()) / 3600000);
+  if (hrs < 1) return "just now";
+  if (hrs < 24) return `${hrs}h ago`;
+  const days = Math.floor(hrs / 24);
+  return `${days}d ago`;
+}
+
 const DIMS: [string, string][] = [
   ["role_match", "Role"], ["skills_alignment", "Skills"], ["seniority_fit", "Level"],
   ["compensation", "Pay"], ["interview_likelihood", "Interview"],
@@ -24,14 +46,16 @@ const DIMS: [string, string][] = [
   ["location_fit", "Location"], ["tech_stack_match", "Tech"], ["culture_signals", "Culture"],
 ];
 
-export default function JobCard({ job, onClick, onBookmark, onMarkApplied }: JobCardProps) {
+export default function JobCard({ job, onClick, onBookmark, onMarkApplied, onNotInterested }: JobCardProps) {
   const salary = formatSalary(job.salary_min, job.salary_max, job.salary_period);
   const ev = job.evaluation;
+  const title = cleanTitle(job.title);
+  const scraped = timeAgo(job.first_seen_at);
 
   return (
     <div onClick={() => onClick(job)} className="card cursor-pointer group flex flex-col transition-shadow">
       {/* Header */}
-      <div className="flex items-start gap-3 mb-3">
+      <div className="flex items-start gap-3 mb-2">
         <div className="w-10 h-10 rounded-badge bg-powder border border-chalk flex items-center justify-center overflow-hidden flex-shrink-0">
           {job.company_logo_url ? (
             <img src={job.company_logo_url} alt="" className="w-7 h-7 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; (e.target as HTMLImageElement).parentElement!.innerHTML = `<span style="color:#777169;font-size:14px;font-weight:600">${job.company?.[0] || "?"}</span>`; }} />
@@ -40,29 +64,29 @@ export default function JobCard({ job, onClick, onBookmark, onMarkApplied }: Job
           )}
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="text-body-medium text-obsidian leading-tight truncate">{job.title}</h3>
+          <h3 className="text-body-medium text-obsidian leading-tight truncate">{title}</h3>
           <p className="text-caption text-gravel mt-0.5 truncate">{job.company} · {job.location}</p>
         </div>
-        <div className="flex items-center gap-1 flex-shrink-0">
-          {/* Mark Applied */}
+        <div className="flex items-center gap-0.5 flex-shrink-0">
           {onMarkApplied && (
-            <button onClick={(e) => { e.stopPropagation(); onMarkApplied(job.id); }} className="p-1 rounded-lg hover:bg-green-50 transition-colors" title="Mark as Applied">
-              <svg className="w-4 h-4 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M14 9V5a3 3 0 00-6 0v4" /><path d="M20 9H4l1 11h14l1-11z" /><path d="M8 14l2 2 4-4" />
-              </svg>
+            <button onClick={(e) => { e.stopPropagation(); onMarkApplied(job.id); }} className="p-1.5 rounded-lg hover:bg-green-50 transition-colors" title="Mark Applied">
+              <svg className="w-4 h-4 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
             </button>
           )}
-          {/* Bookmark */}
-          <button onClick={(e) => { e.stopPropagation(); onBookmark(job.id, !job.is_bookmarked); }} className="p-1 rounded-lg hover:bg-powder transition-colors">
-            <svg className={`w-4 h-4 ${job.is_bookmarked ? "text-obsidian fill-obsidian" : "text-chalk"}`} viewBox="0 0 24 24" fill={job.is_bookmarked ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2">
-              <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
-            </svg>
+          {onNotInterested && (
+            <button onClick={(e) => { e.stopPropagation(); onNotInterested(job.id); }} className="p-1.5 rounded-lg hover:bg-red-50 transition-colors" title="Not Interested">
+              <svg className="w-4 h-4 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+          )}
+          <button onClick={(e) => { e.stopPropagation(); onBookmark(job.id, !job.is_bookmarked); }} className="p-1.5 rounded-lg hover:bg-powder transition-colors">
+            <svg className={`w-4 h-4 ${job.is_bookmarked ? "text-obsidian fill-obsidian" : "text-chalk"}`} viewBox="0 0 24 24" fill={job.is_bookmarked ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
           </button>
         </div>
       </div>
 
-      {/* Tags */}
-      <div className="flex flex-wrap gap-1.5 mb-3">
+      {/* Scraped date + Tags */}
+      <div className="flex flex-wrap items-center gap-1.5 mb-2">
+        {scraped && <span className="text-[10px] text-fog">{scraped}</span>}
         {job.work_mode && <span className="tag !py-0.5 !px-2 !text-[11px]">{job.work_mode}</span>}
         {job.experience_level && <span className="tag !py-0.5 !px-2 !text-[11px]">{job.experience_level}</span>}
         {job.employment_type && <span className="tag !py-0.5 !px-2 !text-[11px]">{job.employment_type.replace("-", " ")}</span>}
@@ -96,7 +120,7 @@ export default function JobCard({ job, onClick, onBookmark, onMarkApplied }: Job
       )}
 
       {/* Footer */}
-      <div className="flex items-center justify-between pt-3 border-t border-chalk">
+      <div className="flex items-center justify-between pt-2 border-t border-chalk">
         <div className="flex-1 min-w-0">
           {salary ? (
             <span className="text-body-medium text-obsidian">{salary}</span>

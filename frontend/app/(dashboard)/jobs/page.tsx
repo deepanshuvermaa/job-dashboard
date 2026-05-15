@@ -121,6 +121,15 @@ export default function JobsPage() {
     }
   };
 
+  const handleNotInterested = async (id: string) => {
+    try {
+      await api.patchJob(id, { is_ignored: true });
+      setJobs((prev) => prev.filter((j) => j.id !== id));
+    } catch (err) {
+      console.error("Not interested failed:", err);
+    }
+  };
+
   const handleExport = async () => {
     try {
       const data = await api.exportJobs();
@@ -194,6 +203,7 @@ export default function JobsPage() {
                 onClick={handleJobClick}
                 onBookmark={handleBookmark}
                 onMarkApplied={handleMarkApplied}
+                onNotInterested={handleNotInterested}
               />
             ))}
           </div>

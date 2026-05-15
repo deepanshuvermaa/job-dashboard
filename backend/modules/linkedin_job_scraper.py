@@ -507,17 +507,30 @@ class LinkedInJobScraper:
     def _extract_job_info(self, card, index: int = 0) -> Optional[Dict]:
         """Extract job information from a job card using JS click to avoid nav interception."""
         try:
+            # Capture current description before clicking (to detect change)
+            old_desc = ""
+            try:
+                old_desc = self.driver.execute_script("""
+                    var el = document.querySelector('.jobs-description__content, .jobs-description-content__text, #job-details');
+                    return el ? el.innerText.substring(0, 100) : '';
+                """) or ""
+            except:
+                pass
+
             # Scroll card into view and click via JS to avoid nav bar interception
             self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", card)
             time.sleep(0.5)
             self.driver.execute_script("arguments[0].click();", card)
 
-            # Wait for side panel to load by checking for job details content change
-            for _ in range(8):
+            # Wait for description to CHANGE (not just exist)
+            for attempt in range(12):
                 time.sleep(0.5)
                 try:
-                    detail = self.driver.find_element(By.CSS_SELECTOR, '.jobs-search__job-details--wrapper, .scaffold-layout__detail')
-                    if detail and detail.text and len(detail.text) > 50:
+                    new_desc = self.driver.execute_script("""
+                        var el = document.querySelector('.jobs-description__content, .jobs-description-content__text, #job-details');
+                        return el ? el.innerText.substring(0, 100) : '';
+                    """) or ""
+                    if new_desc and new_desc != old_desc:
                         break
                 except:
                     pass
@@ -543,6 +556,14 @@ class LinkedInJobScraper:
             if not title:
                 # Fallback: get any text from the card
                 title = card.text.split('\n')[0][:100]
+
+            # Clean title: remove duplicated text and "with verification" suffix
+            if title:
+                title = re.sub(r'\s*with verification\s*$', '', title, flags=re.IGNORECASE).strip()
+                # Remove exact duplicate (e.g. "Full Stack Dev Full Stack Dev")
+                half = len(title) // 2
+                if half > 3 and title[:half].strip() == title[half:].strip():
+                    title = title[:half].strip()
 
             # Company name selectors
             company = None
