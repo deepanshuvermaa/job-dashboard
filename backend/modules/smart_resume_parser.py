@@ -23,7 +23,6 @@ class SmartResumeParser:
 
     def __init__(self):
         # Try providers in order: Groq (free) -> DeepSeek -> OpenAI
-        from openai import OpenAI
         self.openai_client = None
         self.model = "gpt-4o-mini"
 
