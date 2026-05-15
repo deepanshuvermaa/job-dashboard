@@ -1063,9 +1063,14 @@ async def upload_resume(file: UploadFile = File(...)):
                     profile.experience = user_profile.get("experience", [])
                     profile.education = user_profile.get("education", [])
                     db_session.commit()
+                    print(f"[Resume] Profile saved to DB for user {user.email}")
+                else:
+                    print("[Resume] WARNING: No user found in DB to save profile")
                 db_session.close()
             except Exception as db_err:
-                print(f"[WARN] Failed to persist profile to DB: {db_err}")
+                print(f"[Resume] FAILED to persist profile to DB: {db_err}")
+                import traceback
+                traceback.print_exc()
 
             return {
                 "success": True,

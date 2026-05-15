@@ -669,7 +669,7 @@ def tailor_resume(request: dict):
     if not job:
         raise HTTPException(status_code=404, detail="Job not found")
 
-    # Get user profile - try global first, then DB
+    # Get user profile - try global first (just uploaded in this session), then DB
     try:
         from api.main import user_profile
     except:
@@ -677,12 +677,15 @@ def tailor_resume(request: dict):
     if not user_profile:
         from models.user import User, UserProfile
         db2 = SessionLocal()
-        u = db2.query(User).first()
-        if u:
-            p = db2.query(UserProfile).filter(UserProfile.user_id == u.id).first()
+        try:
+            # Try to find any profile with resume_data
+            p = db2.query(UserProfile).filter(UserProfile.resume_data != None).first()
             if p and p.resume_data:
                 user_profile = p.resume_data
-        db2.close()
+        except Exception as e:
+            print(f"[tailor] DB error: {e}")
+        finally:
+            db2.close()
     if not user_profile:
         raise HTTPException(status_code=400, detail="Upload your resume first in Profile section")
 
@@ -762,12 +765,14 @@ def generate_cover_letter(request: dict):
     if not user_profile:
         from models.user import User, UserProfile
         db2 = SessionLocal()
-        u = db2.query(User).first()
-        if u:
-            p = db2.query(UserProfile).filter(UserProfile.user_id == u.id).first()
+        try:
+            p = db2.query(UserProfile).filter(UserProfile.resume_data != None).first()
             if p and p.resume_data:
                 user_profile = p.resume_data
-        db2.close()
+        except:
+            pass
+        finally:
+            db2.close()
     if not user_profile:
         raise HTTPException(status_code=400, detail="Upload your resume first")
 
