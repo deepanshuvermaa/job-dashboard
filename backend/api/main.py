@@ -1044,29 +1044,27 @@ async def upload_resume(file: UploadFile = File(...)):
         if result.get('success'):
             user_profile = result['data']
 
-            # Persist to database using the SAME engine that serves all other queries
+            # Persist to database
             db_saved = False
             db_error = None
             try:
                 import json as _json
-                import sys
-                # Import the engine that's already working (serves /api/jobs etc)
-                backend_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-                if backend_root not in sys.path:
-                    sys.path.insert(0, backend_root)
-                from core.database import engine as _eng
-                from sqlalchemy import text as _text
-                _data = _json.dumps(user_profile, default=str)
-                with _eng.connect() as _conn:
-                    _conn.execute(_text("UPDATE user_profiles SET resume_data = :d WHERE user_id = (SELECT id FROM users LIMIT 1)"), {"d": _data})
-                    _conn.commit()
+                from sqlalchemy import create_engine, text
+                db_url = os.environ.get("DATABASE_URL", "")
+                if db_url.startswith("postgres://"):
+                    db_url = db_url.replace("postgres://", "postgresql://", 1)
+                eng = create_engine(db_url)
+                data_str = _json.dumps(user_profile, default=str)
+                with eng.connect() as c:
+                    c.execute(text("UPDATE user_profiles SET resume_data = :d WHERE user_id = (SELECT id FROM users LIMIT 1)"), {"d": data_str})
+                    c.commit()
                 db_saved = True
-            except Exception as db_err:
-                db_error = str(db_err)
+            except Exception as e:
+                db_error = str(e)
 
             return {
                 "success": True,
-                "message": f"Resume parsed. DB saved: {db_saved}" + (f" Error: {db_error}" if db_error else ""),
+                "message": f"Resume parsed. DB saved: {db_saved}" + (f" | {db_error}" if db_error else ""),
                 "profile": user_profile,
                 "db_saved": db_saved
             }

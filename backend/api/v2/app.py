@@ -62,7 +62,7 @@ app.include_router(jobs_router)
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "version": "3.1.0", "commit": "b61afa5-rawsql"}
+    return {"status": "ok", "version": "3.2.0"}
 
 
 # ── Serve Next.js static assets directly (bypass proxy) ──────────────────────
