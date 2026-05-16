@@ -46,62 +46,54 @@ export default function TailorResumeModal({ job, onClose }: Props) {
 
     const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${name} - Resume</title>
 <style>
-body{font-family:'Calibri','Segoe UI',sans-serif;max-width:700px;margin:24px auto;padding:0 28px;font-size:10.5pt;line-height:1.45;color:#1a1a1a}
-h1{font-size:16pt;margin:0 0 2px;font-weight:700}
-.contact{font-size:9pt;color:#333;margin:2px 0 10px}
-.contact a{color:#0055cc;text-decoration:none}
-h2{font-size:10.5pt;font-weight:700;border-bottom:1.5px solid #1a1a1a;padding-bottom:2px;margin:14px 0 6px;text-transform:uppercase;letter-spacing:0.3px}
-.exp-header{display:flex;justify-content:space-between;margin:8px 0 2px}
-.exp-header h3{font-size:10.5pt;font-weight:600;margin:0}
-.exp-header span{font-size:9pt;color:#555}
-ul{margin:2px 0 8px;padding-left:15px}
-li{margin:1px 0;font-size:10pt}
-.proj-title{font-weight:600;font-size:10pt;margin:6px 0 1px}
-.proj-title a{color:#0055cc;font-weight:400;font-size:9pt;margin-left:4px}
-.tech{font-size:9pt;color:#444;margin:1px 0 6px}
-.skills-section p{margin:2px 0;font-size:10pt}
-.skills-section strong{font-size:9.5pt}
-.edu{margin:4px 0}
-.ats-note{margin-top:16px;padding:8px 12px;background:#f0f7ff;border:1px solid #cce;border-radius:4px;font-size:9pt;color:#333}
-.ats-note strong{color:#0055cc}
-mark{background:#d4edda;padding:0 2px;border-radius:2px}
-@media print{body{margin:0;padding:16px}.ats-note{display:none}}
-</style></head><body>
+@page{size:letter;margin:0}
+body{margin:0;padding:0;font-family:'Times New Roman','Georgia',serif}
+.page{width:8.5in;min-height:11in;padding:0.45in 0.55in;font-size:10.5pt;line-height:1.28;color:#000;box-sizing:border-box}
+h1{font-size:20pt;font-weight:700;text-align:center;margin:0 0 1px;letter-spacing:0.3px}
+.title{text-align:center;font-size:10pt;color:#333;margin:0 0 4px;font-style:italic}
+.contact{text-align:center;font-size:9.5pt;color:#333;margin:0 0 8px}
+.contact a{color:#0066cc;text-decoration:none}
+.sec{border-bottom:1.5px solid #000;padding-bottom:1px;margin:9px 0 5px}
+.sec h2{font-size:11.5pt;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin:0}
+.exp{margin-bottom:7px}
+.exp-row{display:flex;justify-content:space-between;align-items:baseline}
+.exp-row b{font-size:11pt}
+.exp-row i{font-size:9.5pt;color:#444}
+.exp p{font-size:10pt;font-style:italic;color:#222;margin:0 0 3px}
+ul{margin:0;padding-left:15px;list-style-type:disc}
+li{font-size:9.5pt;color:#111;margin-bottom:1.5px;line-height:1.3;text-align:justify}
+li a{color:#0066cc;text-decoration:none;font-weight:500}
+.proj{margin-bottom:5px}
+.proj b{font-size:10.5pt}
+.proj .sub{color:#444;font-size:9.5pt}
+.proj .tech{color:#666;font-size:9pt}
+.proj a{color:#0066cc;font-size:9pt;text-decoration:none;margin-left:4px}
+.skills p{margin:1px 0;font-size:9.5pt;line-height:1.3}
+.skills b{font-weight:700}
+.edu-row{display:flex;justify-content:space-between;margin-bottom:3px}
+.edu-row b{font-size:10.5pt}
+.edu-row .detail{font-size:9.5pt;color:#222;margin:0}
+.edu-row i{font-size:9pt;color:#444;white-space:nowrap}
+@media print{*{-webkit-print-color-adjust:exact!important}}
+</style></head><body><div class="page">
 <h1>${name}</h1>
+<p class="title">${profile.title || profile.headline || 'Software Engineer'}</p>
 <p class="contact">${phone}${email ? ' | <a href="mailto:' + email + '">' + email + '</a>' : ''}${linkedin ? ' | <a href="' + linkedin + '">LinkedIn</a>' : ''}${github ? ' | <a href="' + github + '">GitHub</a>' : ''}${profile.portfolio ? ' | <a href="' + profile.portfolio + '">Portfolio</a>' : ''}</p>
 
-<h2>About</h2>
-<p>${summary}</p>
+${summary ? '<div class="sec"><h2>About</h2></div><p style="font-size:9.5pt;text-align:justify;margin:0">' + summary + '</p>' : ''}
 
-<h2>Work Experience</h2>
-${experience.map((e: any) => `
-<div class="exp-header"><h3>${e.title || e.role} — ${e.company}</h3><span>${e.start_date || ''} – ${e.end_date || 'Present'}</span></div>
-<ul>${(e.responsibilities || e.bullets || []).map((b: string) => '<li>' + b + '</li>').join('')}${(e.achievements || []).map((a: string) => '<li><strong>' + a + '</strong></li>').join('')}</ul>
-`).join('')}
+<div class="sec"><h2>Work Experience</h2></div>
+${experience.map((e: any) => `<div class="exp"><div class="exp-row"><b>${e.company}</b><i>${e.start_date || e.dates || ''} – ${e.end_date || 'Present'}</i></div><p>${e.title || e.role || ''}</p><ul>${(e.responsibilities || e.bullets || []).map((b: any) => '<li>' + (typeof b === 'string' ? b : b.text || '') + (typeof b === 'object' && b.link ? ' <a href="' + (b.link.url || '#') + '">' + (b.link.text || 'Link') + '</a>' : '') + '</li>').join('')}</ul></div>`).join('')}
 
-<h2>Projects</h2>
-${projects.map((p: any) => `
-<p class="proj-title">${p.name}${p.link ? ' <a href="' + p.link + '">↗ Live</a>' : ''}</p>
-<ul>${(p.outcomes || p.responsibilities || [p.description]).filter(Boolean).map((d: string) => '<li>' + d + '</li>').join('')}</ul>
-<p class="tech">${(p.technologies || []).join(' · ')}</p>
-`).join('')}
+<div class="sec"><h2>Projects & SaaS Products</h2></div>
+${projects.map((p: any) => `<div class="proj"><b>${p.name}</b>${p.subtitle ? '<span class="sub"> – ' + p.subtitle + '</span>' : ''}<span class="tech"> | ${(p.technologies || []).join(', ') || p.tech || ''}</span>${p.link ? '<a href="' + p.link + '">↗</a>' : ''}<ul>${(p.bullets || p.outcomes || [p.description]).filter(Boolean).map((b: string) => '<li>' + b + '</li>').join('')}</ul></div>`).join('')}
 
-<h2>Technical Skills</h2>
-<div class="skills-section">
-${typeof skills === 'object' && !Array.isArray(skills) ? Object.entries(skills).map(([cat, vals]: [string, any]) => Array.isArray(vals) && vals.length ? '<p><strong>' + cat.replace(/_/g, ' ') + ':</strong> ' + vals.join(', ') + '</p>' : '').join('') : '<p>' + (Array.isArray(skills) ? skills.join(', ') : String(skills)) + '</p>'}
-</div>
+<div class="sec"><h2>Technical Skills</h2></div>
+<div class="skills">${typeof skills === 'object' && !Array.isArray(skills) ? Object.entries(skills).map(([cat, val]: [string, any]) => Array.isArray(val) && val.length ? '<p><b>' + cat.replace(/_/g, ' ') + ':</b> ' + val.join(', ') + '</p>' : typeof val === 'string' ? '<p><b>' + cat + ':</b> ' + val + '</p>' : '').join('') : '<p>' + (Array.isArray(skills) ? skills.join(', ') : '') + '</p>'}</div>
 
-${education.length ? '<h2>Education</h2>' + education.map((e: any) => '<p class="edu"><strong>' + (e.degree || '') + (e.major ? ' in ' + e.major : '') + '</strong> — ' + (e.institution || '') + (e.graduation_year ? ' (' + e.graduation_year + ')' : '') + (e.gpa ? ' | CGPA: ' + e.gpa : '') + '</p>').join('') : ''}
+${education.length ? '<div class="sec"><h2>Education</h2></div>' + education.map((e: any) => '<div class="edu-row"><div><b>' + (e.institution || e.school || '') + '</b><p class="detail">' + (e.degree || '') + (e.major ? ' in ' + e.major : '') + (e.gpa ? ' | CGPA: ' + e.gpa : '') + (e.detail ? ' | ' + e.detail : '') + '</p></div><i>' + (e.graduation_year || e.dates || '') + '</i></div>').join('') : ''}
 
-<div class="ats-note">
-<strong>ATS Match: ${result.ats_score}%</strong> for ${job.title} at ${job.company}<br>
-<strong>Matched:</strong> ${(result.matched_keywords || []).join(', ')}<br>
-<strong>Consider adding:</strong> ${(result.missing_keywords || []).join(', ')}
-</div>
-
-${coverLetter ? '<h2 style="margin-top:24px">Cover Letter</h2><p>' + coverLetter.replace(/\n/g, '<br>') + '</p>' : ''}
-</body></html>`;
-
+</div></body></html>`;
     const w = window.open("", "_blank");
     if (w) { w.document.write(html); w.document.close(); setTimeout(() => w.print(), 600); }
   };
