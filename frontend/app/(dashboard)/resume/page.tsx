@@ -656,10 +656,15 @@ export default function ResumePage() {
       <div className="flex-1 bg-[#d4d4d4] overflow-auto">
         <div className="sticky top-0 z-10 bg-eggshell border-b border-chalk px-6 py-2.5 flex items-center justify-between">
           <p className="text-[12px] text-gravel">Live Preview</p>
+          <div className="flex gap-2">
           <button onClick={handlePrint} className="btn-primary text-[13px]">
             <svg className="w-4 h-4 inline mr-1.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9V2h12v7 M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2 M6 14h12v8H6z" /></svg>
             Export PDF
           </button>
+          <button onClick={async () => { await api.saveResume(resume); alert("Resume saved to profile!"); }} className="btn-secondary text-[13px]">
+            Save to Profile
+          </button>
+          </div>
         </div>
         <div className="py-8 flex justify-center">
           {/* Wrapper: sets the VISUAL size, clips overflow from the scaled inner div */}

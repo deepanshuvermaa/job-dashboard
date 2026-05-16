@@ -512,9 +512,39 @@ def get_profile():
 def update_profile(updates: dict):
     global _user_profile
     if not _user_profile:
-        return {"success": False, "message": "No profile exists."}
+        _user_profile = {}
     _user_profile.update(updates)
+    # Also save to DB
+    try:
+        import json
+        from core.database import engine
+        from sqlalchemy import text
+        data_str = json.dumps(_user_profile, default=str)
+        with engine.connect() as c:
+            c.execute(text("UPDATE user_profiles SET resume_data = :d WHERE user_id = (SELECT id FROM users LIMIT 1)"), {"d": data_str})
+            c.commit()
+    except:
+        pass
     return {"success": True, "profile": _user_profile}
+
+
+@router.post("/api/resume/save")
+def save_resume_data(data: dict):
+    """Save the resume editor data as the user's profile - this becomes source of truth"""
+    global _user_profile
+    _user_profile = data
+    try:
+        import json
+        from core.database import engine
+        from sqlalchemy import text
+        data_str = json.dumps(data, default=str)
+        with engine.connect() as c:
+            c.execute(text("UPDATE user_profiles SET resume_data = :d WHERE user_id = (SELECT id FROM users LIMIT 1)"), {"d": data_str})
+            c.commit()
+        print("[Resume] Editor data saved to DB")
+        return {"success": True, "message": "Resume saved"}
+    except Exception as e:
+        return {"success": False, "message": str(e)}
 
 
 @router.post("/api/resume/analyze-jd")

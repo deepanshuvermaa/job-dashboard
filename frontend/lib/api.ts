@@ -170,4 +170,6 @@ export const api = {
     request("/api/resume/tailor", { method: "POST", body: JSON.stringify({ job_id: jobId }) }),
   generateCoverLetter: (jobId: string) =>
     request("/api/resume/cover-letter", { method: "POST", body: JSON.stringify({ job_id: jobId }) }),
+  saveResume: (data: any) =>
+    request("/api/resume/save", { method: "POST", body: JSON.stringify(data) }),
 };
