@@ -455,11 +455,13 @@ def easy_apply_stats():
 async def upload_resume(file: UploadFile = File(...)):
     global _resume_parser, _user_profile
     try:
+        print("[UPLOAD] Starting...")
         upload_dir = Path(__file__).parent.parent.parent / "uploads"
         upload_dir.mkdir(exist_ok=True)
         fp = upload_dir / file.filename
         with open(fp, "wb") as f:
             shutil.copyfileobj(file.file, f)
+        print(f"[UPLOAD] File saved: {fp}")
 
         from modules.smart_resume_parser import SmartResumeParser
         _resume_parser = SmartResumeParser()
@@ -467,14 +469,41 @@ async def upload_resume(file: UploadFile = File(...)):
 
         if result.get("success"):
             _user_profile = result["data"]
-            return {"success": True, "message": "Resume parsed", "profile": _user_profile}
+            print(f"[UPLOAD] Parsed OK. Name={_user_profile.get('name')}")
+
+            # Save to DB
+            import json as _json
+            from core.database import engine
+            from sqlalchemy import text
+            data_str = _json.dumps(_user_profile, default=str)
+            print(f"[UPLOAD] Saving to DB ({len(data_str)} bytes)...")
+            with engine.connect() as c:
+                c.execute(text("UPDATE user_profiles SET resume_data = :d WHERE user_id = (SELECT id FROM users LIMIT 1)"), {"d": data_str})
+                c.commit()
+            print("[UPLOAD] DB SAVE SUCCESS")
+
+            return {"success": True, "message": "Resume parsed and saved", "profile": _user_profile, "db_saved": True}
+        print(f"[UPLOAD] Parse failed: {result.get('error')}")
         return {"success": False, "message": result.get("error", "Parse failed")}
     except Exception as e:
+        print(f"[UPLOAD] ERROR: {e}")
         return {"success": False, "message": str(e)}
 
 @router.get("/api/profile/get")
 def get_profile():
     global _user_profile
+    if not _user_profile:
+        # Load from DB
+        try:
+            from core.database import engine
+            from sqlalchemy import text
+            import json
+            with engine.connect() as c:
+                row = c.execute(text("SELECT resume_data FROM user_profiles WHERE resume_data IS NOT NULL LIMIT 1")).fetchone()
+                if row and row[0]:
+                    _user_profile = row[0] if isinstance(row[0], dict) else json.loads(row[0])
+        except:
+            pass
     if not _user_profile:
         return {"success": False, "message": "No profile. Upload resume first."}
     return {"success": True, "profile": _user_profile}
