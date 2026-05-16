@@ -734,38 +734,23 @@ def tailor_resume(request: dict):
     jd = job.description_full or job.description_snippet or ""
     profile_json = _json.dumps(user_profile, default=str)[:3000]
 
-    prompt = f"""You are an ATS resume optimizer. Your job is to ENHANCE the user's resume for a specific job — NOT rewrite it.
-
-CRITICAL RULES:
-1. KEEP every single bullet point, metric, number, link, and achievement EXACTLY as written
-2. NEVER remove or summarize content — the word count must stay the same or increase slightly
-3. NEVER invent experience or change facts
-4. ONLY add JD-relevant keywords INTO existing sentences where they fit naturally
-5. Keep all links, percentages, dollar amounts, timeframes unchanged
-6. If a bullet already matches the JD well, leave it untouched
-7. The summary can be slightly reworded to emphasize JD-relevant skills
-
-WHAT TO DO:
-- Read the JD keywords and find where they naturally fit into existing bullets
-- Add 1-2 JD keywords per bullet point maximum (e.g., "Built a platform" → "Built a scalable cloud-native platform")
-- Reorder skills to put JD-matching ones first
-- Keep project descriptions, tech stacks, and outcomes EXACTLY as-is
-
-USER'S RESUME (preserve this content):
-{profile_json}
+    prompt = f"""Analyze this job description and the user's resume. Do NOT rewrite the resume.
 
 JOB: {job.title} at {job.company}
 JOB DESCRIPTION:
 {jd[:2000]}
 
-Return JSON with:
-- "summary": enhanced summary (same length, JD keywords added naturally)
-- "experience": array of {{"company":"SAME","title":"SAME","duration":"SAME","bullets":["SAME bullets with 1-2 JD keywords injected naturally"]}}
-- "projects": array of {{"name":"SAME","description":"SAME description with 1-2 keywords added","technologies":["SAME"],"link":"SAME"}}
-- "skills_highlighted": user's skills that match JD (reordered, JD-matching first)
-- "keywords_added": JD keywords you injected
-- "keywords_missing": JD keywords user genuinely lacks
-- "ats_score": 0-100 estimated match percentage"""
+USER'S RESUME SKILLS AND CONTENT:
+{profile_json}
+
+Return JSON with ONLY:
+- "jd_keywords": array of important technical keywords/skills from the JD (max 20)
+- "matched_keywords": array of JD keywords that already exist in the user's resume
+- "missing_keywords": array of JD keywords NOT in the user's resume
+- "ats_score": percentage of JD keywords found in resume (0-100)
+- "suggestions": array of 3-5 short suggestions like "Add 'Kubernetes' to your DevOps skills section" or "Mention 'microservices' in your Pear Media experience"
+
+Do NOT rewrite any resume content. Only analyze keywords."""
 
     try:
         response = client.chat.completions.create(model=model, messages=[{"role": "user", "content": prompt}], temperature=0.3, max_tokens=3000)
@@ -789,6 +774,7 @@ Return JSON with:
         result = _json.loads(raw)
         result["job_title"] = job.title
         result["company"] = job.company
+        result["original_profile"] = user_profile
         return {"success": True, **result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"AI tailoring failed: {str(e)}")

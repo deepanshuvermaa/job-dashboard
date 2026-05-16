@@ -9,17 +9,14 @@ export default function TailorResumeModal({ job, onClose }: Props) {
   const [result, setResult] = useState<any>(null);
   const [coverLetter, setCoverLetter] = useState<string | null>(null);
   const [clLoading, setClLoading] = useState(false);
-  const [editing, setEditing] = useState(false);
-  const [editedSummary, setEditedSummary] = useState("");
 
-  const handleTailor = async () => {
+  const handleAnalyze = async () => {
     setLoading(true);
     try {
       const res = await api.tailorResume(job.id);
       setResult(res);
-      setEditedSummary(res.summary || "");
     } catch (err: any) {
-      alert(err.message || "Failed to tailor resume");
+      alert(err.message || "Failed");
     } finally { setLoading(false); }
   };
 
@@ -29,28 +26,82 @@ export default function TailorResumeModal({ job, onClose }: Props) {
       const res = await api.generateCoverLetter(job.id);
       setCoverLetter(res.cover_letter);
     } catch (err: any) {
-      alert(err.message || "Failed to generate cover letter");
+      alert(err.message || "Failed");
     } finally { setClLoading(false); }
   };
 
   const handleDownload = () => {
     if (!result) return;
-    const name = result.original_profile?.name || "Candidate";
-    const email = result.original_profile?.email || "";
-    const phone = result.original_profile?.phone || "";
-    const linkedin = result.original_profile?.linkedin || "";
-    const github = result.original_profile?.github || "";
+    const profile = result.original_profile || {};
+    const name = profile.name || "Candidate";
+    const email = profile.email || "";
+    const phone = profile.phone || "";
+    const linkedin = profile.linkedin || "";
+    const github = profile.github || "";
+    const summary = profile.summary || "";
+    const experience = profile.experience || [];
+    const projects = profile.projects || [];
+    const skills = profile.skills || {};
+    const education = profile.education || [];
+
     const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${name} - Resume</title>
-<style>body{font-family:Calibri,Arial,sans-serif;max-width:680px;margin:30px auto;padding:0 24px;font-size:11pt;line-height:1.5;color:#1a1a1a}h1{font-size:18pt;margin:0 0 2px}h2{font-size:11pt;border-bottom:1.5px solid #222;padding-bottom:3px;margin:16px 0 6px;text-transform:uppercase;letter-spacing:0.5px}h3{font-size:11pt;margin:8px 0 2px;font-weight:600}.contact{color:#444;font-size:9.5pt;margin:2px 0 14px}.contact a{color:#0055cc;text-decoration:none}ul{margin:3px 0;padding-left:16px}li{margin:2px 0;font-size:10.5pt}.tech{font-size:9.5pt;color:#555;margin:2px 0}.meta{color:#888;font-size:8.5pt;margin-top:24px;border-top:1px solid #ddd;padding-top:6px}@media print{body{margin:0;padding:20px}}</style></head><body>
+<style>
+body{font-family:'Calibri','Segoe UI',sans-serif;max-width:700px;margin:24px auto;padding:0 28px;font-size:10.5pt;line-height:1.45;color:#1a1a1a}
+h1{font-size:16pt;margin:0 0 2px;font-weight:700}
+.contact{font-size:9pt;color:#333;margin:2px 0 10px}
+.contact a{color:#0055cc;text-decoration:none}
+h2{font-size:10.5pt;font-weight:700;border-bottom:1.5px solid #1a1a1a;padding-bottom:2px;margin:14px 0 6px;text-transform:uppercase;letter-spacing:0.3px}
+.exp-header{display:flex;justify-content:space-between;margin:8px 0 2px}
+.exp-header h3{font-size:10.5pt;font-weight:600;margin:0}
+.exp-header span{font-size:9pt;color:#555}
+ul{margin:2px 0 8px;padding-left:15px}
+li{margin:1px 0;font-size:10pt}
+.proj-title{font-weight:600;font-size:10pt;margin:6px 0 1px}
+.proj-title a{color:#0055cc;font-weight:400;font-size:9pt;margin-left:4px}
+.tech{font-size:9pt;color:#444;margin:1px 0 6px}
+.skills-section p{margin:2px 0;font-size:10pt}
+.skills-section strong{font-size:9.5pt}
+.edu{margin:4px 0}
+.ats-note{margin-top:16px;padding:8px 12px;background:#f0f7ff;border:1px solid #cce;border-radius:4px;font-size:9pt;color:#333}
+.ats-note strong{color:#0055cc}
+mark{background:#d4edda;padding:0 2px;border-radius:2px}
+@media print{body{margin:0;padding:16px}.ats-note{display:none}}
+</style></head><body>
 <h1>${name}</h1>
-<p class="contact">${email}${phone ? " | " + phone : ""}${linkedin ? ' | <a href="' + linkedin + '">LinkedIn</a>' : ""}${github ? ' | <a href="' + github + '">GitHub</a>' : ""}</p>
-<h2>Summary</h2><p>${editedSummary || result.summary}</p>
-<h2>Experience</h2>${(result.experience || []).map((e: any) => `<h3>${e.title} | ${e.company}</h3><ul>${(e.bullets || []).map((b: string) => "<li>" + b + "</li>").join("")}</ul>`).join("")}
-<h2>Projects</h2>${(result.projects || []).map((p: any) => `<h3>${p.name}${p.link ? ' <a href="' + p.link + '">↗</a>' : ""}</h3><p style="margin:2px 0">${p.description}</p><p class="tech">${(p.technologies || []).join(" · ")}</p>`).join("")}
-<h2>Skills</h2><p>${(result.skills_highlighted || []).join(" · ")}</p>
-${coverLetter ? "<h2>Cover Letter</h2><p>" + coverLetter.replace(/\n/g, "<br>") + "</p>" : ""}
-<p class="meta">Tailored for ${result.job_title} at ${result.company} | ATS: ${result.ats_score}%</p>
+<p class="contact">${phone}${email ? ' | <a href="mailto:' + email + '">' + email + '</a>' : ''}${linkedin ? ' | <a href="' + linkedin + '">LinkedIn</a>' : ''}${github ? ' | <a href="' + github + '">GitHub</a>' : ''}${profile.portfolio ? ' | <a href="' + profile.portfolio + '">Portfolio</a>' : ''}</p>
+
+<h2>About</h2>
+<p>${summary}</p>
+
+<h2>Work Experience</h2>
+${experience.map((e: any) => `
+<div class="exp-header"><h3>${e.title || e.role} — ${e.company}</h3><span>${e.start_date || ''} – ${e.end_date || 'Present'}</span></div>
+<ul>${(e.responsibilities || e.bullets || []).map((b: string) => '<li>' + b + '</li>').join('')}${(e.achievements || []).map((a: string) => '<li><strong>' + a + '</strong></li>').join('')}</ul>
+`).join('')}
+
+<h2>Projects</h2>
+${projects.map((p: any) => `
+<p class="proj-title">${p.name}${p.link ? ' <a href="' + p.link + '">↗ Live</a>' : ''}</p>
+<ul>${(p.outcomes || p.responsibilities || [p.description]).filter(Boolean).map((d: string) => '<li>' + d + '</li>').join('')}</ul>
+<p class="tech">${(p.technologies || []).join(' · ')}</p>
+`).join('')}
+
+<h2>Technical Skills</h2>
+<div class="skills-section">
+${typeof skills === 'object' && !Array.isArray(skills) ? Object.entries(skills).map(([cat, vals]: [string, any]) => Array.isArray(vals) && vals.length ? '<p><strong>' + cat.replace(/_/g, ' ') + ':</strong> ' + vals.join(', ') + '</p>' : '').join('') : '<p>' + (Array.isArray(skills) ? skills.join(', ') : String(skills)) + '</p>'}
+</div>
+
+${education.length ? '<h2>Education</h2>' + education.map((e: any) => '<p class="edu"><strong>' + (e.degree || '') + (e.major ? ' in ' + e.major : '') + '</strong> — ' + (e.institution || '') + (e.graduation_year ? ' (' + e.graduation_year + ')' : '') + (e.gpa ? ' | CGPA: ' + e.gpa : '') + '</p>').join('') : ''}
+
+<div class="ats-note">
+<strong>ATS Match: ${result.ats_score}%</strong> for ${job.title} at ${job.company}<br>
+<strong>Matched:</strong> ${(result.matched_keywords || []).join(', ')}<br>
+<strong>Consider adding:</strong> ${(result.missing_keywords || []).join(', ')}
+</div>
+
+${coverLetter ? '<h2 style="margin-top:24px">Cover Letter</h2><p>' + coverLetter.replace(/\n/g, '<br>') + '</p>' : ''}
 </body></html>`;
+
     const w = window.open("", "_blank");
     if (w) { w.document.write(html); w.document.close(); setTimeout(() => w.print(), 600); }
   };
@@ -59,10 +110,9 @@ ${coverLetter ? "<h2>Cover Letter</h2><p>" + coverLetter.replace(/\n/g, "<br>") 
     <div className="fixed inset-0 z-[60] flex items-center justify-center">
       <div className="absolute inset-0 bg-obsidian/40" onClick={onClose} />
       <div className="relative bg-eggshell rounded-card shadow-card w-full max-w-[700px] max-h-[85vh] overflow-y-auto mx-4">
-        {/* Header */}
         <div className="sticky top-0 bg-eggshell border-b border-chalk px-6 py-4 flex items-center justify-between z-10">
           <div>
-            <h2 className="text-subheading text-obsidian font-display">Tailor Resume</h2>
+            <h2 className="text-subheading text-obsidian font-display">ATS Resume Optimizer</h2>
             <p className="text-caption text-gravel">{job.title} at {job.company}</p>
           </div>
           <button onClick={onClose} className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-powder">
@@ -72,16 +122,13 @@ ${coverLetter ? "<h2>Cover Letter</h2><p>" + coverLetter.replace(/\n/g, "<br>") 
 
         <div className="px-6 py-5 space-y-5">
           {!result ? (
-            /* Initial state - generate button */
             <div className="text-center py-8">
-              <svg className="w-16 h-16 text-chalk mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
-              <p className="text-body text-gravel mb-4">AI will tailor your resume to match this job's requirements while keeping your format and word count intact.</p>
-              <button onClick={handleTailor} disabled={loading} className="btn-primary disabled:opacity-50">
-                {loading ? "Tailoring..." : "Generate Tailored Resume"}
+              <p className="text-body text-gravel mb-4">Analyze how your resume matches this job's requirements. Your content stays untouched — we only show keyword gaps and suggestions.</p>
+              <button onClick={handleAnalyze} disabled={loading} className="btn-primary disabled:opacity-50">
+                {loading ? "Analyzing..." : "Analyze ATS Match"}
               </button>
             </div>
           ) : (
-            /* Results */
             <>
               {/* ATS Score */}
               <div className="flex items-center gap-4 p-4 bg-powder rounded-card">
@@ -90,73 +137,40 @@ ${coverLetter ? "<h2>Cover Letter</h2><p>" + coverLetter.replace(/\n/g, "<br>") 
                 </div>
                 <div>
                   <p className="text-body-medium text-obsidian">ATS Match Score</p>
-                  <p className="text-caption text-gravel">Keywords matched: {result.keywords_added?.length || 0} | Missing: {result.keywords_missing?.length || 0}</p>
+                  <p className="text-caption text-gravel">Matched: {result.matched_keywords?.length || 0} | Missing: {result.missing_keywords?.length || 0}</p>
                 </div>
               </div>
 
               {/* Keywords */}
-              <div className="flex flex-wrap gap-1.5">
-                {(result.keywords_added || []).map((k: string) => (
-                  <span key={k} className="px-2 py-0.5 rounded-pill text-[11px] bg-green-50 text-green-700 border border-green-200">{k}</span>
-                ))}
-                {(result.keywords_missing || []).map((k: string) => (
-                  <span key={k} className="px-2 py-0.5 rounded-pill text-[11px] bg-red-50 text-red-500 border border-red-200">{k}</span>
-                ))}
-              </div>
-
-              {/* Summary */}
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-body-medium text-obsidian">Summary</h3>
-                  <button onClick={() => setEditing(!editing)} className="text-[11px] text-blue-600 hover:underline">{editing ? "Done" : "Edit"}</button>
+                <h3 className="text-body-medium text-obsidian mb-2">Keywords Found in Your Resume</h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {(result.matched_keywords || []).map((k: string) => (
+                    <span key={k} className="px-2 py-0.5 rounded-pill text-[11px] bg-green-50 text-green-700 border border-green-200">{k}</span>
+                  ))}
                 </div>
-                {editing ? (
-                  <textarea value={editedSummary} onChange={e => setEditedSummary(e.target.value)} className="w-full h-24 px-3 py-2 border border-chalk rounded-lg text-[13px] bg-white focus:outline-none focus:border-obsidian resize-none" />
-                ) : (
-                  <p className="text-[13px] text-cinder leading-relaxed">{editedSummary || result.summary}</p>
-                )}
               </div>
 
-              {/* Experience */}
-              {result.experience && (
-                <div>
-                  <h3 className="text-body-medium text-obsidian mb-2">Tailored Experience</h3>
-                  <div className="space-y-3">
-                    {result.experience.map((exp: any, i: number) => (
-                      <div key={i} className="pl-3 border-l-2 border-chalk">
-                        <p className="text-[13px] font-medium text-obsidian">{exp.title} · {exp.company}</p>
-                        <ul className="mt-1 space-y-0.5">
-                          {(exp.bullets || []).map((b: string, j: number) => (
-                            <li key={j} className="text-[12px] text-gravel leading-relaxed">• {b}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
+              <div>
+                <h3 className="text-body-medium text-obsidian mb-2">Missing Keywords (consider adding)</h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {(result.missing_keywords || []).map((k: string) => (
+                    <span key={k} className="px-2 py-0.5 rounded-pill text-[11px] bg-red-50 text-red-500 border border-red-200">{k}</span>
+                  ))}
                 </div>
-              )}
+              </div>
 
-              {/* Projects */}
-              {result.projects && result.projects.length > 0 && (
+              {/* Suggestions */}
+              {result.suggestions && (
                 <div>
-                  <h3 className="text-body-medium text-obsidian mb-2">Tailored Projects</h3>
-                  <div className="space-y-3">
-                    {result.projects.map((proj: any, i: number) => (
-                      <div key={i} className="pl-3 border-l-2 border-green-200">
-                        <p className="text-[13px] font-medium text-obsidian">{proj.name} {proj.link && <a href={proj.link} target="_blank" className="text-blue-600 text-[11px] ml-1">↗</a>}</p>
-                        <p className="text-[12px] text-gravel mt-0.5">{proj.description}</p>
-                        {proj.technologies && <p className="text-[11px] text-fog mt-1">{proj.technologies.join(" · ")}</p>}
-                      </div>
+                  <h3 className="text-body-medium text-obsidian mb-2">Suggestions</h3>
+                  <ul className="space-y-1.5">
+                    {result.suggestions.map((s: string, i: number) => (
+                      <li key={i} className="text-[12px] text-cinder flex items-start gap-2">
+                        <span className="text-green-600 mt-0.5">→</span> {s}
+                      </li>
                     ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Skills */}
-              {result.skills_highlighted && (
-                <div>
-                  <h3 className="text-body-medium text-obsidian mb-2">Highlighted Skills</h3>
-                  <p className="text-[13px] text-gravel">{result.skills_highlighted.join(" · ")}</p>
+                  </ul>
                 </div>
               )}
 
@@ -174,11 +188,12 @@ ${coverLetter ? "<h2>Cover Letter</h2><p>" + coverLetter.replace(/\n/g, "<br>") 
                 )}
               </div>
 
-              {/* Actions */}
+              {/* Download */}
               <div className="flex gap-3 pt-2">
-                <button onClick={handleDownload} className="btn-primary flex-1">Download</button>
+                <button onClick={handleDownload} className="btn-primary flex-1">Download Resume as PDF</button>
                 <a href={job.job_url} target="_blank" rel="noopener" className="btn-secondary flex-1 text-center">Apply Now</a>
               </div>
+              <p className="text-[10px] text-fog text-center">Downloads your ORIGINAL resume with ATS notes. Use browser's "Save as PDF" in print dialog.</p>
             </>
           )}
         </div>
