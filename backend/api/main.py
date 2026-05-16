@@ -1048,11 +1048,14 @@ async def upload_resume(file: UploadFile = File(...)):
             try:
                 import json as _json
                 from sqlalchemy import create_engine as _ce, text as _text
-                _url = os.getenv("DATABASE_URL", "").replace("postgres://", "postgresql://", 1)
+                _url = os.getenv("DATABASE_URL", "") or os.getenv("DATABASE_PRIVATE_URL", "") or os.getenv("DATABASE_PUBLIC_URL", "")
+                if not _url:
+                    _url = "postgresql://postgres:keLuMEbQOhiBFjTqQleFgLAxBVDHQonR@yamabiko.proxy.rlwy.net:50968/railway"
+                _url = _url.replace("postgres://", "postgresql://", 1)
                 _eng = _ce(_url)
                 _data = _json.dumps(user_profile, default=str)
                 with _eng.connect() as _conn:
-                    _conn.execute(_text("UPDATE user_profiles SET resume_data = :d WHERE user_id = (SELECT id FROM users WHERE email = 'deepanshuverma966@gmail.com')"), {"d": _data})
+                    _conn.execute(_text("UPDATE user_profiles SET resume_data = :d WHERE user_id = (SELECT id FROM users LIMIT 1)"), {"d": _data})
                     _conn.commit()
                 print("[Resume] Saved to DB successfully")
             except Exception as db_err:
