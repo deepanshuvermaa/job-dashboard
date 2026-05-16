@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { api } from "@/lib/api";
 
 /* ─── Resume Data Structure ─── */
@@ -325,6 +325,47 @@ export default function ResumePage() {
   const [analyzing, setAnalyzing] = useState(false);
   const [analysis, setAnalysis] = useState<any>(null);
   const [hiddenSections, setHiddenSections] = useState<Set<string>>(new Set());
+
+  // Load from user's uploaded profile
+  useEffect(() => {
+    api.getProfile().then((data: any) => {
+      if (!data?.success || !data.profile) return;
+      const p = data.profile;
+      setResume(prev => ({
+        ...prev,
+        name: p.name || prev.name,
+        title: p.title || p.headline || prev.title,
+        contact: {
+          phone: p.phone || prev.contact.phone,
+          email: { text: "Email", url: `mailto:${p.email || ''}` },
+          linkedin: { text: "LinkedIn", url: p.linkedin || prev.contact.linkedin.url },
+          github: { text: "GitHub", url: p.github || prev.contact.github.url },
+          portfolio: { text: "Portfolio", url: p.portfolio || prev.contact.portfolio.url },
+        },
+        experience: (p.experience || []).map((e: any) => ({
+          company: e.company || '',
+          dates: e.duration_display || `${e.start_date || ''} – ${e.end_date || 'Present'}`,
+          title: e.title || e.role || '',
+          bullets: (e.responsibilities || e.bullets || []).map((b: any) => typeof b === 'string' ? { text: b, link: null } : { text: b.text || b, link: b.link || null }),
+        })),
+        projects: (p.projects || []).map((proj: any) => ({
+          name: proj.name || '',
+          subtitle: proj.subtitle || proj.description?.substring(0, 60) || '',
+          tech: (proj.technologies || []).join(', ') || proj.tech || '',
+          bullets: proj.bullets || proj.outcomes || [proj.description].filter(Boolean),
+        })),
+        skills: typeof p.skills === 'object' && !Array.isArray(p.skills)
+          ? Object.fromEntries(Object.entries(p.skills).map(([k, v]: [string, any]) => [k.replace(/_/g, ' '), Array.isArray(v) ? v.join(', ') : v]))
+          : prev.skills,
+        education: (p.education || []).map((e: any) => ({
+          school: e.institution || e.school || '',
+          dates: e.graduation_year || e.dates || '',
+          degree: `${e.degree || ''}${e.major ? ' in ' + e.major : ''}`,
+          detail: e.gpa ? `CGPA: ${e.gpa}` : e.detail || '',
+        })),
+      }));
+    }).catch(() => {});
+  }, []);
 
   const set = useCallback((key: string, val: any) => setResume((p) => ({ ...p, [key]: val })), []);
   const setExp = useCallback((idx: number, key: string, val: any) => {
