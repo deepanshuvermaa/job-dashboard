@@ -35,35 +35,24 @@ export default function TailorResumeModal({ job, onClose }: Props) {
 
   const handleDownload = () => {
     if (!result) return;
-    // Generate text file for download
-    let content = `TAILORED RESUME\n${"=".repeat(50)}\n\n`;
-    content += `Target: ${result.job_title} at ${result.company}\n`;
-    content += `ATS Match: ${result.ats_score}%\n\n`;
-    content += `SUMMARY\n${"-".repeat(30)}\n${editedSummary || result.summary}\n\n`;
-    if (result.experience) {
-      content += `EXPERIENCE\n${"-".repeat(30)}\n`;
-      for (const exp of result.experience) {
-        content += `\n${exp.title} | ${exp.company}\n`;
-        for (const b of (exp.bullets || [])) content += `• ${b}\n`;
-      }
-    }
-    if (result.projects) {
-      content += `\nPROJECTS\n${"-".repeat(30)}\n`;
-      for (const proj of result.projects) {
-        content += `\n${proj.name}${proj.link ? ` (${proj.link})` : ""}\n`;
-        content += `${proj.description}\n`;
-        if (proj.technologies) content += `Tech: ${proj.technologies.join(", ")}\n`;
-      }
-    }
-    content += `\nSKILLS HIGHLIGHTED\n${"-".repeat(30)}\n${(result.skills_highlighted || []).join(", ")}\n`;
-    if (coverLetter) {
-      content += `\n\nCOVER LETTER\n${"=".repeat(50)}\n${coverLetter}\n`;
-    }
-    const blob = new Blob([content], { type: "text/plain" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = `Resume_${result.company}_${result.job_title?.replace(/\s+/g, "_")}.txt`;
-    a.click();
+    const name = result.original_profile?.name || "Candidate";
+    const email = result.original_profile?.email || "";
+    const phone = result.original_profile?.phone || "";
+    const linkedin = result.original_profile?.linkedin || "";
+    const github = result.original_profile?.github || "";
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${name} - Resume</title>
+<style>body{font-family:Calibri,Arial,sans-serif;max-width:680px;margin:30px auto;padding:0 24px;font-size:11pt;line-height:1.5;color:#1a1a1a}h1{font-size:18pt;margin:0 0 2px}h2{font-size:11pt;border-bottom:1.5px solid #222;padding-bottom:3px;margin:16px 0 6px;text-transform:uppercase;letter-spacing:0.5px}h3{font-size:11pt;margin:8px 0 2px;font-weight:600}.contact{color:#444;font-size:9.5pt;margin:2px 0 14px}.contact a{color:#0055cc;text-decoration:none}ul{margin:3px 0;padding-left:16px}li{margin:2px 0;font-size:10.5pt}.tech{font-size:9.5pt;color:#555;margin:2px 0}.meta{color:#888;font-size:8.5pt;margin-top:24px;border-top:1px solid #ddd;padding-top:6px}@media print{body{margin:0;padding:20px}}</style></head><body>
+<h1>${name}</h1>
+<p class="contact">${email}${phone ? " | " + phone : ""}${linkedin ? ' | <a href="' + linkedin + '">LinkedIn</a>' : ""}${github ? ' | <a href="' + github + '">GitHub</a>' : ""}</p>
+<h2>Summary</h2><p>${editedSummary || result.summary}</p>
+<h2>Experience</h2>${(result.experience || []).map((e: any) => `<h3>${e.title} | ${e.company}</h3><ul>${(e.bullets || []).map((b: string) => "<li>" + b + "</li>").join("")}</ul>`).join("")}
+<h2>Projects</h2>${(result.projects || []).map((p: any) => `<h3>${p.name}${p.link ? ' <a href="' + p.link + '">↗</a>' : ""}</h3><p style="margin:2px 0">${p.description}</p><p class="tech">${(p.technologies || []).join(" · ")}</p>`).join("")}
+<h2>Skills</h2><p>${(result.skills_highlighted || []).join(" · ")}</p>
+${coverLetter ? "<h2>Cover Letter</h2><p>" + coverLetter.replace(/\n/g, "<br>") + "</p>" : ""}
+<p class="meta">Tailored for ${result.job_title} at ${result.company} | ATS: ${result.ats_score}%</p>
+</body></html>`;
+    const w = window.open("", "_blank");
+    if (w) { w.document.write(html); w.document.close(); setTimeout(() => w.print(), 600); }
   };
 
   return (
