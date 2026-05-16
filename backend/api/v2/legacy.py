@@ -734,23 +734,38 @@ def tailor_resume(request: dict):
     jd = job.description_full or job.description_snippet or ""
     profile_json = _json.dumps(user_profile, default=str)[:3000]
 
-    prompt = f"""You are an expert resume tailor. Rewrite the resume content to match the JD.
+    prompt = f"""You are an ATS resume optimizer. Your job is to ENHANCE the user's resume for a specific job — NOT rewrite it.
 
-RULES:
-- Keep EXACT same sections and approximate word count
-- Do NOT invent experience the user doesn't have
-- Reword bullet points to use JD keywords where relevant
-- Keep it truthful
-- Include BOTH work experience AND projects
+CRITICAL RULES:
+1. KEEP every single bullet point, metric, number, link, and achievement EXACTLY as written
+2. NEVER remove or summarize content — the word count must stay the same or increase slightly
+3. NEVER invent experience or change facts
+4. ONLY add JD-relevant keywords INTO existing sentences where they fit naturally
+5. Keep all links, percentages, dollar amounts, timeframes unchanged
+6. If a bullet already matches the JD well, leave it untouched
+7. The summary can be slightly reworded to emphasize JD-relevant skills
 
-USER RESUME:
+WHAT TO DO:
+- Read the JD keywords and find where they naturally fit into existing bullets
+- Add 1-2 JD keywords per bullet point maximum (e.g., "Built a platform" → "Built a scalable cloud-native platform")
+- Reorder skills to put JD-matching ones first
+- Keep project descriptions, tech stacks, and outcomes EXACTLY as-is
+
+USER'S RESUME (preserve this content):
 {profile_json}
 
 JOB: {job.title} at {job.company}
-JD: {jd[:2000]}
+JOB DESCRIPTION:
+{jd[:2000]}
 
-Return JSON:
-{{"summary":"tailored summary","experience":[{{"company":"...","title":"...","bullets":["..."]}}],"projects":[{{"name":"...","description":"tailored description using JD keywords","technologies":["..."],"link":"..."}}],"skills_highlighted":["matched skills"],"keywords_added":["JD keywords used"],"keywords_missing":["JD keywords user lacks"],"ats_score":75}}"""
+Return JSON with:
+- "summary": enhanced summary (same length, JD keywords added naturally)
+- "experience": array of {{"company":"SAME","title":"SAME","duration":"SAME","bullets":["SAME bullets with 1-2 JD keywords injected naturally"]}}
+- "projects": array of {{"name":"SAME","description":"SAME description with 1-2 keywords added","technologies":["SAME"],"link":"SAME"}}
+- "skills_highlighted": user's skills that match JD (reordered, JD-matching first)
+- "keywords_added": JD keywords you injected
+- "keywords_missing": JD keywords user genuinely lacks
+- "ats_score": 0-100 estimated match percentage"""
 
     try:
         response = client.chat.completions.create(model=model, messages=[{"role": "user", "content": prompt}], temperature=0.3, max_tokens=3000)
