@@ -1044,27 +1044,28 @@ async def upload_resume(file: UploadFile = File(...)):
         if result.get('success'):
             user_profile = result['data']
 
-            # Persist to database with raw SQL
+            # Persist to database
+            db_saved = False
+            db_error = None
             try:
                 import json as _json
                 from sqlalchemy import create_engine as _ce, text as _text
-                _url = os.getenv("DATABASE_URL", "") or os.getenv("DATABASE_PRIVATE_URL", "") or os.getenv("DATABASE_PUBLIC_URL", "")
-                if not _url:
-                    _url = "postgresql://postgres:keLuMEbQOhiBFjTqQleFgLAxBVDHQonR@yamabiko.proxy.rlwy.net:50968/railway"
+                _url = os.getenv("DATABASE_URL", "") or os.getenv("DATABASE_PRIVATE_URL", "") or os.getenv("DATABASE_PUBLIC_URL", "") or "postgresql://postgres:keLuMEbQOhiBFjTqQleFgLAxBVDHQonR@yamabiko.proxy.rlwy.net:50968/railway"
                 _url = _url.replace("postgres://", "postgresql://", 1)
                 _eng = _ce(_url)
                 _data = _json.dumps(user_profile, default=str)
                 with _eng.connect() as _conn:
                     _conn.execute(_text("UPDATE user_profiles SET resume_data = :d WHERE user_id = (SELECT id FROM users LIMIT 1)"), {"d": _data})
                     _conn.commit()
-                print("[Resume] Saved to DB successfully")
+                db_saved = True
             except Exception as db_err:
-                print(f"[Resume] DB save error: {db_err}")
+                db_error = str(db_err)
 
             return {
                 "success": True,
-                "message": "Resume parsed successfully using AI",
-                "profile": user_profile
+                "message": f"Resume parsed. DB saved: {db_saved}" + (f" Error: {db_error}" if db_error else ""),
+                "profile": user_profile,
+                "db_saved": db_saved
             }
         else:
             return {
