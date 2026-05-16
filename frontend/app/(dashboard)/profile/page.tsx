@@ -23,6 +23,8 @@ export default function ProfilePage() {
       const data = await api.uploadResume(file);
       if (data.success) {
         setProfile(data.profile);
+        // Redirect to resume editor to review and save
+        window.location.href = "/resume";
       } else {
         alert(data.message || "Upload failed");
       }
