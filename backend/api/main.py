@@ -1043,6 +1043,7 @@ async def upload_resume(file: UploadFile = File(...)):
 
         if result.get('success'):
             user_profile = result['data']
+            print(f"[UPLOAD] Parse success. Name={user_profile.get('name')}. Keys={list(user_profile.keys())[:5]}")
 
             # Persist to database
             db_saved = False
@@ -1051,16 +1052,22 @@ async def upload_resume(file: UploadFile = File(...)):
                 import json as _json
                 from sqlalchemy import create_engine, text
                 db_url = os.environ.get("DATABASE_URL", "")
+                print(f"[UPLOAD] DATABASE_URL present: {bool(db_url)}, starts with: {db_url[:30]}")
                 if db_url.startswith("postgres://"):
                     db_url = db_url.replace("postgres://", "postgresql://", 1)
                 eng = create_engine(db_url)
                 data_str = _json.dumps(user_profile, default=str)
+                print(f"[UPLOAD] JSON size: {len(data_str)} bytes. Connecting to DB...")
                 with eng.connect() as c:
+                    print("[UPLOAD] Connected. Executing UPDATE...")
                     c.execute(text("UPDATE user_profiles SET resume_data = :d WHERE user_id = (SELECT id FROM users LIMIT 1)"), {"d": data_str})
                     c.commit()
+                    print("[UPLOAD] COMMIT done.")
                 db_saved = True
+                print("[UPLOAD] DB SAVE SUCCESS")
             except Exception as e:
                 db_error = str(e)
+                print(f"[UPLOAD] DB SAVE FAILED: {e}")
 
             return {
                 "success": True,
@@ -1069,6 +1076,7 @@ async def upload_resume(file: UploadFile = File(...)):
                 "db_saved": db_saved
             }
         else:
+            print(f"[UPLOAD] Parse FAILED: {result.get('error', result.get('message', 'unknown'))}")
             return {
                 "success": False,
                 "message": result.get('error', 'Failed to parse resume')
