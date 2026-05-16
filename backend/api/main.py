@@ -1044,15 +1044,18 @@ async def upload_resume(file: UploadFile = File(...)):
         if result.get('success'):
             user_profile = result['data']
 
-            # Persist to database
+            # Persist to database using the SAME engine that serves all other queries
             db_saved = False
             db_error = None
             try:
                 import json as _json
-                from sqlalchemy import create_engine as _ce, text as _text
-                _url = os.getenv("DATABASE_URL", "") or os.getenv("DATABASE_PRIVATE_URL", "") or os.getenv("DATABASE_PUBLIC_URL", "") or "postgresql://postgres:keLuMEbQOhiBFjTqQleFgLAxBVDHQonR@yamabiko.proxy.rlwy.net:50968/railway"
-                _url = _url.replace("postgres://", "postgresql://", 1)
-                _eng = _ce(_url)
+                import sys
+                # Import the engine that's already working (serves /api/jobs etc)
+                backend_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                if backend_root not in sys.path:
+                    sys.path.insert(0, backend_root)
+                from core.database import engine as _eng
+                from sqlalchemy import text as _text
                 _data = _json.dumps(user_profile, default=str)
                 with _eng.connect() as _conn:
                     _conn.execute(_text("UPDATE user_profiles SET resume_data = :d WHERE user_id = (SELECT id FROM users LIMIT 1)"), {"d": _data})
